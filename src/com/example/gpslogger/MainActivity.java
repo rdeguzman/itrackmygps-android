@@ -45,7 +45,9 @@ public class MainActivity extends Activity implements LocationListener {
         Location loc = lm.getLastKnownLocation(gpsProvider);
 
         // fill in the TextViews
-        displayGPSDetails(loc);
+        if(loc != null){
+            displayGPSDetails(loc);
+        }
 
         lm.requestLocationUpdates(gpsProvider, 10000L, 10.0f, this);
     }

@@ -23,8 +23,8 @@ public class MainActivity extends Activity implements LocationListener {
         setContentView(R.layout.activity_main);
 
         //find the textviews
-        tvLatitude = (TextView)findViewById(R.id.tvLatitude);
-        tvLongitude = (TextView)findViewById(R.id.tvLongitude);
+        tvLatitude = (TextView)findViewById(R.id.tvGPSLatitude);
+        tvLongitude = (TextView)findViewById(R.id.tvGPSLongitude);
 
         // get handle for LocationManager
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -35,8 +35,8 @@ public class MainActivity extends Activity implements LocationListener {
         Location loc = lm.getLastKnownLocation(gpsProvider);
 
         // fill in the TextViews
-        tvLatitude.setText(Double.toString(loc.getLatitude()));
-        tvLongitude.setText(Double.toString(loc.getLongitude()));
+//        tvLatitude.setText(Double.toString(loc.getLatitude()));
+//        tvLongitude.setText(Double.toString(loc.getLongitude()));
 
         lm.requestLocationUpdates(gpsProvider, 10000L, 10.0f, this);
     }

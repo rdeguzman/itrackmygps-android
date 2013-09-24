@@ -3,22 +3,93 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
-    <TextView
-            android:id="@+id/lblLatitude"
+    <TableLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Latitude:"/>
-    <TextView
-            android:id="@+id/tvLatitude"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-    <TextView
-            android:id="@+id/lblLongitude"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Longitude:"/>
-    <TextView
-            android:id="@+id/tvLongitude"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="fill_parent">
+
+        <TableRow>
+            <TextView
+                    android:text="GPS Details"
+                    style="@style/GPSDetailsTableHeader" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                    android:text="Latitude:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSLatitude"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
+                    android:text="Longitude:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSLongitude"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
+                    android:text="Altitude:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSAltitude"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
+                    android:text="Heading:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSHeading"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
+                    android:text="Speed:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSSpeed"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
+                    android:text="UTC TimeStamp:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSTimestamp"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
+                    android:text="Accuracy:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSAccuracy"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+    </TableLayout>
+
 </LinearLayout>
+
+

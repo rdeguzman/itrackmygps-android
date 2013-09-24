@@ -37,7 +37,7 @@
 
         <TableRow>
             <TextView
-                    android:text="Altitude:"
+                    android:text="Altitude (m):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSAltitude"
@@ -48,10 +48,10 @@
 
         <TableRow>
             <TextView
-                    android:text="Heading:"
+                    android:text="Heading (º):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSHeading"
+                    android:id="@+id/tvGPSBearing"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
@@ -59,7 +59,7 @@
 
         <TableRow>
             <TextView
-                    android:text="Speed:"
+                    android:text="Speed (meters/sec):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSSpeed"
@@ -70,7 +70,7 @@
 
         <TableRow>
             <TextView
-                    android:text="UTC TimeStamp:"
+                    android:text="TimeStamp (UTC):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSTimestamp"
@@ -81,7 +81,7 @@
 
         <TableRow>
             <TextView
-                    android:text="Accuracy:"
+                    android:text="Accuracy (m):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSAccuracy"

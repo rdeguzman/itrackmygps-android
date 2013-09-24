@@ -14,8 +14,13 @@ public class MainActivity extends Activity implements LocationListener {
 
     private LocationListener locListenD;
 
-    private TextView tvLatitude;
-    private TextView tvLongitude;
+    private TextView tvGPSLatitude;
+    private TextView tvGPSLongitude;
+    private TextView tvGPSAltitude;
+    private TextView tvGPSBearing;
+    private TextView tvGPSSpeed;
+    private TextView tvGPSTimestamp;
+    private TextView tvGPSAccuracy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,8 +28,13 @@ public class MainActivity extends Activity implements LocationListener {
         setContentView(R.layout.activity_main);
 
         //find the textviews
-        tvLatitude = (TextView)findViewById(R.id.tvGPSLatitude);
-        tvLongitude = (TextView)findViewById(R.id.tvGPSLongitude);
+        tvGPSLatitude = (TextView)findViewById(R.id.tvGPSLatitude);
+        tvGPSLongitude = (TextView)findViewById(R.id.tvGPSLongitude);
+        tvGPSAltitude = (TextView)findViewById(R.id.tvGPSAltitude);
+        tvGPSBearing = (TextView)findViewById(R.id.tvGPSBearing);
+        tvGPSSpeed = (TextView)findViewById(R.id.tvGPSSpeed);
+        tvGPSTimestamp = (TextView)findViewById(R.id.tvGPSTimestamp);
+        tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
 
         // get handle for LocationManager
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -35,8 +45,10 @@ public class MainActivity extends Activity implements LocationListener {
         Location loc = lm.getLastKnownLocation(gpsProvider);
 
         // fill in the TextViews
-//        tvLatitude.setText(Double.toString(loc.getLatitude()));
-//        tvLongitude.setText(Double.toString(loc.getLongitude()));
+        /*
+        tvGPSLatitude.setText(Double.toString(loc.getLatitude()));
+        tvGPSLongitude.setText(Double.toString(loc.getLongitude()));
+        */
 
         lm.requestLocationUpdates(gpsProvider, 10000L, 10.0f, this);
     }
@@ -44,8 +56,13 @@ public class MainActivity extends Activity implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         // update TextViews
-        tvLatitude.setText(Double.toString(location.getLatitude()));
-        tvLongitude.setText(Double.toString(location.getLongitude()));
+        tvGPSLatitude.setText(Double.toString(location.getLatitude()));
+        tvGPSLongitude.setText(Double.toString(location.getLongitude()));
+        tvGPSAltitude.setText(Double.toString(location.getAltitude()));
+        tvGPSBearing.setText(Float.toString(location.getBearing()));
+        tvGPSSpeed.setText(Float.toString(location.getSpeed()));
+        tvGPSTimestamp.setText(Long.toString(location.getTime()));
+        tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
     }
 
     @Override

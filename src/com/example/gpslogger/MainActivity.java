@@ -45,17 +45,12 @@ public class MainActivity extends Activity implements LocationListener {
         Location loc = lm.getLastKnownLocation(gpsProvider);
 
         // fill in the TextViews
-        /*
-        tvGPSLatitude.setText(Double.toString(loc.getLatitude()));
-        tvGPSLongitude.setText(Double.toString(loc.getLongitude()));
-        */
+        displayGPSDetails(loc);
 
         lm.requestLocationUpdates(gpsProvider, 10000L, 10.0f, this);
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        // update TextViews
+    private void displayGPSDetails(Location location){
         tvGPSLatitude.setText(Double.toString(location.getLatitude()));
         tvGPSLongitude.setText(Double.toString(location.getLongitude()));
         tvGPSAltitude.setText(Double.toString(location.getAltitude()));
@@ -63,6 +58,11 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSSpeed.setText(Float.toString(location.getSpeed()));
         tvGPSTimestamp.setText(Long.toString(location.getTime()));
         tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        displayGPSDetails(location);
     }
 
     @Override

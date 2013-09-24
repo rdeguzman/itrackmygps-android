@@ -9,10 +9,13 @@
 *.apk
 *.ap_
 *.dex
-*.iml
-*.ipr
 *.iws
 bin/
 gen/
+out/
 local.properties
-.idea
+
+#IntellJ Idea
+.idea/workspace.xml
+.idea/tasks.xml
+#.idea/misc.xml

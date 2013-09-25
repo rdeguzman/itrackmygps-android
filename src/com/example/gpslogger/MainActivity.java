@@ -14,10 +14,10 @@ public class MainActivity extends Activity implements LocationListener {
     private String networkProvider;
 
     private static final String TAG = "MainActivity";
-    private static final int TWO_MINUTES = 1000 * 60 * 2;
 
-    private LocationListener locListenD;
+    private int ctrUpdate = 0;
 
+    private TextView tvGPSCounter;
     private TextView tvGPSLatitude;
     private TextView tvGPSLongitude;
     private TextView tvGPSAltitude;
@@ -28,12 +28,15 @@ public class MainActivity extends Activity implements LocationListener {
     private TextView tvGPSAccuracy;
     private TextView tvGPSProvider;
 
+    LocationManager locationManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //find the textviews
+        tvGPSCounter = (TextView)findViewById(R.id.tvGPSCounter);
         tvGPSLatitude = (TextView)findViewById(R.id.tvGPSLatitude);
         tvGPSLongitude = (TextView)findViewById(R.id.tvGPSLongitude);
         tvGPSAltitude = (TextView)findViewById(R.id.tvGPSAltitude);
@@ -45,12 +48,12 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
 
         // get handle for LocationManager
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         gpsProvider = LocationManager.GPS_PROVIDER;
         networkProvider = LocationManager.NETWORK_PROVIDER;
 
         // connect to the network location service
-        Location loc = lm.getLastKnownLocation(networkProvider);
+        Location loc = locationManager.getLastKnownLocation(networkProvider);
 
         // connect to the GPS location service
         //Location loc = lm.getLastKnownLocation(gpsProvider);
@@ -60,10 +63,13 @@ public class MainActivity extends Activity implements LocationListener {
             displayGPSDetails(loc);
         }
 
-        lm.requestLocationUpdates(gpsProvider, 10000L, 10.0f, this);
+        locationManager.requestLocationUpdates(gpsProvider, 0, 0, this);
     }
 
     private void displayGPSDetails(Location location){
+        ctrUpdate++;
+
+        tvGPSCounter.setText(Integer.toString(ctrUpdate));
         tvGPSLatitude.setText(Double.toString(location.getLatitude()));
         tvGPSLongitude.setText(Double.toString(location.getLongitude()));
         tvGPSAltitude.setText(Double.toString(location.getAltitude()));
@@ -95,6 +101,20 @@ public class MainActivity extends Activity implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public void onPause(){
+        super.onPause(); // Always call the superclass method first
+        Log.i(TAG, "paused");
+
+        locationManager.removeUpdates(this);
+    }
+
+    public void onResume(){
+        super.onResume();  // Always call the superclass method first
+
+        Log.i(TAG, "resume");
+        locationManager.requestLocationUpdates(gpsProvider, 0, 0, this);
     }
 
 }

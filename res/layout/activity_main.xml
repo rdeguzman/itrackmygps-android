@@ -15,6 +15,17 @@
 
         <TableRow>
             <TextView
+                    android:text="Counter:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSCounter"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
                     android:text="Latitude:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView

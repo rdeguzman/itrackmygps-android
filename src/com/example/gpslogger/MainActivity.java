@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements LocationListener {
     private String gpsProvider;
-    private String locationProvider;
+    private String networkProvider;
+
+    private static final int TWO_MINUTES = 1000 * 60 * 2;
 
     private LocationListener locListenD;
 
@@ -21,6 +23,7 @@ public class MainActivity extends Activity implements LocationListener {
     private TextView tvGPSSpeed;
     private TextView tvGPSTimestamp;
     private TextView tvGPSAccuracy;
+    private TextView tvGPSProvider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,14 +38,18 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSSpeed = (TextView)findViewById(R.id.tvGPSSpeed);
         tvGPSTimestamp = (TextView)findViewById(R.id.tvGPSTimestamp);
         tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
+        tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
 
         // get handle for LocationManager
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         gpsProvider = LocationManager.GPS_PROVIDER;
-        locationProvider = LocationManager.NETWORK_PROVIDER;
+        networkProvider = LocationManager.NETWORK_PROVIDER;
+
+        // connect to the network location service
+        Location loc = lm.getLastKnownLocation(networkProvider);
 
         // connect to the GPS location service
-        Location loc = lm.getLastKnownLocation(gpsProvider);
+        //Location loc = lm.getLastKnownLocation(gpsProvider);
 
         // fill in the TextViews
         if(loc != null){
@@ -60,6 +67,7 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSSpeed.setText(Float.toString(location.getSpeed()));
         tvGPSTimestamp.setText(Long.toString(location.getTime()));
         tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
+        tvGPSProvider.setText(location.getProvider());
     }
 
     @Override
@@ -81,5 +89,6 @@ public class MainActivity extends Activity implements LocationListener {
     public void onProviderDisabled(String provider) {
 
     }
+
 
 }

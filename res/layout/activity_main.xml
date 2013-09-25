@@ -88,6 +88,18 @@
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
+                    android:text="Provider:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSProvider"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+
     </TableLayout>
 
 </LinearLayout>

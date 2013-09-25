@@ -73,9 +73,21 @@
                     android:text="TimeStamp (UTC):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
+                    android:id="@+id/tvGPSTimestampUTC"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
+                    android:text="DateTime:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
                     android:id="@+id/tvGPSTimestamp"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
+
 
         <View android:layout_height="1dp" android:background="@color/table_divider" />
 

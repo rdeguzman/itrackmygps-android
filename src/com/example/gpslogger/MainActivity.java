@@ -6,12 +6,14 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements LocationListener {
     private String gpsProvider;
     private String networkProvider;
 
+    private static final String TAG = "MainActivity";
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
     private LocationListener locListenD;
@@ -21,7 +23,8 @@ public class MainActivity extends Activity implements LocationListener {
     private TextView tvGPSAltitude;
     private TextView tvGPSBearing;
     private TextView tvGPSSpeed;
-    private TextView tvGPSTimestamp;
+    private TextView tvGPSTimestampUTC;
+    private TextView tvGPSDateTime;
     private TextView tvGPSAccuracy;
     private TextView tvGPSProvider;
 
@@ -36,7 +39,8 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSAltitude = (TextView)findViewById(R.id.tvGPSAltitude);
         tvGPSBearing = (TextView)findViewById(R.id.tvGPSBearing);
         tvGPSSpeed = (TextView)findViewById(R.id.tvGPSSpeed);
-        tvGPSTimestamp = (TextView)findViewById(R.id.tvGPSTimestamp);
+        tvGPSTimestampUTC = (TextView)findViewById(R.id.tvGPSTimestampUTC);
+        tvGPSDateTime = (TextView)findViewById(R.id.tvGPSTimestamp);
         tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
         tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
 
@@ -65,9 +69,12 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSAltitude.setText(Double.toString(location.getAltitude()));
         tvGPSBearing.setText(Float.toString(location.getBearing()));
         tvGPSSpeed.setText(Float.toString(location.getSpeed()));
-        tvGPSTimestamp.setText(Long.toString(location.getTime()));
+        tvGPSTimestampUTC.setText(Long.toString(location.getTime()));
         tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
         tvGPSProvider.setText(location.getProvider());
+
+        String gpsDateTime = CustomDateUtils.timeAgoInWords(this,location.getTime());
+        tvGPSDateTime.setText(gpsDateTime);
     }
 
     @Override
@@ -89,6 +96,5 @@ public class MainActivity extends Activity implements LocationListener {
     public void onProviderDisabled(String provider) {
 
     }
-
 
 }

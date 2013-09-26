@@ -2,14 +2,15 @@ package com.example.gpslogger;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.location.*;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements LocationListener {
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class MainActivity extends Activity {
     private String gpsProvider;
     private String networkProvider;
 
@@ -30,7 +31,10 @@ public class MainActivity extends Activity implements LocationListener {
     private TextView tvGPSProvider;
     private TextView tvGPSTotalSatellites;
 
-    LocationManager locationManager;
+    private LocationManager locationManager;
+    private MyLocationListener gpslocationListener;
+
+    private ArrayList gpsSatelliteList; // loop through satellites to get status
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,21 +60,21 @@ public class MainActivity extends Activity implements LocationListener {
         gpsProvider = LocationManager.GPS_PROVIDER;
         networkProvider = LocationManager.NETWORK_PROVIDER;
 
+        MyGpsStatusListener gpsStatusListener = new MyGpsStatusListener();
+        locationManager.addGpsStatusListener(gpsStatusListener);
+
         // connect to the network location service
         Location loc = locationManager.getLastKnownLocation(networkProvider);
 
-        // connect to the GPS location service
-        //Location loc = lm.getLastKnownLocation(gpsProvider);
-
-        // fill in the TextViews
         if(loc != null){
             displayGPSDetails(loc);
         }
 
-        locationManager.requestLocationUpdates(gpsProvider, 0, 0, this);
+        gpslocationListener = new MyLocationListener();
+        locationManager.requestLocationUpdates(gpsProvider, 0, 0, gpslocationListener);
     }
 
-    private void displayGPSDetails(Location location){
+    private void displayGPSDetails(Location location) {
         ctrUpdate++;
 
         tvGPSCounter.setText(Integer.toString(ctrUpdate));
@@ -93,38 +97,86 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSTotalSatellites.setText(Integer.toString(totalSatellites));
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-        displayGPSDetails(location);
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
-
-    public void onPause(){
+    public void onPause() {
         super.onPause(); // Always call the superclass method first
         Log.i(TAG, "paused");
 
-        locationManager.removeUpdates(this);
+        locationManager.removeUpdates(gpslocationListener);
     }
 
-    public void onResume(){
+    public void onResume() {
         super.onResume();  // Always call the superclass method first
 
         Log.i(TAG, "resume");
-        locationManager.requestLocationUpdates(gpsProvider, 0, 0, this);
+        locationManager.requestLocationUpdates(gpsProvider, 0, 0, gpslocationListener);
     }
+
+    // Methods in this class are called when the location providers give an update
+    private class MyLocationListener implements LocationListener{
+        @Override
+        public void onLocationChanged(Location location) {
+            displayGPSDetails(location);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    }
+
+    // Methods in this class are called when the status of the GPS changes
+    private class MyGpsStatusListener implements GpsStatus.Listener
+    {
+        // called to handle an event updating the satellite status
+        private void satelliteStatusUpdate() {
+            // use the location manager to get a gps status object
+            // this method should only be called inside GpsStatus.Listener
+            GpsStatus gpsStatus = locationManager.getGpsStatus(null);
+
+            // create an iterator to loop through list of satellites
+            Iterable<GpsSatellite> iSatellites = gpsStatus.getSatellites();
+            Iterator<GpsSatellite> gpsSatelliteIterator = iSatellites.iterator();
+
+            // find the satellite with the best (greatest signal to noise ratio to update display
+            // and save list of satellites in an ArrayList
+            gpsSatelliteList = new ArrayList<GpsSatellite>();
+            while (gpsSatelliteIterator.hasNext())
+            {
+                // get next satellite from iterator
+                GpsSatellite s = (GpsSatellite) gpsSatelliteIterator.next();
+                // and add to ArrayList
+                gpsSatelliteList.add(s);
+            }
+        }
+
+        // the status of the GPS has changed
+        public void onGpsStatusChanged(int event) {
+            switch (event) {
+                case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
+                    Log.i(TAG, "GPS_EVENT_SATELLITE_STATUS");
+                    satelliteStatusUpdate();
+                    break;
+                case GpsStatus.GPS_EVENT_STARTED:
+                    Log.i(TAG, "GPS_EVENT_STARTED");
+                    break;
+                case GpsStatus.GPS_EVENT_FIRST_FIX:
+                    Log.i(TAG, "GPS_EVENT_FIRST_FIX");
+                    break;
+                case GpsStatus.GPS_EVENT_STOPPED:
+                    Log.i(TAG, "GPS_EVENT_STOPPED");
+                    break;
+            }
+        }
+    };
 
 }

@@ -27,6 +27,7 @@ public class MainActivity extends Activity implements LocationListener {
     private TextView tvGPSDateTime;
     private TextView tvGPSAccuracy;
     private TextView tvGPSProvider;
+    private TextView tvGPSTotalSatellites;
 
     LocationManager locationManager;
 
@@ -46,6 +47,7 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSDateTime = (TextView)findViewById(R.id.tvGPSTimestamp);
         tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
         tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
+        tvGPSTotalSatellites = (TextView)findViewById(R.id.tvGPSTotalSatellites);
 
         // get handle for LocationManager
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -81,6 +83,9 @@ public class MainActivity extends Activity implements LocationListener {
 
         String gpsDateTime = CustomDateUtils.timeAgoInWords(this,location.getTime());
         tvGPSDateTime.setText(gpsDateTime);
+
+        int totalSatellites = location.getExtras().getInt("satellites");
+        tvGPSTotalSatellites.setText(Integer.toString(totalSatellites));
     }
 
     @Override

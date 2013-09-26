@@ -104,6 +104,17 @@
 
         <TableRow>
             <TextView
+                    android:text="GPS Age:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSAge"
+                    style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+        <TableRow>
+            <TextView
                     android:text="Accuracy (m):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView

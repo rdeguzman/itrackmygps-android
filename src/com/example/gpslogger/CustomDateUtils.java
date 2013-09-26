@@ -13,7 +13,7 @@ public class CustomDateUtils {
     public static String timeAgoInWords(Activity activity, long timestamp){
         return (String) DateUtils.getRelativeDateTimeString(activity,
                 timestamp,
-                DateUtils.MINUTE_IN_MILLIS,
+                DateUtils.SECOND_IN_MILLIS,
                 DateUtils.WEEK_IN_MILLIS,
                 0);
     }

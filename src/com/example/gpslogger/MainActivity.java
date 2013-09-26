@@ -25,6 +25,7 @@ public class MainActivity extends Activity implements LocationListener {
     private TextView tvGPSSpeed;
     private TextView tvGPSTimestampUTC;
     private TextView tvGPSDateTime;
+    private TextView tvGPSAge;
     private TextView tvGPSAccuracy;
     private TextView tvGPSProvider;
     private TextView tvGPSTotalSatellites;
@@ -45,6 +46,7 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSSpeed = (TextView)findViewById(R.id.tvGPSSpeed);
         tvGPSTimestampUTC = (TextView)findViewById(R.id.tvGPSTimestampUTC);
         tvGPSDateTime = (TextView)findViewById(R.id.tvGPSTimestamp);
+        tvGPSAge = (TextView)findViewById(R.id.tvGPSAge);
         tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
         tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
         tvGPSTotalSatellites = (TextView)findViewById(R.id.tvGPSTotalSatellites);
@@ -81,7 +83,10 @@ public class MainActivity extends Activity implements LocationListener {
         tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
         tvGPSProvider.setText(location.getProvider());
 
-        String gpsDateTime = CustomDateUtils.timeAgoInWords(this,location.getTime());
+        String gpsAge = CustomDateUtils.timeAgoInWords(this,location.getTime());
+        tvGPSAge.setText(gpsAge);
+
+        String gpsDateTime = CustomDateUtils.formatDateTimestamp(location.getTime());
         tvGPSDateTime.setText(gpsDateTime);
 
         int totalSatellites = location.getExtras().getInt("satellites");

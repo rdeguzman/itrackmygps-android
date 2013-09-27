@@ -24,9 +24,7 @@ public class MainActivity extends Activity {
     private TextView tvGPSAltitude;
     private TextView tvGPSBearing;
     private TextView tvGPSSpeed;
-    private TextView tvGPSTimestampUTC;
     private TextView tvGPSDateTime;
-    private TextView tvGPSAge;
     private TextView tvGPSAccuracy;
     private TextView tvGPSProvider;
     private TextView tvGPSTotalSatellites;
@@ -48,9 +46,7 @@ public class MainActivity extends Activity {
         tvGPSAltitude = (TextView)findViewById(R.id.tvGPSAltitude);
         tvGPSBearing = (TextView)findViewById(R.id.tvGPSBearing);
         tvGPSSpeed = (TextView)findViewById(R.id.tvGPSSpeed);
-        tvGPSTimestampUTC = (TextView)findViewById(R.id.tvGPSTimestampUTC);
         tvGPSDateTime = (TextView)findViewById(R.id.tvGPSTimestamp);
-        tvGPSAge = (TextView)findViewById(R.id.tvGPSAge);
         tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
         tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
         tvGPSTotalSatellites = (TextView)findViewById(R.id.tvGPSTotalSatellites);
@@ -83,12 +79,8 @@ public class MainActivity extends Activity {
         tvGPSAltitude.setText(Double.toString(location.getAltitude()));
         tvGPSBearing.setText(Float.toString(location.getBearing()));
         tvGPSSpeed.setText(Float.toString(location.getSpeed()));
-        tvGPSTimestampUTC.setText(Long.toString(location.getTime()));
         tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
         tvGPSProvider.setText(location.getProvider());
-
-        String gpsAge = CustomDateUtils.timeAgoInWords(this,location.getTime());
-        tvGPSAge.setText(gpsAge);
 
         String gpsDateTime = CustomDateUtils.formatDateTimestamp(location.getTime());
         tvGPSDateTime.setText(gpsDateTime);

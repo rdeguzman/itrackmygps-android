@@ -22,7 +22,7 @@ public class CustomDateUtils {
         Calendar cal = Calendar.getInstance();
         TimeZone tz = cal.getTimeZone();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss a");
         sdf.setTimeZone(tz);
 
         String localTime = sdf.format(new Date(timestamp));

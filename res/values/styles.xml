@@ -4,16 +4,18 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:layout_weight">0.4</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:maxLines">1</item>
         <item name="android:padding">5dp</item>
         <item name="android:gravity">right</item>
     </style>
     <style name="GPSDetailsTableData">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">0.6</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:padding">5dp</item>
         <item name="android:gravity">left</item>
+        <item name="android:maxLines">1</item>
     </style>
     <style name="GPSDetailsTableHeader">
         <item name="android:layout_width">fill_parent</item>

@@ -15,21 +15,16 @@
 
         <TableRow>
             <TextView
-                    android:text="Counter:"
+                    android:text="Ctr:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSCounter"
                     style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
-        <TableRow>
             <TextView
-                    android:text="Latitude:"
+                    android:text="Time:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSLatitude"
+                    android:id="@+id/tvGPSTimestamp"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
@@ -37,7 +32,13 @@
 
         <TableRow>
             <TextView
-                    android:text="Longitude:"
+                    android:text="Lat:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSLatitude"
+                    style="@style/GPSDetailsTableData" />
+            <TextView
+                    android:text="Lon:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSLongitude"
@@ -48,16 +49,11 @@
 
         <TableRow>
             <TextView
-                    android:text="Altitude (m):"
+                    android:text="Speed (mps):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSAltitude"
+                    android:id="@+id/tvGPSSpeed"
                     style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
-        <TableRow>
             <TextView
                     android:text="Heading (º):"
                     style="@style/GPSDetailsTableColumn" />
@@ -70,74 +66,36 @@
 
         <TableRow>
             <TextView
-                    android:text="Speed (meters/sec):"
+                    android:text="Altitude (m):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSSpeed"
+                    android:id="@+id/tvGPSAltitude"
                     style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
-        <TableRow>
             <TextView
-                    android:text="TimeStamp (UTC):"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tvGPSTimestampUTC"
-                    style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
-        <TableRow>
-            <TextView
-                    android:text="DateTime:"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tvGPSTimestamp"
-                    style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
-        <TableRow>
-            <TextView
-                    android:text="GPS Age:"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tvGPSAge"
-                    style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
-        <TableRow>
-            <TextView
-                    android:text="Accuracy (m):"
+                    android:text="Err (m):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSAccuracy"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
+
         <View android:layout_height="1dp" android:background="@color/table_divider" />
 
         <TableRow>
-            <TextView
-                    android:text="Provider:"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tvGPSProvider"
-                    style="@style/GPSDetailsTableData" />
         </TableRow>
 
         <View android:layout_height="1dp" android:background="@color/table_divider" />
 
         <TableRow>
             <TextView
-                    android:text="Total Satellites:"
+                    android:text="Type:"
+                    style="@style/GPSDetailsTableColumn" />
+            <TextView
+                    android:id="@+id/tvGPSProvider"
+                    style="@style/GPSDetailsTableData" />
+            <TextView
+                    android:text="Sat:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSTotalSatellites"

@@ -1,6 +1,7 @@
 package com.example.gpslogger;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.location.GpsSatellite;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,14 @@ public class SatteliteListAdapter extends BaseAdapter {
         holder.txtFifth.setText(sat.hasAlmanac() ? "T" : "F");
         holder.txtSixth.setText(sat.hasEphemeris() ? "T" : "F");
         holder.txtSeventh.setText(sat.usedInFix() ? "T" : "F");
+
+        if(sat.usedInFix()){
+            convertView.setBackgroundColor(Color.parseColor("#339900"));
+        }
+        else{
+            convertView.setBackgroundColor(Color.parseColor("#FF0000"));
+        }
+
 
         return convertView;
     }

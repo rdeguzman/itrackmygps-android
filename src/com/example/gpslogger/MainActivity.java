@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
         tvGPSDateTime = (TextView)findViewById(R.id.tvGPSTimestamp);
         tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
         tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
-        tvGPSTotalSatellites = (TextView)findViewById(R.id.tvGPSTotalSatellites);
+        tvGPSTotalSatellites = (TextView)findViewById(R.id.tvGPSFixTotalSatellites);
 
         lvSatellites = (ListView)findViewById(R.id.lv_satellites);
         gpsSatelliteList = new ArrayList<GpsSatellite>();
@@ -93,8 +93,10 @@ public class MainActivity extends Activity {
         String gpsDateTime = CustomDateUtils.formatDateTimestamp(location.getTime());
         tvGPSDateTime.setText(gpsDateTime);
 
-        int totalSatellites = location.getExtras().getInt("satellites");
-        tvGPSTotalSatellites.setText(Integer.toString(totalSatellites));
+        int satellitesWithFix = location.getExtras().getInt("satellites");
+        int satellitesTotal = gpsSatelliteList.size();
+        String s = Integer.toString(satellitesWithFix) + "/" + satellitesTotal;
+        tvGPSTotalSatellites.setText(s);
     }
 
     public void onPause() {
@@ -150,7 +152,7 @@ public class MainActivity extends Activity {
             // find the satellite with the best (greatest signal to noise ratio to update display
             // and save list of satellites in an ArrayList
             gpsSatelliteList.clear();
-            
+
             while (gpsSatelliteIterator.hasNext()){
                 // get next satellite from iterator
                 GpsSatellite s = (GpsSatellite) gpsSatelliteIterator.next();

@@ -95,10 +95,10 @@
                     android:id="@+id/tvGPSProvider"
                     style="@style/GPSDetailsTableData" />
             <TextView
-                    android:text="Sat:"
+                    android:text="Sat(F/T):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSTotalSatellites"
+                    android:id="@+id/tvGPSFixTotalSatellites"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 

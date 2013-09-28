@@ -3,6 +3,8 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
+
+
     <TableLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
@@ -11,6 +13,24 @@
             <TextView
                     android:text="GPS Details"
                     style="@style/GPSDetailsTableHeader" />
+        </TableRow>
+
+        <TableRow>
+            <Button
+                    android:id="@+id/btn_start"
+                    android:text="Start"
+                    android:onClick="buttonStartPressed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"/>
+
+            <Button
+                    android:id="@+id/btn_stop"
+                    android:text="Stop"
+                    android:onClick="buttonStopPressed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"/>
         </TableRow>
 
         <TableRow>

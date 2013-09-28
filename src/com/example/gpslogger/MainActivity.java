@@ -95,11 +95,6 @@ public class MainActivity extends Activity {
             displayGPSDetails(loc);
         }
 
-        protected void onSatelliteReceived(Context context, ArrayList newSatellites){
-            gpsSatelliteList = new ArrayList<GpsSatellite>(newSatellites);
-            satelliteAdapter.notifyDataSetChanged();
-        }
-
         @Override
         protected void onProviderEnabledChanged(boolean enabled) {
             if(enabled){
@@ -148,15 +143,13 @@ public class MainActivity extends Activity {
     public void onPause() {
         super.onPause(); // Always call the superclass method first
         Log.i(TAG, "paused");
-
-        //locationManager.removeUpdates(gpslocationListener);
     }
 
     public void onResume() {
         super.onResume();  // Always call the superclass method first
 
         Log.i(TAG, "resume");
-        //locationManager.requestLocationUpdates(gpsProvider, 0, 0, gpslocationListener);
+        updateButtons();
     }
 
 }

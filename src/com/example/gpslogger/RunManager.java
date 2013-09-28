@@ -3,10 +3,8 @@ package com.example.gpslogger;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.location.GpsSatellite;
-import android.location.GpsStatus;
-import android.location.Location;
-import android.location.LocationManager;
+import android.location.*;
+import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -20,6 +18,10 @@ public class RunManager {
     private static RunManager sRunManager;
     private Context mAppContext;
     private LocationManager mLocationManager;
+    private boolean mRunning;
+
+    private MyLocationListener gpsLocationListener;
+    private MyGpsStatusListener gpsStatusListener;
 
     private String gpsProvider;
     private ArrayList gpsSatelliteList; // loop through satellites to get status
@@ -38,11 +40,12 @@ public class RunManager {
         return sRunManager;
     }
 
-    private PendingIntent getLocationPendingIntent(boolean shouldCreate) {
-        Intent broadcast = new Intent(ACTION_LOCATION);
-        int flags = shouldCreate ? 0 : PendingIntent.FLAG_NO_CREATE;
-        return PendingIntent.getBroadcast(mAppContext, 0, broadcast, flags);
-    }
+//    private PendingIntent getLocationPendingIntent(boolean shouldCreate) {
+//        Log.d(TAG, "getLocationPendingIntent");
+//        Intent broadcast = new Intent(ACTION_LOCATION);
+//        int flags = shouldCreate ? 0 : PendingIntent.FLAG_NO_CREATE;
+//        return PendingIntent.getBroadcast(mAppContext, 0, broadcast, flags);
+//    }
 
     public void startLocationUpdates() {
         gpsProvider = LocationManager.GPS_PROVIDER;
@@ -54,29 +57,61 @@ public class RunManager {
         }
 
         // Start updates from the location manager
-        PendingIntent pi = getLocationPendingIntent(true);
-        mLocationManager.requestLocationUpdates(gpsProvider, 0, 0, pi);
+//        PendingIntent pi = getLocationPendingIntent(true);
+
+        gpsLocationListener = new MyLocationListener();
+        mLocationManager.requestLocationUpdates(gpsProvider, 0, 0, gpsLocationListener);
 
         MyGpsStatusListener gpsStatusListener = new MyGpsStatusListener();
         mLocationManager.addGpsStatusListener(gpsStatusListener);
+
+        mRunning = true;
     }
 
     public void stopLocationUpdates() {
-        PendingIntent pi = getLocationPendingIntent(false);
-        if (pi != null) {
-            mLocationManager.removeUpdates(pi);
-            pi.cancel();
-        }
+//        PendingIntent pi = getLocationPendingIntent(false);
+//        if (pi != null) {
+//            mLocationManager.removeUpdates(pi);
+//            pi.cancel();
+//        }
+
+        mLocationManager.removeUpdates(gpsLocationListener);
+        mLocationManager.removeGpsStatusListener(gpsStatusListener);
+        mRunning = false;
     }
 
     public boolean isTrackingRun() {
-        return getLocationPendingIntent(false) != null;
+        return mRunning;
     }
 
     private void broadcastLocation(Location location) {
         Intent broadcast = new Intent(ACTION_LOCATION);
         broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);
         mAppContext.sendBroadcast(broadcast);
+    }
+
+    // Methods in this class are called when the location providers give an update
+    private class MyLocationListener implements LocationListener {
+        @Override
+        public void onLocationChanged(Location location) {
+            broadcastLocation(location);
+            mRunning = true;
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
     }
 
     // Methods in this class are called when the status of the GPS changes

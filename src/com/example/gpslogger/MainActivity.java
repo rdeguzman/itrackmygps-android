@@ -5,6 +5,7 @@ import android.content.Context;
 import android.location.*;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class MainActivity extends Activity {
     private MyLocationListener gpslocationListener;
 
     private ArrayList gpsSatelliteList; // loop through satellites to get status
+    private ListView lvSatellites;
+    private SatteliteListAdapter satelliteAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,11 @@ public class MainActivity extends Activity {
         tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
         tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
         tvGPSTotalSatellites = (TextView)findViewById(R.id.tvGPSTotalSatellites);
+
+        lvSatellites = (ListView)findViewById(R.id.lv_satellites);
+        gpsSatelliteList = new ArrayList<GpsSatellite>();
+        satelliteAdapter = new SatteliteListAdapter(this, gpsSatelliteList);
+        lvSatellites.setAdapter(satelliteAdapter);
 
         // get handle for LocationManager
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -141,14 +149,16 @@ public class MainActivity extends Activity {
 
             // find the satellite with the best (greatest signal to noise ratio to update display
             // and save list of satellites in an ArrayList
-            gpsSatelliteList = new ArrayList<GpsSatellite>();
-            while (gpsSatelliteIterator.hasNext())
-            {
+            gpsSatelliteList.clear();
+            
+            while (gpsSatelliteIterator.hasNext()){
                 // get next satellite from iterator
                 GpsSatellite s = (GpsSatellite) gpsSatelliteIterator.next();
                 // and add to ArrayList
                 gpsSatelliteList.add(s);
             }
+
+            satelliteAdapter.notifyDataSetChanged();
         }
 
         // the status of the GPS has changed

@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:divider="#FFF">
+
+    <TextView
+            android:id="@+id/tv_satellite_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="id"
+            android:gravity="right"
+            android:layout_weight="0.10">
+    </TextView>
+
+    <TextView
+            android:id="@+id/tv_satellite_azimuth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="AZIº"
+            android:gravity="right"
+            android:layout_weight="0.20">
+    </TextView>
+
+    <TextView
+            android:id="@+id/tv_satellite_elevation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ELEVº"
+            android:gravity="right"
+            android:layout_weight="0.20">
+    </TextView>
+
+    <TextView
+            android:id="@+id/tv_satellite_snr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="SNR"
+            android:gravity="right"
+            android:layout_weight="0.20">
+    </TextView>
+
+    <TextView
+            android:id="@+id/tv_satellite_almanac"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
+            android:text="A"
+            android:layout_weight="0.10">
+    </TextView>
+
+    <TextView
+            android:id="@+id/tv_satellite_ephemeris"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
+            android:text="E"
+            android:layout_weight="0.10">
+    </TextView>
+
+    <TextView
+            android:id="@+id/tv_satellite_fix"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
+            android:text="F"
+            android:layout_weight="0.10">
+    </TextView>
+
+</LinearLayout>

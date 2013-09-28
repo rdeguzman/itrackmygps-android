@@ -5,7 +5,7 @@
               android:layout_height="fill_parent">
     <TableLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
         <TableRow>
             <TextView
@@ -103,6 +103,19 @@
         </TableRow>
 
     </TableLayout>
+
+    <include
+            layout="@layout/list_item_satellite"
+            android:layout_width="fill_parent"
+            android:layout_height="20dp"/>
+
+    <View android:layout_height="1dp" android:layout_width="fill_parent" android:background="@color/table_divider" />
+
+    <ListView
+            android:id="@+id/lv_satellites"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
 </LinearLayout>
 

@@ -91,8 +91,8 @@ public class MainActivity extends Activity {
     private BroadcastReceiver mLocationReceiver = new LocationReceiver() {
 
         @Override
-        protected void onLocationReceived(Context context, Location loc) {
-            displayGPSDetails(loc);
+        protected void onLocationReceived(Context context, Location loc, int ctr) {
+            displayGPSDetails(loc, ctr);
         }
 
         @Override
@@ -119,10 +119,10 @@ public class MainActivity extends Activity {
         super.onStop();
     }
 
-    private void displayGPSDetails(Location location) {
+    private void displayGPSDetails(Location location, int ctr) {
         ctrUpdate++;
 
-        tvGPSCounter.setText(Integer.toString(ctrUpdate));
+        tvGPSCounter.setText(Integer.toString(ctr));
         tvGPSLatitude.setText(Double.toString(location.getLatitude()));
         tvGPSLongitude.setText(Double.toString(location.getLongitude()));
         tvGPSAltitude.setText(Double.toString(location.getAltitude()));

@@ -14,8 +14,9 @@ public class LocationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         // If you got a Location extra, use it
         Location loc = (Location)intent.getParcelableExtra(LocationManager.KEY_LOCATION_CHANGED);
+        int ctr = intent.getIntExtra("counter", 0);
         if (loc != null) {
-            onLocationReceived(context, loc);
+            onLocationReceived(context, loc, ctr);
             return;
         }
 
@@ -26,8 +27,8 @@ public class LocationReceiver extends BroadcastReceiver {
         }
     }
 
-    protected void onLocationReceived(Context context, Location loc) {
-        Log.d(TAG, this + " Got location from " + loc.getProvider() + ": "
+    protected void onLocationReceived(Context context, Location loc, int ctr) {
+        Log.d(TAG, this + " Got #" + Integer.toString(ctr)  + " location from " + loc.getProvider() + ": "
                 + loc.getLatitude() + ", " + loc.getLongitude());
     }
 

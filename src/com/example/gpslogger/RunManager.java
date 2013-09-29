@@ -25,6 +25,7 @@ public class RunManager {
 
     private String gpsProvider;
     private ArrayList gpsSatelliteList; // loop through satellites to get status
+    private int counter = 0;
 
     // The private constructor forces users to use RunManager.get(Context)
     private RunManager(Context appContext) {
@@ -40,13 +41,6 @@ public class RunManager {
         return sRunManager;
     }
 
-//    private PendingIntent getLocationPendingIntent(boolean shouldCreate) {
-//        Log.d(TAG, "getLocationPendingIntent");
-//        Intent broadcast = new Intent(ACTION_LOCATION);
-//        int flags = shouldCreate ? 0 : PendingIntent.FLAG_NO_CREATE;
-//        return PendingIntent.getBroadcast(mAppContext, 0, broadcast, flags);
-//    }
-
     public void startLocationUpdates() {
         gpsProvider = LocationManager.GPS_PROVIDER;
 
@@ -55,9 +49,6 @@ public class RunManager {
         if (lastKnown != null) {
             broadcastLocation(lastKnown);
         }
-
-        // Start updates from the location manager
-//        PendingIntent pi = getLocationPendingIntent(true);
 
         gpsLocationListener = new MyLocationListener();
         mLocationManager.requestLocationUpdates(gpsProvider, 0, 0, gpsLocationListener);
@@ -69,12 +60,6 @@ public class RunManager {
     }
 
     public void stopLocationUpdates() {
-//        PendingIntent pi = getLocationPendingIntent(false);
-//        if (pi != null) {
-//            mLocationManager.removeUpdates(pi);
-//            pi.cancel();
-//        }
-
         mLocationManager.removeUpdates(gpsLocationListener);
         mLocationManager.removeGpsStatusListener(gpsStatusListener);
         mRunning = false;
@@ -85,8 +70,10 @@ public class RunManager {
     }
 
     private void broadcastLocation(Location location) {
+        counter++;
         Intent broadcast = new Intent(ACTION_LOCATION);
         broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);
+        broadcast.putExtra("counter", counter);
         mAppContext.sendBroadcast(broadcast);
     }
 
@@ -94,8 +81,8 @@ public class RunManager {
     private class MyLocationListener implements LocationListener {
         @Override
         public void onLocationChanged(Location location) {
-            broadcastLocation(location);
             mRunning = true;
+            broadcastLocation(location);
         }
 
         @Override
@@ -115,8 +102,7 @@ public class RunManager {
     }
 
     // Methods in this class are called when the status of the GPS changes
-    private class MyGpsStatusListener implements GpsStatus.Listener
-    {
+    private class MyGpsStatusListener implements GpsStatus.Listener {
         // called to handle an event updating the satellite status
         private void satelliteStatusUpdate() {
             // use the location manager to get a gps status object

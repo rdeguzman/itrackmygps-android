@@ -27,6 +27,8 @@ public class RunManager {
     private ArrayList gpsSatelliteList; // loop through satellites to get status
     private int counter = 0;
 
+    private LocationDatabaseHelper mDatabaseHelper;
+
     // The private constructor forces users to use RunManager.get(Context)
     private RunManager(Context appContext) {
         mAppContext = appContext;
@@ -75,6 +77,10 @@ public class RunManager {
         broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);
         broadcast.putExtra("counter", counter);
         mAppContext.sendBroadcast(broadcast);
+    }
+
+    public void insertLocation(Location location){
+        mDatabaseHelper.insertLocation(location);
     }
 
     // Methods in this class are called when the location providers give an update
@@ -130,17 +136,17 @@ public class RunManager {
         public void onGpsStatusChanged(int event) {
             switch (event) {
                 case GpsStatus.GPS_EVENT_SATELLITE_STATUS:
-                    Log.i(TAG, "GPS_EVENT_SATELLITE_STATUS");
+                    Log.d(TAG, "GPS_EVENT_SATELLITE_STATUS");
                     satelliteStatusUpdate();
                     break;
                 case GpsStatus.GPS_EVENT_STARTED:
-                    Log.i(TAG, "GPS_EVENT_STARTED");
+                    Log.d(TAG, "GPS_EVENT_STARTED");
                     break;
                 case GpsStatus.GPS_EVENT_FIRST_FIX:
-                    Log.i(TAG, "GPS_EVENT_FIRST_FIX");
+                    Log.d(TAG, "GPS_EVENT_FIRST_FIX");
                     break;
                 case GpsStatus.GPS_EVENT_STOPPED:
-                    Log.i(TAG, "GPS_EVENT_STOPPED");
+                    Log.d(TAG, "GPS_EVENT_STOPPED");
                     break;
             }
         }

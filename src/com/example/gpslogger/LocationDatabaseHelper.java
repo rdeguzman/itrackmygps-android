@@ -10,7 +10,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "gpslogger.sqlite";
     private static final int VERSION = 1;
 
-    private static final String TABLE_LOCATION = "location";
+    private static final String TABLE_LOCATION = "locations";
     private static final String COLUMN_LOCATION_TIMESTAMP = "timestamp";
     private static final String COLUMN_LOCATION_LATITUDE = "latitude";
     private static final String COLUMN_LOCATION_LONGITUDE = "longitude";

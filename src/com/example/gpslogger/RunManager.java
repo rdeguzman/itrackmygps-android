@@ -33,6 +33,7 @@ public class RunManager {
     private RunManager(Context appContext) {
         mAppContext = appContext;
         mLocationManager = (LocationManager)mAppContext.getSystemService(Context.LOCATION_SERVICE);
+        mDatabaseHelper = new LocationDatabaseHelper(mAppContext);
     }
 
     public static RunManager get(Context c) {
@@ -72,6 +73,8 @@ public class RunManager {
     }
 
     private void broadcastLocation(Location location) {
+        insertLocation(location);
+
         counter++;
         Intent broadcast = new Intent(ACTION_LOCATION);
         broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);

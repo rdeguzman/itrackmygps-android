@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
+import android.util.Log;
 
 public class LocationDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "gpslogger.sqlite";
@@ -19,15 +20,18 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_LOCATION_HEADING = "heading";
     private static final String COLUMN_LOCATION_ACCURACY = "accuracy";
     private static final String COLUMN_LOCATION_PROVIDER = "provider";
+    private static final String TAG = "LocationDatabaseHelper";
 
-    public LocationDatabaseHelper(Context context) {
+    public LocationDatabaseHelper(Context context){
         super(context, DB_NAME, null, VERSION);
+        Log.d(TAG, "database helper created");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d(TAG, "locations table created");
         // Create the "location" table
-        db.execSQL("CREATE TABLE location (" +
+        db.execSQL("CREATE TABLE locations (" +
                 " timestamp integer, " +
                 " latitude real, " +
                 " longitude real, " +
@@ -45,6 +49,8 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public long insertLocation(Location location) {
+        Log.d(TAG, "inserted loc:" + location.getLatitude() + " lon:" + location.getLongitude());
+
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_LOCATION_TIMESTAMP, location.getTime());
         cv.put(COLUMN_LOCATION_LATITUDE, location.getLatitude());

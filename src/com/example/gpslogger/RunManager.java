@@ -23,7 +23,9 @@ public class RunManager {
     private MyLocationListener gpsLocationListener;
     private MyGpsStatusListener gpsStatusListener;
 
+    private String networkProvider;
     private String gpsProvider;
+
     private ArrayList gpsSatelliteList; // loop through satellites to get status
     private int counter = 0;
 
@@ -46,12 +48,16 @@ public class RunManager {
 
     public void startLocationUpdates() {
         gpsProvider = LocationManager.GPS_PROVIDER;
+        networkProvider = LocationManager.NETWORK_PROVIDER;
 
         // Get the last known location and broadcast it if you have one
         Location lastKnown = mLocationManager.getLastKnownLocation(gpsProvider);
         if (lastKnown != null) {
             broadcastLocation(lastKnown);
         }
+
+        MyLocationListener networkLocationListener = new MyLocationListener();
+        mLocationManager.requestLocationUpdates(networkProvider, 0, 0, networkLocationListener);
 
         gpsLocationListener = new MyLocationListener();
         mLocationManager.requestLocationUpdates(gpsProvider, 0, 0, gpsLocationListener);

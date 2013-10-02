@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
@@ -62,10 +66,12 @@ public class MainActivity extends Activity {
         tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
         tvGPSTotalSatellites = (TextView)findViewById(R.id.tvGPSFixTotalSatellites);
 
-        lvSatellites = (ListView)findViewById(R.id.lv_satellites);
         gpsSatelliteList = new ArrayList<GpsSatellite>();
-        satelliteAdapter = new SatteliteListAdapter(this, gpsSatelliteList);
-        lvSatellites.setAdapter(satelliteAdapter);
+
+        gmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapview)).getMap();
+        if(gmap != null){
+            gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        }
     }
 
     public void buttonStartPressed(View view){

@@ -19,3 +19,4 @@ local.properties
 .idea/workspace.xml
 .idea/tasks.xml
 #.idea/misc.xml
+proguard_logs/

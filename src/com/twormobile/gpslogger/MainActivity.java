@@ -16,6 +16,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -43,6 +45,7 @@ public class MainActivity extends Activity {
 
     private GoogleMap gmap;
     private boolean firstFix = true;
+    private Marker marker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,15 +103,25 @@ public class MainActivity extends Activity {
         protected void onLocationReceived(Context context, Location loc, int ctr) {
             displayGPSDetails(loc, ctr);
 
-            LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
+            if(gmap != null){
+                LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
 
-            // If this is the first fix, move the camera to the new position
-            // Enable myLocation so we can see the blue dot on the map
-            if(firstFix && gmap.isMyLocationEnabled() == false){
-                firstFix = false;
-                float maxZoom = gmap.getMaxZoomLevel() - 8.0f;
-                gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, maxZoom));
-                gmap.setMyLocationEnabled(true);
+                // If this is the first fix, move the camera to the new position
+                // Enable myLocation so we can see the blue dot on the map
+                if(firstFix && gmap.isMyLocationEnabled() == false){
+                    firstFix = false;
+                    float maxZoom = gmap.getMaxZoomLevel() - 8.0f;
+                    gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, maxZoom));
+                    gmap.setMyLocationEnabled(true);
+                }
+                else{
+                    if(marker == null){
+                        MarkerOptions markerOptions = new MarkerOptions().position(pos);
+                        marker = gmap.addMarker(markerOptions);
+                    }
+
+                    marker.setPosition(pos);
+                }
             }
         }
 

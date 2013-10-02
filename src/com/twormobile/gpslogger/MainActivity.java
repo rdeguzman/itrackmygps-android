@@ -40,8 +40,9 @@ public class MainActivity extends Activity {
     private TextView tvGPSTotalSatellites;
 
     private ArrayList gpsSatelliteList; // loop through satellites to get status
-    private ListView lvSatellites;
-    private SatteliteListAdapter satelliteAdapter;
+
+    private GoogleMap gmap;
+    private boolean firstFix = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,15 +99,16 @@ public class MainActivity extends Activity {
         @Override
         protected void onLocationReceived(Context context, Location loc, int ctr) {
             displayGPSDetails(loc, ctr);
-        }
 
-        @Override
-        protected void onProviderEnabledChanged(boolean enabled) {
-            if(enabled){
-                Toast.makeText(getApplicationContext(), "GPS enabled", Toast.LENGTH_LONG).show();
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "GPS disabled", Toast.LENGTH_LONG).show();
+            LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
+
+            // If this is the first fix, move the camera to the new position
+            // Enable myLocation so we can see the blue dot on the map
+            if(firstFix && gmap.isMyLocationEnabled() == false){
+                firstFix = false;
+                float maxZoom = gmap.getMaxZoomLevel() - 8.0f;
+                gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, maxZoom));
+                gmap.setMyLocationEnabled(true);
             }
         }
 

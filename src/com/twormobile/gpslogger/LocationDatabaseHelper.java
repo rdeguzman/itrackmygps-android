@@ -1,4 +1,4 @@
-package com.example.gpslogger;
+package com.twormobile.gpslogger;
 
 import android.content.ContentValues;
 import android.content.Context;

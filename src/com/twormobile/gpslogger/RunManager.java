@@ -1,4 +1,4 @@
-package com.example.gpslogger;
+package com.twormobile.gpslogger;
 
 import android.app.PendingIntent;
 import android.content.Context;

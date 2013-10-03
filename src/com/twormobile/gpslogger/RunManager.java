@@ -20,6 +20,7 @@ public class RunManager {
     private LocationManager mLocationManager;
     private boolean mRunning;
 
+    private MyLocationListener networkLocationListener;
     private MyLocationListener gpsLocationListener;
     private MyGpsStatusListener gpsStatusListener;
 
@@ -50,17 +51,33 @@ public class RunManager {
         gpsProvider = LocationManager.GPS_PROVIDER;
         networkProvider = LocationManager.NETWORK_PROVIDER;
 
-        // Get the last known location and broadcast it if you have one
+        // Get the last known gps location and broadcast it if you have one
+        // If you can't find one then broadcast a network location
         Location lastKnown = mLocationManager.getLastKnownLocation(gpsProvider);
         if (lastKnown != null) {
             broadcastLocation(lastKnown);
         }
+        else{
+            Location lastKnownNetworkLocation = mLocationManager.getLastKnownLocation(networkProvider);
+            if(lastKnownNetworkLocation != null)
+                broadcastLocation(lastKnownNetworkLocation);
+        }
 
-        MyLocationListener networkLocationListener = new MyLocationListener();
-        mLocationManager.requestLocationUpdates(networkProvider, 0, 0, networkLocationListener);
-
-        gpsLocationListener = new MyLocationListener();
-        mLocationManager.requestLocationUpdates(gpsProvider, 0, 0, gpsLocationListener);
+        //Here we check for "network", "gps" in providers
+        for(String provider : mLocationManager.getAllProviders()){
+            if(provider.contains(networkProvider)){
+                if(mLocationManager.isProviderEnabled(networkProvider) == false){
+                    networkLocationListener = new MyLocationListener();
+                    mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkLocationListener);
+                }
+            }
+            else if(provider.contains(gpsProvider)){
+                if(mLocationManager.isProviderEnabled(gpsProvider) == false){
+                    gpsLocationListener = new MyLocationListener();
+                    mLocationManager.requestLocationUpdates(gpsProvider, 0, 0, gpsLocationListener);
+                }
+            }
+        }
 
         MyGpsStatusListener gpsStatusListener = new MyGpsStatusListener();
         mLocationManager.addGpsStatusListener(gpsStatusListener);

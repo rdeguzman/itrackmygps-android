@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -106,21 +105,25 @@ public class MainActivity extends Activity {
             if(gmap != null){
                 LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
 
-                // If this is the first fix, move the camera to the new position
-                // Enable myLocation so we can see the blue dot on the map
-                if(firstFix && gmap.isMyLocationEnabled() == false){
-                    firstFix = false;
-                    float maxZoom = gmap.getMaxZoomLevel() - 8.0f;
-                    gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, maxZoom));
-                    gmap.setMyLocationEnabled(true);
+                if(marker == null){
+                    MarkerOptions markerOptions = new MarkerOptions().position(pos);
+                    marker = gmap.addMarker(markerOptions);
                 }
-                else{
-                    if(marker == null){
-                        MarkerOptions markerOptions = new MarkerOptions().position(pos);
-                        marker = gmap.addMarker(markerOptions);
+
+                marker.setPosition(pos);
+
+                // If this is the first fix, zoom to the new position
+                if(firstFix){
+                    firstFix = false;
+                    float maxZoom = gmap.getMaxZoomLevel()/2.0f;
+                    gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, maxZoom));
+                }
+                else {
+                    // If the new location is not within the map move to the new position.
+                    if(MapUtils.isLatLngVisible(gmap, pos) == false){
+                        gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
                     }
 
-                    marker.setPosition(pos);
                 }
             }
         }

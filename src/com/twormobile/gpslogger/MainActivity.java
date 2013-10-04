@@ -119,7 +119,8 @@ public class MainActivity extends Activity {
                     gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, maxZoom));
                 }
                 else {
-                    // If the new location is not within the map move to the new position.
+                    // If the new location is not visible within the map
+                    // move the map to the new location.
                     if(MapUtils.isLatLngVisible(gmap, pos) == false){
                         gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
                     }

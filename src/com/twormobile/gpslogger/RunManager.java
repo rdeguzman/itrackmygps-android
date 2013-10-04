@@ -97,15 +97,10 @@ public class RunManager {
     }
 
     public void stopLocationUpdates() {
-        // Synchronized because there may be multiple listeners running and
-        // we don't want them to both try to alter the listeners collection
-        // at the same time.
-        synchronized (locationListeners) {
-            for (MyLocationListener listener : locationListeners) {
-                mLocationManager.removeUpdates(listener);
-                locationListeners.remove(listener);
-            }
+        for (MyLocationListener listener : locationListeners) {
+            mLocationManager.removeUpdates(listener);
         }
+        locationListeners.clear();
 
         mLocationManager.removeGpsStatusListener(gpsStatusListener);
         mRunning = false;

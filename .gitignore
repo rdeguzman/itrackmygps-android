@@ -20,3 +20,4 @@ local.properties
 .idea/tasks.xml
 #.idea/misc.xml
 proguard_logs/
+res/values/api_keys.xml

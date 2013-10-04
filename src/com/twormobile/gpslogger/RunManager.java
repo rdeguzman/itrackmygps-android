@@ -27,7 +27,8 @@ public class RunManager {
     private String networkProvider;
     private String gpsProvider;
 
-    private ArrayList gpsSatelliteList; // loop through satellites to get status
+    private ArrayList gpsSatelliteList;     // loop through satellites to get status
+    private ArrayList<MyLocationListener> locationListeners = new ArrayList();    // list of location listenres ("network", "gps", etc)
     private int counter = 0;
 
     private LocationDatabaseHelper mDatabaseHelper;
@@ -37,6 +38,10 @@ public class RunManager {
         mAppContext = appContext;
         mLocationManager = (LocationManager)mAppContext.getSystemService(Context.LOCATION_SERVICE);
         mDatabaseHelper = new LocationDatabaseHelper(mAppContext);
+
+        networkLocationListener = new MyLocationListener();
+        gpsLocationListener = new MyLocationListener();
+        gpsStatusListener = new MyGpsStatusListener();
     }
 
     public static RunManager get(Context c) {
@@ -53,9 +58,9 @@ public class RunManager {
 
         // Get the last known gps location and broadcast it if you have one
         // If you can't find one then broadcast a network location
-        Location lastKnown = mLocationManager.getLastKnownLocation(gpsProvider);
-        if (lastKnown != null) {
-            broadcastLocation(lastKnown);
+        Location lastKnownGPSLocation = mLocationManager.getLastKnownLocation(gpsProvider);
+        if (lastKnownGPSLocation != null) {
+            broadcastLocation(lastKnownGPSLocation);
         }
         else{
             Location lastKnownNetworkLocation = mLocationManager.getLastKnownLocation(networkProvider);
@@ -63,30 +68,45 @@ public class RunManager {
                 broadcastLocation(lastKnownNetworkLocation);
         }
 
-        //Here we check for "network", "gps" in providers
-        for(String provider : mLocationManager.getAllProviders()){
-            if(provider.contains(networkProvider)){
-                if(mLocationManager.isProviderEnabled(networkProvider) == false){
-                    networkLocationListener = new MyLocationListener();
-                    mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, networkLocationListener);
-                }
-            }
-            else if(provider.contains(gpsProvider)){
-                if(mLocationManager.isProviderEnabled(gpsProvider) == false){
-                    gpsLocationListener = new MyLocationListener();
-                    mLocationManager.requestLocationUpdates(gpsProvider, 0, 0, gpsLocationListener);
-                }
-            }
-        }
-
-        MyGpsStatusListener gpsStatusListener = new MyGpsStatusListener();
+        // Here we check for "network", "gps" in providers and start them if they are available
+        // Note that "network" is not available in the emulator
+        startLocationListener(networkLocationListener, networkProvider);
+        startLocationListener(gpsLocationListener, gpsProvider);
         mLocationManager.addGpsStatusListener(gpsStatusListener);
 
         mRunning = true;
     }
 
+    private boolean isProviderAllowed(String s){
+        boolean flag = false;
+        for(String provider : mLocationManager.getAllProviders()){
+            if(provider.contains(s)){
+                flag = true;
+                break;
+            }
+        }
+
+        return flag;
+    }
+
+    private void startLocationListener(MyLocationListener listener, String provider){
+        if(isProviderAllowed(provider) && mLocationManager.isProviderEnabled(provider)){
+            mLocationManager.requestLocationUpdates(provider, 0, 0, listener);
+            locationListeners.add(listener);
+        }
+    }
+
     public void stopLocationUpdates() {
-        mLocationManager.removeUpdates(gpsLocationListener);
+        // Synchronized because there may be multiple listeners running and
+        // we don't want them to both try to alter the listeners collection
+        // at the same time.
+        synchronized (locationListeners) {
+            for (MyLocationListener listener : locationListeners) {
+                mLocationManager.removeUpdates(listener);
+                locationListeners.remove(listener);
+            }
+        }
+
         mLocationManager.removeGpsStatusListener(gpsStatusListener);
         mRunning = false;
     }

@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">gpslogger</string>
     <string name="action_settings">Settings</string>
+    <string name="label_update_interval">Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds</string>
 </resources>

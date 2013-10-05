@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
+
+    <TableRow>
+        <TextView
+                android:text="GPS Settings"
+                android:id="@+id/job_details_header"
+                style="@style/GPSDetailsTableHeader" />
+    </TableRow>
+
+    <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+    <TableRow android:layout_height="wrap_content">
+        <TextView
+                android:text="@string/label_update_interval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"/>
+        <EditText
+                android:id="@+id/etxt_update_interval"
+                android:layout_width="50dp"
+                android:text="3"
+                android:gravity="right"
+                android:padding="10dp" android:layout_gravity="center_vertical"/>
+    </TableRow>
+
+    <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+    <TableRow android:layout_height="wrap_content">
+        <TextView
+                android:text="@string/label_update_interval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"/>
+        <EditText
+                android:id="@+id/etxt_distance  _interval"
+                android:layout_width="50dp"
+                android:text="3"
+                android:gravity="right"
+                android:padding="10dp" android:layout_gravity="center_vertical"/>
+    </TableRow>
+
+</TableLayout>

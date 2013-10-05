@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.*;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
+    public static final int ENTRY_SETTINGS = 10;
 
     private RunManager runManager;
     private Button btnStart;
@@ -206,6 +208,8 @@ public class MainActivity extends Activity {
 
     private void startSettingsActivity(){
         Log.d(TAG, "startSettingsActivity");
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivityForResult(intent, ENTRY_SETTINGS);
     }
 
 }

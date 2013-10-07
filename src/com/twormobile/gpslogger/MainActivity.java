@@ -202,15 +202,15 @@ public class MainActivity extends Activity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_settings:
-                startSettingsActivity();
+                displaySettingsActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void startSettingsActivity(){
-        Log.d(TAG, "startSettingsActivity");
+    private void displaySettingsActivity(){
+        Log.d(TAG, "displaySettingsActivity");
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivityForResult(intent, ENTRY_SETTINGS);
     }
@@ -251,8 +251,6 @@ public class MainActivity extends Activity {
 
             @Override
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                // TODO Auto-generated method stub
-
             }
         });
         dialog.show();

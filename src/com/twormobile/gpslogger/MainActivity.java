@@ -2,13 +2,12 @@ package com.twormobile.gpslogger;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.app.AlertDialog;
+import android.content.*;
 import android.content.res.Configuration;
 import android.location.*;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
@@ -56,6 +55,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         runManager = RunManager.get(getApplicationContext());
+        if(!runManager.isLocationAccessEnabled()){
+            displayLocationAccessDialog();
+        }
 
         //find the view layouts
         viewTableLayout = (TableLayout)findViewById(R.id.table_layout);
@@ -144,7 +146,7 @@ public class MainActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        this.registerReceiver(mLocationReceiver,new IntentFilter(RunManager.ACTION_LOCATION));
+        this.registerReceiver(mLocationReceiver, new IntentFilter(RunManager.ACTION_LOCATION));
     }
 
     @Override
@@ -235,4 +237,24 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void displayLocationAccessDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setMessage(R.string.gps_network_not_enabled);
+        dialog.setPositiveButton(R.string.enable, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        });
+        dialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        dialog.show();
+    }
 }

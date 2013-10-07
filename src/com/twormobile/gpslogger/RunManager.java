@@ -42,6 +42,9 @@ public class RunManager {
         networkLocationListener = new MyLocationListener();
         gpsLocationListener = new MyLocationListener();
         gpsStatusListener = new MyGpsStatusListener();
+
+        gpsProvider = LocationManager.GPS_PROVIDER;
+        networkProvider = LocationManager.NETWORK_PROVIDER;
     }
 
     public static RunManager get(Context c) {
@@ -53,8 +56,6 @@ public class RunManager {
     }
 
     public void startLocationUpdates() {
-        gpsProvider = LocationManager.GPS_PROVIDER;
-        networkProvider = LocationManager.NETWORK_PROVIDER;
 
         // Get the last known gps location and broadcast it if you have one
         // If you can't find one then broadcast a network location
@@ -192,5 +193,9 @@ public class RunManager {
             }
         }
     };
+
+    public boolean isLocationAccessEnabled(){
+        return mLocationManager.isProviderEnabled(gpsProvider);
+    }
 
 }

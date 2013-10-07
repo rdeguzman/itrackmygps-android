@@ -3,7 +3,7 @@
     <string name="app_name">gpslogger</string>
     <string name="action_settings">Settings</string>
 
-    <string name="gps_network_not_enabled">We need GPS enabled in Settings > Location Access.</string>
+    <string name="gps_network_not_enabled">We need GPS satellites enabled in Settings > Location Access.</string>
     <string name="enable">Enable</string>
     <string name="cancel">Cancel</string>
 

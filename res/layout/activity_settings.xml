@@ -7,8 +7,7 @@
     <TableRow>
         <TextView
                 android:text="GPS Settings"
-                android:id="@+id/job_details_header"
-                style="@style/GPSDetailsTableHeader" />
+                style="@style/SettingsTableHeader" />
     </TableRow>
 
     <View android:layout_height="1dp" android:background="@color/table_divider" />
@@ -44,5 +43,33 @@
                 android:gravity="right"
                 android:padding="10dp" android:layout_gravity="center_vertical"/>
     </TableRow>
+
+    <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+    <TableRow>
+        <TextView
+                android:text="Map Settings"
+                style="@style/SettingsTableHeader" />
+    </TableRow>
+
+    <View android:layout_height="1dp" android:background="@color/table_divider" />
+
+    <TableRow>
+        <TextView
+                android:text="@string/label_map_layers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"/>
+    </TableRow>
+    <TableRow>
+        <Spinner android:id="@+id/spinner1"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:drawSelectorOnTop="true"
+                 android:prompt="@string/spinner_map_layers_prompt"
+                />
+    </TableRow>
+
 
 </TableLayout>

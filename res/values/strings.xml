@@ -2,5 +2,6 @@
 <resources>
     <string name="app_name">gpslogger</string>
     <string name="action_settings">Settings</string>
-    <string name="label_update_interval">Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds Updates Interval in Seconds</string>
+    <string name="label_min_time_interval">Time Interval in Seconds - minimum time interval between location updates</string>
+    <string name="label_min_distance_interval">Distance Interval in Meters - minimum distance between location updates</string>
 </resources>

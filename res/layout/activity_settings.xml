@@ -15,13 +15,13 @@
 
     <TableRow android:layout_height="wrap_content">
         <TextView
-                android:text="@string/label_update_interval"
+                android:text="@string/label_min_time_interval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="10dp"/>
         <EditText
-                android:id="@+id/etxt_update_interval"
+                android:id="@+id/etxt_time_interval"
                 android:layout_width="50dp"
                 android:text="3"
                 android:gravity="right"
@@ -32,7 +32,7 @@
 
     <TableRow android:layout_height="wrap_content">
         <TextView
-                android:text="@string/label_update_interval"
+                android:text="@string/label_min_distance_interval"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

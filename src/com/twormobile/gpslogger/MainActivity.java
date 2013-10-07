@@ -6,15 +6,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.location.*;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +32,7 @@ public class MainActivity extends Activity {
 
     private int ctrUpdate = 0;
 
+    private TableLayout viewTableLayout;
     private TextView tvGPSCounter;
     private TextView tvGPSLatitude;
     private TextView tvGPSLongitude;
@@ -58,6 +56,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         runManager = RunManager.get(getApplicationContext());
+
+        //find the view layouts
+        viewTableLayout = (TableLayout)findViewById(R.id.table_layout);
 
         //find the buttons
         btnStart = (Button)findViewById(R.id.btn_start);
@@ -210,6 +211,28 @@ public class MainActivity extends Activity {
         Log.d(TAG, "startSettingsActivity");
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivityForResult(intent, ENTRY_SETTINGS);
+    }
+
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "Switched to Landscape", Toast.LENGTH_SHORT).show();
+            viewTableLayout.setVisibility(View.INVISIBLE);
+
+            TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, 0);
+            viewTableLayout.setLayoutParams(params);
+
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+
+            Toast.makeText(this, "Switched to Portrait", Toast.LENGTH_SHORT).show();
+
+            viewTableLayout.setVisibility(View.VISIBLE);
+
+            TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
+            viewTableLayout.setLayoutParams(params);
+        }
     }
 
 }

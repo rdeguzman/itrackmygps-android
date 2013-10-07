@@ -38,7 +38,7 @@
                 android:layout_weight="1"
                 android:padding="10dp"/>
         <EditText
-                android:id="@+id/etxt_distance  _interval"
+                android:id="@+id/etxt_distance_interval"
                 android:layout_width="50dp"
                 android:text="3"
                 android:gravity="right"

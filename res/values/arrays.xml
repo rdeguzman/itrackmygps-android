@@ -3,7 +3,7 @@
     <string-array name="map_layers">
         <item>Normal</item>
         <item>Satellite</item>
-        <item>Hybrid</item>
         <item>Terrain</item>
+        <item>Hybrid</item>
     </string-array>
 </resources>

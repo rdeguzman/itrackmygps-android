@@ -4,5 +4,6 @@
         <item>Normal</item>
         <item>Satellite</item>
         <item>Hybrid</item>
+        <item>Terrain</item>
     </string-array>
 </resources>

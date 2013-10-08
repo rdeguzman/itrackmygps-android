@@ -5,6 +5,24 @@
              android:layout_height="fill_parent">
 
     <TableRow>
+        <Button
+                android:id="@+id/btn_cancel"
+                android:text="Cancel"
+                android:onClick="buttonCancelPressed"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"/>
+
+        <Button
+                android:id="@+id/btn_save"
+                android:text="Save"
+                android:onClick="buttonSavePressed"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"/>
+    </TableRow>
+
+    <TableRow>
         <TextView
                 android:text="GPS Settings"
                 style="@style/SettingsTableHeader" />

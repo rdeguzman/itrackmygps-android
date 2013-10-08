@@ -38,26 +38,11 @@ public class SettingsActivity extends Activity {
         mapLayerSpinner.setSelection(mapLayerIndex);
     }
 
-    void showToast(CharSequence msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
     private void populate(){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.map_layers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mapLayerSpinner.setAdapter(adapter);
-        mapLayerSpinner.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(
-                            AdapterView<?> parent, View view, int position, long id) {
-                        showToast("Spinner1: position=" + position + " id=" + id);
-                    }
-
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        showToast("Spinner1: unselected");
-                    }
-                });
 
     }
 
@@ -78,6 +63,8 @@ public class SettingsActivity extends Activity {
 
     public void buttonCancelPressed(View view){
         Log.d(TAG, "buttonCancelPressed");
+        SettingsActivity.this.setResult(RESULT_CANCELED);
+        finish();
     }
 
 }

@@ -7,6 +7,7 @@ import android.content.*;
 import android.content.res.Configuration;
 import android.location.*;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.*;
@@ -49,6 +50,8 @@ public class MainActivity extends Activity {
     private boolean firstFix = true;
     private Marker marker;
 
+    private int mapLayer;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,10 +85,20 @@ public class MainActivity extends Activity {
         actionBar.show();
 
         gpsSatelliteList = new ArrayList<GpsSatellite>();
-
         gmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapview)).getMap();
+
+        updateFromPreferences();
+    }
+
+    private void updateFromPreferences() {
+        Context context = getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        // we add 1 since GoogleMap.MAP_TYPE_NORMAL starts at 1
+        mapLayer = prefs.getInt(SettingsActivity.PREF_MAP_LAYER_INDEX, 0) + 1;
+
         if(gmap != null){
-            gmap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            gmap.setMapType(mapLayer);
         }
     }
 
@@ -186,6 +199,7 @@ public class MainActivity extends Activity {
 
         Log.d(TAG, "resume");
         updateButtons();
+        updateFromPreferences();
     }
 
 

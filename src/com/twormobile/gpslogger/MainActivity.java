@@ -150,9 +150,9 @@ public class MainActivity extends Activity {
                     int speed = (int)loc.getSpeed();
 
                     boolean isMoving = speed > 1;
-                    boolean isSpeedSlow = MapUtils.isBetween(speed, 10, 40);
-                    boolean isSpeedModerate = MapUtils.isBetween(speed, 41, 60);
-                    boolean isSpeedQuiteFast = MapUtils.isBetween(speed, 61, 80);
+                    boolean isSpeedSlow = isBetween(speed, 10, 40);
+                    boolean isSpeedModerate = isBetween(speed, 41, 60);
+                    boolean isSpeedQuiteFast = isBetween(speed, 61, 80);
                     boolean isSpeedFast = speed > 81;
 
                     if(isSpeedSlow){
@@ -301,4 +301,9 @@ public class MainActivity extends Activity {
         });
         dialog.show();
     }
+
+    private boolean isBetween(int x, int lower, int upper) {
+        return lower <= x && x <= upper;
+    }
+
 }

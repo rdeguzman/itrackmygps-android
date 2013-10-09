@@ -51,6 +51,7 @@ public class MainActivity extends Activity {
     private Marker marker;
 
     private int mapLayer;
+    private float currentZoom; //tracks the current zoom of the map
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,6 +130,7 @@ public class MainActivity extends Activity {
 
             if(gmap != null){
                 LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
+                float maxZoom = gmap.getMaxZoomLevel();
 
                 if(marker == null){
                     MarkerOptions markerOptions = new MarkerOptions().position(pos);
@@ -140,21 +142,51 @@ public class MainActivity extends Activity {
                 // If this is the first fix, zoom to the new position
                 if(firstFix){
                     firstFix = false;
-                    float maxZoom = gmap.getMaxZoomLevel()/2.0f;
-                    gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, maxZoom));
+                    currentZoom = maxZoom/2.0f;
+                    gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
                 }
                 else {
-                    // If the new location is not visible within the map
-                    // move the map to the new location.
-                    if(MapUtils.isLatLngVisible(gmap, pos) == false){
-                        gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                    // Dynamic zoom based on speed
+                    int speed = (int)loc.getSpeed();
+                    float zoom = gmap.getCameraPosition().zoom;
+
+                    boolean isSpeedSlow = speed < 20;
+                    boolean isSpeedModerate = MapUtils.isBetween(speed, 21, 60);
+                    boolean isSpeedFast = speed > 60;
+
+                    if(isSpeedSlow){
+                        currentZoom = maxZoom - 5.0f;
+                    }
+                    else if(isSpeedModerate){
+                        currentZoom = maxZoom - 7.0f;
+                    }
+                    else if(isSpeedFast){
+                        currentZoom = maxZoom - 9.0f;
                     }
 
+                    if(isSpeedFast){
+                        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
+                        return;
+                    }
+
+                    if((isSpeedModerate || isSpeedSlow) && MapUtils.isLatLngNotVisible(pos, gmap)){
+                        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
+                        return;
+                    }
+
+                    if(MapUtils.isLatLngNotVisible(pos, gmap)){
+                        gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                        return;
+                    }
                 }
             }
         }
 
     };
+
+    private boolean isZoomEqual(float newZoom, float curZoom){
+        return (int)newZoom != (int)curZoom;
+    }
 
     @Override
     public void onStart() {

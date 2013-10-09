@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     public static final int ENTRY_SETTINGS = 10;
 
-    private RunManager runManager;
+    private GpsManager gpsManager;
     private Button btnStart;
     private Button btnStop;
 
@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        runManager = RunManager.get(getApplicationContext());
-        if(!runManager.isLocationAccessEnabled()){
+        gpsManager = GpsManager.get(getApplicationContext());
+        if(!gpsManager.isLocationAccessEnabled()){
             displayLocationAccessDialog();
         }
 
@@ -104,18 +104,18 @@ public class MainActivity extends Activity {
 
     public void buttonStartPressed(View view){
         Log.i(TAG, "buttonStartPressed");
-        runManager.startLocationUpdates();
+        gpsManager.startLocationUpdates();
         updateButtons();
     }
 
     public void buttonStopPressed(View view){
         Log.i(TAG, "buttonStopPressed");
-        runManager.stopLocationUpdates();
+        gpsManager.stopLocationUpdates();
         updateButtons();
     }
 
     private void updateButtons() {
-        boolean started = runManager.isTrackingRun();
+        boolean started = gpsManager.isTrackingRun();
 
         btnStart.setEnabled(!started);
         btnStop.setEnabled(started);
@@ -159,7 +159,7 @@ public class MainActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        this.registerReceiver(mLocationReceiver, new IntentFilter(RunManager.ACTION_LOCATION));
+        this.registerReceiver(mLocationReceiver, new IntentFilter(GpsManager.ACTION_LOCATION));
     }
 
     @Override

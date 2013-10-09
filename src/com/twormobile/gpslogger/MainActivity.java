@@ -148,45 +148,44 @@ public class MainActivity extends Activity {
                 else {
                     // Dynamic zoom based on speed
                     int speed = (int)loc.getSpeed();
-                    float zoom = gmap.getCameraPosition().zoom;
 
-                    boolean isSpeedSlow = speed < 20;
-                    boolean isSpeedModerate = MapUtils.isBetween(speed, 21, 60);
-                    boolean isSpeedFast = speed > 60;
+                    boolean isMoving = speed > 1;
+                    boolean isSpeedSlow = MapUtils.isBetween(speed, 10, 40);
+                    boolean isSpeedModerate = MapUtils.isBetween(speed, 41, 60);
+                    boolean isSpeedQuiteFast = MapUtils.isBetween(speed, 61, 80);
+                    boolean isSpeedFast = speed > 81;
 
                     if(isSpeedSlow){
-                        currentZoom = maxZoom - 5.0f;
+                        currentZoom = maxZoom - 3.0f; //zoom = 18
                     }
                     else if(isSpeedModerate){
-                        currentZoom = maxZoom - 7.0f;
+                        currentZoom = maxZoom - 4.0f; //zoom = 17
+                    }
+                    else if(isSpeedQuiteFast){
+                        currentZoom = maxZoom - 5.0f; //zoom = 16
                     }
                     else if(isSpeedFast){
-                        currentZoom = maxZoom - 9.0f;
+                        currentZoom = maxZoom - 6.0f; //zoom = 15
+                    }
+                    else{ //crawling
+                        currentZoom = maxZoom - 2.0f; //zoom = 19
                     }
 
-                    if(isSpeedFast){
+                    if(isMoving){
                         gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
-                        return;
+                    }
+                    else{
+                        if(MapUtils.isLatLngNotVisible(pos, gmap)){
+                            gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                            return;
+                        }
                     }
 
-                    if((isSpeedModerate || isSpeedSlow) && MapUtils.isLatLngNotVisible(pos, gmap)){
-                        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
-                        return;
-                    }
-
-                    if(MapUtils.isLatLngNotVisible(pos, gmap)){
-                        gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
-                        return;
-                    }
                 }
             }
         }
 
     };
-
-    private boolean isZoomEqual(float newZoom, float curZoom){
-        return (int)newZoom != (int)curZoom;
-    }
 
     @Override
     public void onStart() {
@@ -202,8 +201,9 @@ public class MainActivity extends Activity {
 
     private void displayGPSDetails(Location location, int ctr) {
         ctrUpdate++;
+        String tmpZoom = " Z:" + Float.toString(gmap.getCameraPosition().zoom);
 
-        tvGPSCounter.setText(Integer.toString(ctr));
+        tvGPSCounter.setText(Integer.toString(ctr) + tmpZoom);
         tvGPSLatitude.setText(Double.toString(location.getLatitude()));
         tvGPSLongitude.setText(Double.toString(location.getLongitude()));
         tvGPSAltitude.setText(Double.toString(location.getAltitude()));

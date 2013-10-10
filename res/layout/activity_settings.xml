@@ -81,7 +81,7 @@
                 android:padding="10dp"/>
     </TableRow>
     <TableRow>
-        <Spinner android:id="@+id/spinner1"
+        <Spinner android:id="@+id/spinner_map_layers"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:drawSelectorOnTop="true"

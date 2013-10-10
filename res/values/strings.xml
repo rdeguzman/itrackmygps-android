@@ -10,5 +10,7 @@
     <string name="label_min_time_interval">Time Interval in Seconds - minimum time interval between location updates</string>
     <string name="label_min_distance_interval">Distance Interval in Meters - minimum distance between location updates</string>
     <string name="label_map_layers">Switch Map Layer</string>
+    <string name="label_dynamic_zoom">Adjust Map zoom when vehicle is moving in high speeds.</string>
+
     <string name="spinner_map_layers_prompt">Switch Map Layer</string>
 </resources>

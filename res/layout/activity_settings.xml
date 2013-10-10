@@ -89,5 +89,22 @@
                 />
     </TableRow>
 
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <TextView
+                android:text="@string/label_dynamic_zoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"/>
+        <CheckBox
+                android:id="@+id/chk_dynamic_zoom_on_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="" />
+    </TableRow>
+
 
 </TableLayout>

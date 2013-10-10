@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
 
     private int mapLayer;
     private float currentZoom; //tracks the current zoom of the map
+    private boolean isZoomBasedOnSpeed;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,7 @@ public class MainActivity extends Activity {
 
         // we add 1 since GoogleMap.MAP_TYPE_NORMAL starts at 1
         mapLayer = prefs.getInt(SettingsActivity.PREF_MAP_LAYER_INDEX, 0) + 1;
+        isZoomBasedOnSpeed = prefs.getBoolean(SettingsActivity.PREF_ZOOM_BASED_ON_SPEED, true);
 
         if(gmap != null){
             gmap.setMapType(mapLayer);
@@ -147,39 +149,47 @@ public class MainActivity extends Activity {
                 }
                 else {
                     // Dynamic zoom based on speed
-                    int speed = (int)loc.getSpeed();
+                    if(isZoomBasedOnSpeed){
+                        int speed = (int)loc.getSpeed();
 
-                    boolean isMoving = speed > 1;
-                    boolean isSpeedSlow = isBetween(speed, 10, 40);
-                    boolean isSpeedModerate = isBetween(speed, 41, 60);
-                    boolean isSpeedQuiteFast = isBetween(speed, 61, 80);
-                    boolean isSpeedFast = speed > 81;
+                        boolean isMoving = speed > 1;
+                        boolean isSpeedSlow = isBetween(speed, 10, 40);
+                        boolean isSpeedModerate = isBetween(speed, 41, 60);
+                        boolean isSpeedQuiteFast = isBetween(speed, 61, 80);
+                        boolean isSpeedFast = speed > 81;
 
-                    if(isSpeedSlow){
-                        currentZoom = maxZoom - 3.0f; //zoom = 18
-                    }
-                    else if(isSpeedModerate){
-                        currentZoom = maxZoom - 4.0f; //zoom = 17
-                    }
-                    else if(isSpeedQuiteFast){
-                        currentZoom = maxZoom - 5.0f; //zoom = 16
-                    }
-                    else if(isSpeedFast){
-                        currentZoom = maxZoom - 6.0f; //zoom = 15
-                    }
-                    else{ //crawling
-                        currentZoom = maxZoom - 2.0f; //zoom = 19
-                    }
+                        if(isSpeedSlow){
+                            currentZoom = maxZoom - 3.0f; //zoom = 18
+                        }
+                        else if(isSpeedModerate){
+                            currentZoom = maxZoom - 4.0f; //zoom = 17
+                        }
+                        else if(isSpeedQuiteFast){
+                            currentZoom = maxZoom - 5.0f; //zoom = 16
+                        }
+                        else if(isSpeedFast){
+                            currentZoom = maxZoom - 6.0f; //zoom = 15
+                        }
+                        else{ //crawling
+                            currentZoom = maxZoom - 2.0f; //zoom = 19
+                        }
 
-                    if(isMoving){
-                        gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
-                    }
-                    else{
-                        if(MapUtils.isLatLngNotVisible(pos, gmap)){
-                            gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
-                            return;
+                        if(isMoving){
+                            gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
+                        }
+                        else{
+                            if(MapUtils.isLatLngNotVisible(pos, gmap)){
+                                gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                                return;
+                            }
                         }
                     }
+
+                    if(MapUtils.isLatLngNotVisible(pos, gmap)){
+                        gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                        return;
+                    }
+
 
                 }
             }

@@ -73,4 +73,11 @@ public class SettingsActivity extends Activity {
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        savePreferences();
+        SettingsActivity.this.setResult(RESULT_OK);
+        finish();
+    }
+
 }

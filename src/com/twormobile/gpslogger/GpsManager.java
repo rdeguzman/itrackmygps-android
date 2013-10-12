@@ -2,8 +2,10 @@ package com.twormobile.gpslogger;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.*;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -34,6 +36,10 @@ public class GpsManager {
     private LocationDatabaseHelper mDatabaseHelper;
     private Location currentBestLocation;
 
+    //used for location updates
+    private long minTimeInMilliseconds;
+    private float minDistanceInMeters;
+
     // The private constructor forces users to use GpsManager.get(Context)
     private GpsManager(Context appContext) {
         mAppContext = appContext;
@@ -46,6 +52,12 @@ public class GpsManager {
 
         gpsProvider = LocationManager.GPS_PROVIDER;
         networkProvider = LocationManager.NETWORK_PROVIDER;
+
+        // get time and distance interval from preferences
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mAppContext);
+        int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS, 0);
+        minTimeInMilliseconds = minTimeInSeconds * 1000L;
+        minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS, 0) * 1.0f;
     }
 
     public static GpsManager get(Context c) {
@@ -72,13 +84,7 @@ public class GpsManager {
                 broadcastLocation(lastKnownNetworkLocation);
         }
 
-        // Here we check for "network", "gps" in providers and start them if they are available
-        // Note that "network" is not available in the emulator
-        startLocationListener(networkLocationListener, networkProvider);
-        startLocationListener(gpsLocationListener, gpsProvider);
-        mLocationManager.addGpsStatusListener(gpsStatusListener);
-
-        mRunning = true;
+        startLocationListeners();
     }
 
     private boolean isProviderAllowed(String s){
@@ -93,9 +99,19 @@ public class GpsManager {
         return flag;
     }
 
+    private void startLocationListeners(){
+        // Here we check for "network", "gps" in providers and start them if they are available
+        // Note that "network" is not available in the emulator
+        startLocationListener(networkLocationListener, networkProvider);
+        startLocationListener(gpsLocationListener, gpsProvider);
+        mLocationManager.addGpsStatusListener(gpsStatusListener);
+
+        mRunning = true;
+    }
+
     private void startLocationListener(MyLocationListener listener, String provider){
         if(isProviderAllowed(provider) && mLocationManager.isProviderEnabled(provider)){
-            mLocationManager.requestLocationUpdates(provider, 0, 0, listener);
+            mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
             locationListeners.add(listener);
         }
     }
@@ -255,6 +271,13 @@ public class GpsManager {
             return provider2 == null;
         }
         return provider1.equals(provider2);
+    }
+
+    public void updateLocationUpdateSettings(int secs, int meters){
+        minTimeInMilliseconds = secs * 1000L;
+        minDistanceInMeters = meters * 1.0f;
+        stopLocationUpdates();
+        startLocationListeners();
     }
 
 }

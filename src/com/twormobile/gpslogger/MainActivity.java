@@ -103,6 +103,10 @@ public class MainActivity extends Activity {
         if(gmap != null){
             gmap.setMapType(mapLayer);
         }
+
+        int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS, 0);
+        int minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS, 0);
+        gpsManager.updateLocationUpdateSettings(minTimeInSeconds, minDistanceInMeters);
     }
 
     public void buttonStartPressed(View view){

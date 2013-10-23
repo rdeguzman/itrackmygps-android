@@ -113,12 +113,16 @@ public class MainActivity extends Activity {
         Log.i(TAG, "buttonStartPressed");
         gpsManager.startLocationUpdates();
         updateButtons();
+
+        startService(new Intent(this, GpsLoggerService.class));
     }
 
     public void buttonStopPressed(View view){
         Log.i(TAG, "buttonStopPressed");
         gpsManager.stopLocationUpdates();
         updateButtons();
+
+        stopService(new Intent(this, GpsLoggerService.class));
     }
 
     private void updateButtons() {

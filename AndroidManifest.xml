@@ -25,6 +25,7 @@
     <uses-feature android:required="true" android:name="android.hardware.location.gps"/>
 
     <application android:label="@string/app_name"
+                 android:name=".GpsLoggerApplication"
                  android:icon="@drawable/ic_launcher"
                  android:debuggable="true">
 

@@ -9,6 +9,7 @@ public class GpsLoggerService extends Service {
     private static final String TAG = GpsLoggerService.class.getSimpleName();
 
     private GpsLoggerApplication gpssapp;
+    private GpsManager gpsManager;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -19,6 +20,7 @@ public class GpsLoggerService extends Service {
     public void onCreate() {
         super.onCreate();
         this.gpssapp = (GpsLoggerApplication)getApplication();
+        this.gpsManager = gpssapp.getGpsManager();
 
         Log.d(TAG, "onCreated");
     }
@@ -28,6 +30,8 @@ public class GpsLoggerService extends Service {
         super.onStartCommand(intent, flags, startId);
         Log.d(TAG, "onStarted");
 
+        gpsManager.startLocationUpdates();
+
         return START_STICKY;
     }
 
@@ -35,5 +39,9 @@ public class GpsLoggerService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroyed");
+
+        if(gpsManager.isTrackingRun()){
+            gpsManager.stopLocationUpdates();
+        }
     }
 }

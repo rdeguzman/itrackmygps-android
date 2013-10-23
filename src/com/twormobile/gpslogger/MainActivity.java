@@ -26,7 +26,6 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     public static final int ENTRY_SETTINGS = 10;
 
-    private GpsManager gpsManager;
     private Button btnStart;
     private Button btnStop;
 
@@ -54,12 +53,16 @@ public class MainActivity extends Activity {
     private float currentZoom; //tracks the current zoom of the map
     private boolean isZoomBasedOnSpeed;
 
+    private GpsLoggerApplication gpssapp;
+    private GpsManager gpsManager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gpsManager = GpsManager.get(getApplicationContext());
+        this.gpssapp = (GpsLoggerApplication)getApplication();
+        this.gpsManager = gpssapp.getGpsManager();
         if(!gpsManager.isLocationAccessEnabled()){
             displayLocationAccessDialog();
         }
@@ -111,18 +114,19 @@ public class MainActivity extends Activity {
 
     public void buttonStartPressed(View view){
         Log.i(TAG, "buttonStartPressed");
-        gpsManager.startLocationUpdates();
-        updateButtons();
-
         startService(new Intent(this, GpsLoggerService.class));
+
+        updateButtons();
     }
 
     public void buttonStopPressed(View view){
         Log.i(TAG, "buttonStopPressed");
-        gpsManager.stopLocationUpdates();
-        updateButtons();
-
         stopService(new Intent(this, GpsLoggerService.class));
+//        if(gpsManager.isTrackingRun()){
+//            gpsManager.stopLocationUpdates();
+//        }
+
+        updateButtons();
     }
 
     private void updateButtons() {

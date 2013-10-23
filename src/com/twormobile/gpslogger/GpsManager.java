@@ -63,6 +63,7 @@ public class GpsManager {
     public static GpsManager get(Context c) {
         if (sGpsManager == null) {
             // Use the application context to avoid leaking activities
+            Log.i(TAG, "onCreated");
             sGpsManager = new GpsManager(c.getApplicationContext());
         }
         return sGpsManager;
@@ -276,8 +277,10 @@ public class GpsManager {
     public void updateLocationUpdateSettings(int secs, int meters){
         minTimeInMilliseconds = secs * 1000L;
         minDistanceInMeters = meters * 1.0f;
-        stopLocationUpdates();
-        startLocationListeners();
+        if(isTrackingRun()){
+            stopLocationUpdates();
+            startLocationListeners();
+        }
     }
 
 }

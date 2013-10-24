@@ -8,7 +8,7 @@ import android.util.Log;
 public class GpsLoggerService extends Service {
     private static final String TAG = GpsLoggerService.class.getSimpleName();
 
-    private GpsLoggerApplication gpssapp;
+    private GpsLoggerApplication gpsApp;
     private GpsManager gpsManager;
 
     @Override
@@ -19,8 +19,8 @@ public class GpsLoggerService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        this.gpssapp = (GpsLoggerApplication)getApplication();
-        this.gpsManager = gpssapp.getGpsManager();
+        this.gpsApp = (GpsLoggerApplication)getApplication();
+        this.gpsManager = gpsApp.getGpsManager();
 
         Log.d(TAG, "onCreated");
     }
@@ -30,7 +30,10 @@ public class GpsLoggerService extends Service {
         super.onStartCommand(intent, flags, startId);
         Log.d(TAG, "onStarted");
 
-        gpsManager.startLocationUpdates();
+        if(!gpsApp.isServiceRunning() && !gpsManager.isTrackingRun()){
+            gpsApp.setServiceRunning(true);
+            gpsManager.startLocationUpdates();
+        }
 
         return START_STICKY;
     }
@@ -40,8 +43,10 @@ public class GpsLoggerService extends Service {
         super.onDestroy();
         Log.d(TAG, "onDestroyed");
 
-        if(gpsManager.isTrackingRun()){
+        if(gpsApp.isServiceRunning() && gpsManager.isTrackingRun()){
+            gpsApp.setServiceRunning(false);
             gpsManager.stopLocationUpdates();
         }
     }
+
 }

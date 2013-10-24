@@ -22,14 +22,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity{
     private static final String TAG = "MainActivity";
     public static final int ENTRY_SETTINGS = 10;
 
-    private Button btnStart;
-    private Button btnStop;
-
     private int ctrUpdate = 0;
+
+    private ToggleButton toggleBtnService;
+    private ImageView ivGpsStatus;
 
     private TableLayout viewTableLayout;
     private TextView tvGPSCounter;
@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
     private float currentZoom; //tracks the current zoom of the map
     private boolean isZoomBasedOnSpeed;
 
-    private GpsLoggerApplication gpssapp;
+    private GpsLoggerApplication gpsApp;
     private GpsManager gpsManager;
 
     @Override
@@ -61,18 +61,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.gpssapp = (GpsLoggerApplication)getApplication();
-        this.gpsManager = gpssapp.getGpsManager();
+        this.gpsApp = (GpsLoggerApplication)getApplication();
+        this.gpsManager = gpsApp.getGpsManager();
         if(!gpsManager.isLocationAccessEnabled()){
             displayLocationAccessDialog();
         }
 
+        toggleBtnService = (ToggleButton)findViewById(R.id.toggleBtnService);
+        ivGpsStatus = (ImageView)findViewById(R.id.iv_gps_status);
+
         //find the view layouts
         viewTableLayout = (TableLayout)findViewById(R.id.table_layout);
-
-        //find the buttons
-        btnStart = (Button)findViewById(R.id.btn_start);
-        btnStop = (Button)findViewById(R.id.btn_stop);
 
         //find the textviews
         tvGPSCounter = (TextView)findViewById(R.id.tvGPSCounter);
@@ -112,28 +111,22 @@ public class MainActivity extends Activity {
         gpsManager.updateLocationUpdateSettings(minTimeInSeconds, minDistanceInMeters);
     }
 
-    public void buttonStartPressed(View view){
-        Log.i(TAG, "buttonStartPressed");
-        startService(new Intent(this, GpsLoggerService.class));
+    public void updateToggleButtonService(){
+        toggleBtnService.setChecked(gpsApp.isServiceRunning());
 
-        updateButtons();
+        ivGpsStatus.setImageResource(R.drawable.ball_green);
     }
 
-    public void buttonStopPressed(View view){
-        Log.i(TAG, "buttonStopPressed");
-        stopService(new Intent(this, GpsLoggerService.class));
-//        if(gpsManager.isTrackingRun()){
-//            gpsManager.stopLocationUpdates();
-//        }
+    public void onToggleClicked(View view) {
+        // Is the toggle on?
+        boolean on = ((ToggleButton) view).isChecked();
 
-        updateButtons();
-    }
-
-    private void updateButtons() {
-        boolean started = gpsManager.isTrackingRun();
-
-        btnStart.setEnabled(!started);
-        btnStop.setEnabled(started);
+        if (on) {
+            Log.i(TAG, "buttonStartPressed");
+            startService(new Intent(this, GpsLoggerService.class));
+        } else {
+            stopService(new Intent(this, GpsLoggerService.class));
+        }
     }
 
     private BroadcastReceiver mLocationReceiver = new LocationReceiver() {
@@ -252,7 +245,7 @@ public class MainActivity extends Activity {
         super.onResume();  // Always call the superclass method first
 
         Log.d(TAG, "resume");
-        updateButtons();
+        updateToggleButtonService();
         updateFromPreferences();
     }
 

@@ -4,7 +4,7 @@
           android:versionCode="1"
           android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="11"/>
+    <uses-sdk android:minSdkVersion="14"/>
 
     <permission
             android:name="com.twormobile.gpslogger.permission.MAPS_RECEIVE"

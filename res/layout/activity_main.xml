@@ -10,21 +10,20 @@
             android:layout_height="wrap_content">
 
         <TableRow>
-            <Button
-                    android:id="@+id/btn_start"
-                    android:text="Start"
-                    android:onClick="buttonStartPressed"
+            <ToggleButton
+                    android:id="@+id/toggleBtnService"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"/>
+                    android:layout_height="wrap_content"
+                    android:textOn="ON"
+                    android:textOff="OFF"
+                    android:onClick="onToggleClicked"/>
 
-            <Button
-                    android:id="@+id/btn_stop"
-                    android:text="Stop"
-                    android:onClick="buttonStopPressed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_weight="1"/>
+            <ImageView
+                    android:id="@+id/iv_gps_status"
+                    android:layout_width="16dip"
+                    android:layout_height="16dip"
+                    android:layout_gravity="center_vertical"/>
+
         </TableRow>
 
         <TableRow>

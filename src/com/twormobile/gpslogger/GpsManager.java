@@ -15,12 +15,15 @@ public class GpsManager {
     private static final String TAG = "GpsManager";
 
     public static final String ACTION_LOCATION = "com.example.gpslogger.ACTION_LOCATION";
+    public static final String ACTION_GPS_NETWORK_STATUS = "com.example.gpslogger.ACTION_GPS_NETWORK_STATUS";
+
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
     private static GpsManager sGpsManager;
     private Context mAppContext;
     private LocationManager mLocationManager;
     private boolean mRunning;
+    private boolean mGpsFixed;
 
     private MyLocationListener networkLocationListener;
     private MyLocationListener gpsLocationListener;
@@ -86,6 +89,20 @@ public class GpsManager {
         }
 
         startLocationListeners();
+        broadcastGpsNetworkStatus();
+    }
+
+    public void stopLocationUpdates() {
+        for (MyLocationListener listener : locationListeners) {
+            mLocationManager.removeUpdates(listener);
+        }
+        locationListeners.clear();
+
+        mLocationManager.removeGpsStatusListener(gpsStatusListener);
+        mRunning = false;
+        mGpsFixed = false;
+
+        broadcastGpsNetworkStatus();
     }
 
     private boolean isProviderAllowed(String s){
@@ -108,6 +125,7 @@ public class GpsManager {
         mLocationManager.addGpsStatusListener(gpsStatusListener);
 
         mRunning = true;
+
     }
 
     private void startLocationListener(MyLocationListener listener, String provider){
@@ -115,16 +133,6 @@ public class GpsManager {
             mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
             locationListeners.add(listener);
         }
-    }
-
-    public void stopLocationUpdates() {
-        for (MyLocationListener listener : locationListeners) {
-            mLocationManager.removeUpdates(listener);
-        }
-        locationListeners.clear();
-
-        mLocationManager.removeGpsStatusListener(gpsStatusListener);
-        mRunning = false;
     }
 
     public boolean isTrackingRun() {
@@ -138,6 +146,14 @@ public class GpsManager {
         broadcast.putExtra("counter", counter);
         mAppContext.sendBroadcast(broadcast);
     }
+
+    private void broadcastGpsNetworkStatus() {
+        Intent broadcast = new Intent(ACTION_GPS_NETWORK_STATUS);
+        int index = connectionStatus().ordinal();
+        broadcast.putExtra("GPS_NETWORK_STATUS", index);
+        mAppContext.sendBroadcast(broadcast);
+    }
+
 
     public void insertLocation(Location location){
         mDatabaseHelper.insertLocation(location);
@@ -257,10 +273,13 @@ public class GpsManager {
 
         // Determine location quality using a combination of timeliness and accuracy
         if (isMoreAccurate) {
+            setGpsFixStatusIf(location);
             return true;
         } else if (isNewer && !isLessAccurate) {
+            setGpsFixStatusIf(location);
             return true;
         } else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
+            setGpsFixStatusIf(location);
             return true;
         }
         return false;
@@ -281,6 +300,28 @@ public class GpsManager {
             stopLocationUpdates();
             startLocationListeners();
         }
+    }
+
+    public void setGpsFixStatusIf(Location location){
+        if(!mGpsFixed && location.getProvider().equals("gps")){
+            mGpsFixed = true;
+            broadcastGpsNetworkStatus();
+        }
+    }
+
+    public GpsFix connectionStatus(){
+        if(mRunning){
+            if(mGpsFixed){
+                return GpsFix.CONNECTED;
+            }
+            else{
+                return GpsFix.ACQUIRING_FIX;
+            }
+        }
+        else{
+            return GpsFix.IDLE;
+        }
+
     }
 
 }

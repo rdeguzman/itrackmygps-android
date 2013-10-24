@@ -55,6 +55,7 @@ public class MainActivity extends Activity{
 
     private GpsLoggerApplication gpsApp;
     private GpsManager gpsManager;
+    private GpsConnectionStatusReceiver mGpsNetworkStatusReceiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,10 @@ public class MainActivity extends Activity{
         gpsSatelliteList = new ArrayList<GpsSatellite>();
         gmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapview)).getMap();
 
+        mGpsNetworkStatusReceiver = new GpsConnectionStatusReceiver();
+
         updateFromPreferences();
+        updateGpsConnectionStatus();
     }
 
     private void updateFromPreferences() {
@@ -113,8 +117,6 @@ public class MainActivity extends Activity{
 
     public void updateToggleButtonService(){
         toggleBtnService.setChecked(gpsApp.isServiceRunning());
-
-        ivGpsStatus.setImageResource(R.drawable.ball_green);
     }
 
     public void onToggleClicked(View view) {
@@ -126,6 +128,13 @@ public class MainActivity extends Activity{
             startService(new Intent(this, GpsLoggerService.class));
         } else {
             stopService(new Intent(this, GpsLoggerService.class));
+        }
+    }
+
+    public class GpsConnectionStatusReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            Log.d("GpsConnectionStatusReceiver", "onReceived");
+            updateGpsConnectionStatus();
         }
     }
 
@@ -195,22 +204,28 @@ public class MainActivity extends Activity{
                         return;
                     }
 
-
                 }
             }
         }
 
     };
 
+    private void updateGpsConnectionStatus() {
+        GpsFix status = gpsManager.connectionStatus();
+        ivGpsStatus.setImageResource(status.icon());
+    }
+
     @Override
     public void onStart() {
         super.onStart();
         this.registerReceiver(mLocationReceiver, new IntentFilter(GpsManager.ACTION_LOCATION));
+        this.registerReceiver(mGpsNetworkStatusReceiver, new IntentFilter(GpsManager.ACTION_GPS_NETWORK_STATUS));
     }
 
     @Override
     public void onStop() {
         this.unregisterReceiver(mLocationReceiver);
+        this.unregisterReceiver(mGpsNetworkStatusReceiver);
         super.onStop();
     }
 

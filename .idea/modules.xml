@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/libs/volley/Volley.iml" filepath="$PROJECT_DIR$/libs/volley/Volley.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/libs/google-play-services_lib/google-play-services_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/gpslogger.iml" filepath="$PROJECT_DIR$/gpslogger.iml" />
     </modules>

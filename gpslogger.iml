@@ -25,6 +25,7 @@
       </library>
     </orderEntry>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Volley" />
   </component>
 </module>
 

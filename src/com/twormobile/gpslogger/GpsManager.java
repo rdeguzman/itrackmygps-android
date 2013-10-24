@@ -7,9 +7,15 @@ import android.location.*;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 public class GpsManager {
     private static final String TAG = "GpsManager";
@@ -20,6 +26,7 @@ public class GpsManager {
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
     private static GpsManager sGpsManager;
+    private static GpsLoggerApplication gpsApp;
     private Context mAppContext;
     private LocationManager mLocationManager;
     private boolean mRunning;
@@ -67,7 +74,8 @@ public class GpsManager {
         if (sGpsManager == null) {
             // Use the application context to avoid leaking activities
             Log.i(TAG, "onCreated");
-            sGpsManager = new GpsManager(c.getApplicationContext());
+            gpsApp = (GpsLoggerApplication)c.getApplicationContext();
+            sGpsManager = new GpsManager(gpsApp);
         }
         return sGpsManager;
     }
@@ -140,11 +148,15 @@ public class GpsManager {
     }
 
     private void broadcastLocation(Location location) {
+        insertLocation(location);
+
         counter++;
         Intent broadcast = new Intent(ACTION_LOCATION);
         broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);
         broadcast.putExtra("counter", counter);
         mAppContext.sendBroadcast(broadcast);
+
+        postLocation(location);
     }
 
     private void broadcastGpsNetworkStatus() {
@@ -157,6 +169,42 @@ public class GpsManager {
 
     public void insertLocation(Location location){
         mDatabaseHelper.insertLocation(location);
+    }
+
+    public void postLocation(Location location){
+        String url = "http://gpslogger.geocoding.io/locations/";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.getMessage());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("location[gps_latitude]", "23");
+                params.put("location[gps_longitude]", "114.0");
+                params.put("location[gps_speed]", "14");
+                params.put("location[gps_heading]", "100");
+
+                return params;
+            }
+        };
+
+        gpsApp.getVolleyRequestQueue().add(postRequest);
     }
 
     // Methods in this class are called when the location providers give an update

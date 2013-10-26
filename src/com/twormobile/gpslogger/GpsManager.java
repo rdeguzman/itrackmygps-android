@@ -174,7 +174,7 @@ public class GpsManager {
     }
 
     public void postLocation(Location location){
-        String url = "http://gpslogger.geocoding.io/locations/";
+        String url = GpsLoggerApplication.LOCATION_NEW_URL;
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>(){
                     @Override

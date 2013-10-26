@@ -173,8 +173,15 @@ public class GpsManager {
         mDatabaseHelper.insertLocation(location);
     }
 
-    public void postLocation(Location location){
+    public void postLocation(final Location location){
         String url = GpsLoggerApplication.LOCATION_NEW_URL;
+
+        final String timestamp = Long.toString(location.getTime());
+        final String latitude = Double.toString(location.getLatitude());
+        final String longitude = Double.toString(location.getLongitude());
+        final String speed = Float.toString(location.getSpeed());
+        final String heading = Float.toString(location.getBearing());
+
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>(){
                     @Override
@@ -189,14 +196,16 @@ public class GpsManager {
                     }
                 })
         {
+
             @Override
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("location[gps_latitude]", "23");
-                params.put("location[gps_longitude]", "114.0");
-                params.put("location[gps_speed]", "14");
-                params.put("location[gps_heading]", "100");
+                params.put("location[gps_timestamp]", timestamp);
+                params.put("location[gps_latitude]", latitude);
+                params.put("location[gps_longitude]", longitude);
+                params.put("location[gps_speed]", speed);
+                params.put("location[gps_heading]", heading);
 
                 return params;
             }

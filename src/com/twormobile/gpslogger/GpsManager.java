@@ -10,6 +10,7 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.ArrayList;
@@ -175,23 +176,19 @@ public class GpsManager {
     public void postLocation(Location location){
         String url = "http://gpslogger.geocoding.io/locations/";
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
-                {
+                new Response.Listener<String>(){
                     @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
+                    public void onResponse(String response){
+                        VolleyLog.v("Response:%n %s", response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener(){
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", error.getMessage());
+                    public void onErrorResponse(VolleyError error){
+                        VolleyLog.e("Error: ", error.getMessage());
                     }
-                }
-        ) {
+                })
+        {
             @Override
             protected Map<String, String> getParams()
             {

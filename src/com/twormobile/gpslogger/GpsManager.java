@@ -148,15 +148,16 @@ public class GpsManager {
     }
 
     private void broadcastLocation(Location location) {
-        insertLocation(location);
-
         counter++;
         Intent broadcast = new Intent(ACTION_LOCATION);
         broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);
         broadcast.putExtra("counter", counter);
         mAppContext.sendBroadcast(broadcast);
 
-        postLocation(location);
+        if(connectionStatus() == GpsFix.CONNECTED){
+            insertLocation(location);
+            postLocation(location);
+        }
     }
 
     private void broadcastGpsNetworkStatus() {

@@ -21,6 +21,9 @@ public class SettingsActivity extends Activity {
     public static final String PREF_TIME_INTERVAL_IN_SECONDS = "PREF_TIME_INTERVAL_IN_SECONDS";
     public static final String PREF_TIME_INTERVAL_IN_METERS = "PREF_TIME_INTERVAL_IN_METERS";
 
+    public static final int DEFAULT_TIME_INTERVAL_IN_SECONDS = 5;
+    public static final int DEFAULT_TIME_INTERVAL_IN_METERS = 100;
+
     private Spinner mapLayerSpinner;
     private CheckBox chkDynamicZoom;
     private EditText etxtTimeInterval;

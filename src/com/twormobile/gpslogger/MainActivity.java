@@ -110,8 +110,10 @@ public class MainActivity extends Activity{
             gmap.setMapType(mapLayer);
         }
 
-        int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS, 0);
-        int minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS, 0);
+        int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS,
+                SettingsActivity.DEFAULT_TIME_INTERVAL_IN_SECONDS);
+        int minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS,
+                SettingsActivity.DEFAULT_TIME_INTERVAL_IN_METERS);
         gpsManager.updateLocationUpdateSettings(minTimeInSeconds, minDistanceInMeters);
     }
 

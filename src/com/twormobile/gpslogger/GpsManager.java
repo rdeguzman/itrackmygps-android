@@ -66,9 +66,11 @@ public class GpsManager {
 
         // get time and distance interval from preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mAppContext);
-        int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS, 0);
+        int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS,
+                SettingsActivity.DEFAULT_TIME_INTERVAL_IN_SECONDS);
         minTimeInMilliseconds = minTimeInSeconds * 1000L;
-        minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS, 0) * 1.0f;
+        minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS,
+                SettingsActivity.DEFAULT_TIME_INTERVAL_IN_METERS) * 1.0f;
     }
 
     public static GpsManager get(Context c) {

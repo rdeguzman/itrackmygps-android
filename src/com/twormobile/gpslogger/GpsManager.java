@@ -203,11 +203,11 @@ public class GpsManager {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("location[gps_timestamp]", timestamp);
-                params.put("location[gps_latitude]", latitude);
-                params.put("location[gps_longitude]", longitude);
-                params.put("location[gps_speed]", speed);
-                params.put("location[gps_heading]", heading);
+                params.put("gps_timestamp", timestamp);
+                params.put("gps_latitude", latitude);
+                params.put("gps_longitude", longitude);
+                params.put("gps_speed", speed);
+                params.put("gps_heading", heading);
 
                 return params;
             }

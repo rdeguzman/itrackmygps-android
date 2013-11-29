@@ -8,7 +8,7 @@ import com.android.volley.toolbox.Volley;
 public class GpsLoggerApplication extends Application {
     private static final String TAG = GpsLoggerApplication.class.getSimpleName();
 //    public static final String LOCATION_NEW_URL = "http://gpslogger.geocoding.io/locations/";
-    public static final String LOCATION_NEW_URL = "http://192.168.4.238:8080/";
+    public static final String LOCATION_NEW_URL = "http://192.168.0.17:8080/location";
 
     private GpsManager gpsManager;
     private boolean mServiceRun;

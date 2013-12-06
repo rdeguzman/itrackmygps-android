@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="NEW_LOCATION_URL">http://track.geocoding.io:8080/location</string>
+</resources>

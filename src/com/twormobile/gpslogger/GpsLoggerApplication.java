@@ -8,8 +8,7 @@ import com.android.volley.toolbox.Volley;
 public class GpsLoggerApplication extends Application {
     private static final String TAG = GpsLoggerApplication.class.getSimpleName();
 
-    //Note "/location" not with a trailing "/" in "/location/"
-    public static final String LOCATION_NEW_URL = "http://track.geocoding.io/location";
+    public String LOCATION_NEW_URL = getResources().getString(R.string.NEW_LOCATION_URL);
 
     private GpsManager gpsManager;
     private boolean mServiceRun;

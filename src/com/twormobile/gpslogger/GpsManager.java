@@ -176,7 +176,7 @@ public class GpsManager {
     }
 
     public void postLocation(final Location location){
-        final String url = GpsLoggerApplication.LOCATION_NEW_URL;
+        final String url = gpsApp.LOCATION_NEW_URL;
 
         final String timestamp = Long.toString(location.getTime());
         final String latitude = Double.toString(location.getLatitude());

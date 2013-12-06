@@ -176,7 +176,7 @@ public class GpsManager {
     }
 
     public void postLocation(final Location location){
-        String url = GpsLoggerApplication.LOCATION_NEW_URL;
+        final String url = GpsLoggerApplication.LOCATION_NEW_URL;
 
         final String timestamp = Long.toString(location.getTime());
         final String latitude = Double.toString(location.getLatitude());
@@ -194,6 +194,7 @@ public class GpsManager {
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
+                        Log.d(TAG, "Error on " + url);
                         VolleyLog.e("Error: ", error.getMessage());
                     }
                 })

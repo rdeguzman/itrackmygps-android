@@ -70,7 +70,7 @@ public class GpsManager {
                 SettingsActivity.DEFAULT_TIME_INTERVAL_IN_SECONDS);
         minTimeInMilliseconds = minTimeInSeconds * 1000L;
         minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS,
-                SettingsActivity.DEFAULT_TIME_INTERVAL_IN_METERS) * 1.0f;
+                SettingsActivity.DEFAULT_DISTANCE_INTERVAL_IN_METERS) * 1.0f;
     }
 
     public static GpsManager get(Context c) {

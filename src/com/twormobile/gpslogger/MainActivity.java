@@ -113,7 +113,7 @@ public class MainActivity extends Activity{
         int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS,
                 SettingsActivity.DEFAULT_TIME_INTERVAL_IN_SECONDS);
         int minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS,
-                SettingsActivity.DEFAULT_TIME_INTERVAL_IN_METERS);
+                SettingsActivity.DEFAULT_DISTANCE_INTERVAL_IN_METERS);
         gpsManager.updateLocationUpdateSettings(minTimeInSeconds, minDistanceInMeters);
     }
 

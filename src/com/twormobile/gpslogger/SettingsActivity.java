@@ -22,7 +22,7 @@ public class SettingsActivity extends Activity {
     public static final String PREF_TIME_INTERVAL_IN_METERS = "PREF_TIME_INTERVAL_IN_METERS";
 
     public static final int DEFAULT_TIME_INTERVAL_IN_SECONDS = 5;
-    public static final int DEFAULT_TIME_INTERVAL_IN_METERS = 100;
+    public static final int DEFAULT_DISTANCE_INTERVAL_IN_METERS = 5;
 
     private Spinner mapLayerSpinner;
     private CheckBox chkDynamicZoom;
@@ -49,8 +49,8 @@ public class SettingsActivity extends Activity {
 
     private void updateUIFromPreferences() {
         int mapLayerIndex = prefs.getInt(PREF_MAP_LAYER_INDEX, GoogleMap.MAP_TYPE_NORMAL);
-        int timeIntervalInSecs = prefs.getInt(PREF_TIME_INTERVAL_IN_SECONDS, 60);
-        int distanceIntervalInMeters = prefs.getInt(PREF_TIME_INTERVAL_IN_METERS, 10);
+        int timeIntervalInSecs = prefs.getInt(PREF_TIME_INTERVAL_IN_SECONDS, DEFAULT_TIME_INTERVAL_IN_SECONDS);
+        int distanceIntervalInMeters = prefs.getInt(PREF_TIME_INTERVAL_IN_METERS, DEFAULT_DISTANCE_INTERVAL_IN_METERS);
         boolean isZoomBasedOnSpeed = prefs.getBoolean(PREF_ZOOM_BASED_ON_SPEED, true);
 
         mapLayerSpinner.setSelection(mapLayerIndex);

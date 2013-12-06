@@ -12,6 +12,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
     private static final String TABLE_LOCATION = "locations";
+    private static final String COLUMN_LOCATION_DEVICEID = "device_id";
     private static final String COLUMN_LOCATION_TIMESTAMP = "timestamp";
     private static final String COLUMN_LOCATION_LATITUDE = "latitude";
     private static final String COLUMN_LOCATION_LONGITUDE = "longitude";
@@ -22,9 +23,14 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_LOCATION_PROVIDER = "provider";
     private static final String TAG = "LocationDatabaseHelper";
 
+    private static String device_id;
+
     public LocationDatabaseHelper(Context context){
         super(context, DB_NAME, null, VERSION);
         Log.d(TAG, "database helper created");
+
+        GpsLoggerApplication gpsApp = (GpsLoggerApplication)context.getApplicationContext();
+        device_id = gpsApp.getUUID();
     }
 
     @Override
@@ -32,6 +38,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "locations table created");
         // Create the "location" table
         db.execSQL("CREATE TABLE locations (" +
+                " device_id varchar(100)," +
                 " timestamp integer, " +
                 " latitude real, " +
                 " longitude real, " +
@@ -52,6 +59,8 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "inserted loc:" + location.getLatitude() + " lon:" + location.getLongitude());
 
         ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_LOCATION_DEVICEID, device_id);
         cv.put(COLUMN_LOCATION_TIMESTAMP, location.getTime());
         cv.put(COLUMN_LOCATION_LATITUDE, location.getLatitude());
         cv.put(COLUMN_LOCATION_LONGITUDE, location.getLongitude());

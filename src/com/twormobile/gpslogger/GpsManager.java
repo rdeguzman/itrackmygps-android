@@ -176,6 +176,9 @@ public class GpsManager {
     }
 
     public void postLocation(final Location location){
+        if(location == null)
+            return;
+
         final String url = gpsApp.LOCATION_NEW_URL;
 
         final String timestamp = Long.toString(location.getTime());

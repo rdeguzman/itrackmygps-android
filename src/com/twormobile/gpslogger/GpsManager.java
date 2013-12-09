@@ -94,9 +94,10 @@ public class GpsManager {
         }
         else{
             Location lastKnownNetworkLocation = mLocationManager.getLastKnownLocation(networkProvider);
-            if(lastKnownNetworkLocation != null)
+            if(lastKnownNetworkLocation != null){
                 currentBestLocation = lastKnownNetworkLocation;
                 broadcastLocation(lastKnownNetworkLocation);
+            }
         }
 
         startLocationListeners();
@@ -151,14 +152,17 @@ public class GpsManager {
     }
 
     private void broadcastLocation(Location location) {
-        counter++;
-        Intent broadcast = new Intent(ACTION_LOCATION);
-        broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);
-        broadcast.putExtra("counter", counter);
-        mAppContext.sendBroadcast(broadcast);
+        if(location != null){
+            counter++;
+            Intent broadcast = new Intent(ACTION_LOCATION);
+            broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);
+            broadcast.putExtra("counter", counter);
+            mAppContext.sendBroadcast(broadcast);
 
-        if(connectionStatus() == GpsFix.CONNECTED){
-            insertLocation(location);
+            if(connectionStatus() == GpsFix.CONNECTED){
+                insertLocation(location);
+            }
+
             postLocation(location);
         }
     }

@@ -211,7 +211,7 @@ public class GpsManager {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("device_id", gpsApp.getUUID());
+                params.put("uuid", gpsApp.getUUID());
                 params.put("gps_timestamp", timestamp);
                 params.put("gps_latitude", latitude);
                 params.put("gps_longitude", longitude);

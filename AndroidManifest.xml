@@ -25,13 +25,13 @@
     <uses-feature android:required="true" android:name="android.hardware.location.gps"/>
 
     <application android:label="@string/app_name"
-                 android:name="com.twormobile.trackble.GpsLoggerApplication"
+                 android:name=".GpsLoggerApplication"
                  android:icon="@drawable/ic_launcher"
                  android:debuggable="true">
 
-        <service android:name="com.twormobile.trackble.GpsLoggerService"/>
+        <service android:name=".GpsLoggerService"/>
 
-        <activity android:name="com.twormobile.trackble.MainActivity"
+        <activity android:name=".MainActivity"
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:label="@string/app_name">
             <intent-filter>
@@ -39,14 +39,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.twormobile.trackble.SettingsActivity"/>
+        <activity android:name=".SettingsActivity"/>
 
         <activity android:name=".RegisterActivity"/>
 
         <receiver android:name="com.twormobile.trackble.LocationReceiver"
                   android:exported="false">
             <intent-filter>
-                <action android:name="com.example.trackble.ACTION_LOCATION"/>
+                <action android:name="com.twormobile.trackble.ACTION_LOCATION"/>
             </intent-filter>
         </receiver>
 

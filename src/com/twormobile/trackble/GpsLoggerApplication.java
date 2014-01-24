@@ -19,7 +19,7 @@ public class GpsLoggerApplication extends Application {
 
     @Override
     public void onCreate() {
-        initHTTPRequests();
+        setURLs();
 
         Log.i(TAG, "onCreated");
         uuidFactory = new DeviceUUIDFactory(getApplicationContext());
@@ -55,7 +55,7 @@ public class GpsLoggerApplication extends Application {
         return deviceId;
     }
 
-    public void initHTTPRequests(){
+    public void setURLs(){
         LOCATION_NEW_URL = getResources().getString(R.string.NEW_LOCATION_URL);
     }
 }

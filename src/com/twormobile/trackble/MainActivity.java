@@ -21,7 +21,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends Activity{
     private static final String TAG = "MainActivity";
-    public static final int ENTRY_SETTINGS = 10;
 
     private int ctrUpdate = 0;
 
@@ -256,8 +255,8 @@ public class MainActivity extends Activity{
     @Override
     public void onStart() {
         super.onStart();
-        this.registerReceiver(mLocationReceiver, new IntentFilter(GpsManager.ACTION_LOCATION));
-        this.registerReceiver(mGpsNetworkStatusReceiver, new IntentFilter(GpsManager.ACTION_GPS_NETWORK_STATUS));
+        this.registerReceiver(mLocationReceiver, new IntentFilter(IntentCodes.ACTION_LOCATION));
+        this.registerReceiver(mGpsNetworkStatusReceiver, new IntentFilter(IntentCodes.ACTION_GPS_NETWORK_STATUS));
     }
 
     @Override
@@ -325,7 +324,7 @@ public class MainActivity extends Activity{
     private void displaySettingsActivity(){
         Log.d(TAG, "displaySettingsActivity");
         Intent intent = new Intent(this, SettingsActivity.class);
-        startActivityForResult(intent, ENTRY_SETTINGS);
+        startActivityForResult(intent, IntentCodes.SETTINGS);
     }
 
     private void displayLocationAccessDialog(){

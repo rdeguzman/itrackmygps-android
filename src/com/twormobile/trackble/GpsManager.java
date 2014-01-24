@@ -21,9 +21,6 @@ import java.util.Map;
 public class GpsManager {
     private static final String TAG = "GpsManager";
 
-    public static final String ACTION_LOCATION = "com.twormobile.trackble.ACTION_LOCATION";
-    public static final String ACTION_GPS_NETWORK_STATUS = "com.twormobile.trackble.ACTION_GPS_NETWORK_STATUS";
-
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
     private static GpsManager sGpsManager;
@@ -154,7 +151,7 @@ public class GpsManager {
     private void broadcastLocation(Location location) {
         if(location != null){
             counter++;
-            Intent broadcast = new Intent(ACTION_LOCATION);
+            Intent broadcast = new Intent(IntentCodes.ACTION_LOCATION);
             broadcast.putExtra(LocationManager.KEY_LOCATION_CHANGED, location);
             broadcast.putExtra("counter", counter);
             mAppContext.sendBroadcast(broadcast);
@@ -168,7 +165,7 @@ public class GpsManager {
     }
 
     private void broadcastGpsNetworkStatus() {
-        Intent broadcast = new Intent(ACTION_GPS_NETWORK_STATUS);
+        Intent broadcast = new Intent(IntentCodes.ACTION_GPS_NETWORK_STATUS);
         int index = connectionStatus().ordinal();
         broadcast.putExtra("GPS_NETWORK_STATUS", index);
         mAppContext.sendBroadcast(broadcast);

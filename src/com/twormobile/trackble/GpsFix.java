@@ -1,4 +1,4 @@
-package com.twormobile.gpslogger;
+package com.twormobile.trackble;
 
 public enum GpsFix {
 

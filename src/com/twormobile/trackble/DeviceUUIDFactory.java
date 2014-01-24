@@ -1,5 +1,5 @@
 //Credits to http://stackoverflow.com/questions/2785485/is-there-a-unique-android-device-id
-package com.twormobile.gpslogger;
+package com.twormobile.trackble;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.twormobile.gpslogger;
+package com.twormobile.trackble;
 
 import android.app.Activity;
 import android.graphics.Color;

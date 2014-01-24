@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="GPSLogger" type="AndroidRunConfigurationType" factoryName="Android Application">
-    <module name="gpslogger" />
+  <configuration default="false" name="trackble" type="AndroidRunConfigurationType" factoryName="Android Application">
+    <module name="trackble" />
     <option name="ACTIVITY_CLASS" value="" />
     <option name="MODE" value="default_activity" />
     <option name="DEPLOY" value="true" />

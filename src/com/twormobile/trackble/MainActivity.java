@@ -68,7 +68,7 @@ public class MainActivity extends Activity{
             displayLocationAccessDialog();
         }
 
-        toggleBtnService = (ToggleButton)findViewById(R.id.toggleBtnService);
+        toggleBtnService = (ToggleButton)findViewById(R.id.btn_toggle_tracker_status);
         ivGpsFixStatus = (ImageView)findViewById(R.id.iv_gps_status);
         tvGpsFixStatus = (TextView)findViewById(R.id.tv_gps_fix_status);
 
@@ -76,16 +76,16 @@ public class MainActivity extends Activity{
         viewGPSLayout = (TableLayout)findViewById(R.id.gps_status_layout);
 
         //find the textviews
-        tvGPSCounter = (TextView)findViewById(R.id.tvGPSCounter);
-        tvGPSLatitude = (TextView)findViewById(R.id.tvGPSLatitude);
-        tvGPSLongitude = (TextView)findViewById(R.id.tvGPSLongitude);
-        tvGPSAltitude = (TextView)findViewById(R.id.tvGPSAltitude);
-        tvGPSBearing = (TextView)findViewById(R.id.tvGPSBearing);
-        tvGPSSpeed = (TextView)findViewById(R.id.tvGPSSpeed);
-        tvGPSDateTime = (TextView)findViewById(R.id.tvGPSTimestamp);
-        tvGPSAccuracy = (TextView)findViewById(R.id.tvGPSAccuracy);
-        tvGPSProvider = (TextView)findViewById(R.id.tvGPSProvider);
-        tvGPSTotalSatellites = (TextView)findViewById(R.id.tvGPSFixTotalSatellites);
+        tvGPSCounter = (TextView)findViewById(R.id.tv_gps_counter);
+        tvGPSLatitude = (TextView)findViewById(R.id.tv_gps_latitude);
+        tvGPSLongitude = (TextView)findViewById(R.id.tv_gps_longitude);
+        tvGPSAltitude = (TextView)findViewById(R.id.tv_gps_altitude);
+        tvGPSBearing = (TextView)findViewById(R.id.tv_gps_bearing);
+        tvGPSSpeed = (TextView)findViewById(R.id.tv_gps_speed);
+        tvGPSDateTime = (TextView)findViewById(R.id.tv_gps_timestamp);
+        tvGPSAccuracy = (TextView)findViewById(R.id.tv_gps_accuracy);
+        tvGPSProvider = (TextView)findViewById(R.id.tv_gps_provider);
+        tvGPSTotalSatellites = (TextView)findViewById(R.id.tv_gps_fix_total_satellites);
 
         ActionBar actionBar = getActionBar();
         actionBar.show();
@@ -251,9 +251,8 @@ public class MainActivity extends Activity{
 
     private void displayGPSDetails(Location location, int ctr) {
         ctrUpdate++;
-        String tmpZoom = " Z:" + Float.toString(gmap.getCameraPosition().zoom);
 
-        tvGPSCounter.setText(Integer.toString(ctr) + tmpZoom);
+        tvGPSCounter.setText(Integer.toString(ctr));
         tvGPSLatitude.setText(Double.toString(location.getLatitude()));
         tvGPSLongitude.setText(Double.toString(location.getLongitude()));
         tvGPSAltitude.setText(Double.toString(location.getAltitude()));

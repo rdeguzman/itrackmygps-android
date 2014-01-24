@@ -30,7 +30,7 @@
                 android:layout_marginTop="-10dp"/>
 
         <ToggleButton
-                android:id="@+id/toggleBtnService"
+                android:id="@+id/btn_toggle_tracker_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textOn="ON"
@@ -88,7 +88,7 @@
                     android:textColor="#ffffff" />
 
             <TextView
-                    android:id="@+id/tvGPSProvider"
+                    android:id="@+id/tv_gps_provider"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:gravity="center"
@@ -112,7 +112,7 @@
                     android:textColor="#ffffff" />
 
             <TextView
-                    android:id="@+id/tvGPSFixTotalSatellites"
+                    android:id="@+id/tv_gps_fix_total_satellites"
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:text="0"
@@ -136,13 +136,13 @@
                     android:text="Ctr:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSCounter"
+                    android:id="@+id/tv_gps_counter"
                     style="@style/GPSDetailsTableData" />
             <TextView
                     android:text="Time:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSTimestamp"
+                    android:id="@+id/tv_gps_timestamp"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
@@ -151,13 +151,13 @@
                     android:text="Lat:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSLatitude"
+                    android:id="@+id/tv_gps_latitude"
                     style="@style/GPSDetailsTableData" />
             <TextView
                     android:text="Lon:"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSLongitude"
+                    android:id="@+id/tv_gps_longitude"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
@@ -166,13 +166,13 @@
                     android:text="Speed (mps):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSSpeed"
+                    android:id="@+id/tv_gps_speed"
                     style="@style/GPSDetailsTableData" />
             <TextView
                     android:text="Heading (º):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSBearing"
+                    android:id="@+id/tv_gps_bearing"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
@@ -181,13 +181,13 @@
                     android:text="Altitude (m):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSAltitude"
+                    android:id="@+id/tv_gps_altitude"
                     style="@style/GPSDetailsTableData" />
             <TextView
                     android:text="Err (m):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
-                    android:id="@+id/tvGPSAccuracy"
+                    android:id="@+id/tv_gps_accuracy"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 

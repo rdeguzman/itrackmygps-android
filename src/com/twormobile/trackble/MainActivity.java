@@ -357,16 +357,19 @@ public class MainActivity extends Activity{
         dialog.setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivityForResult(intent, IntentCodes.LOGIN);
+
             }
         });
         dialog.setNegativeButton(R.string.register, new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivityForResult(intent, IntentCodes.REGISTER);
             }
         });
+
         dialog.show();
     }
 

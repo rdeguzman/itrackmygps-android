@@ -42,6 +42,7 @@
         <activity android:name=".SettingsActivity"/>
 
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".LoginActivity"/>
 
         <receiver android:name="com.twormobile.trackble.LocationReceiver"
                   android:exported="false">

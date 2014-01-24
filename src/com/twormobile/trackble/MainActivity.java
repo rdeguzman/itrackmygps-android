@@ -28,7 +28,8 @@ public class MainActivity extends Activity{
     private int ctrUpdate = 0;
 
     private ToggleButton toggleBtnService;
-    private ImageView ivGpsStatus;
+    private ImageView ivGpsFixStatus;
+    private TextView tvGpsFixStatus;
 
     private TableLayout viewGPSLayout;
     private TextView tvGPSCounter;
@@ -68,7 +69,8 @@ public class MainActivity extends Activity{
         }
 
         toggleBtnService = (ToggleButton)findViewById(R.id.toggleBtnService);
-        ivGpsStatus = (ImageView)findViewById(R.id.iv_gps_status);
+        ivGpsFixStatus = (ImageView)findViewById(R.id.iv_gps_status);
+        tvGpsFixStatus = (TextView)findViewById(R.id.tv_gps_fix_status);
 
         //find the view layouts
         viewGPSLayout = (TableLayout)findViewById(R.id.gps_status_layout);
@@ -140,18 +142,18 @@ public class MainActivity extends Activity{
     private void showGPSStatus(boolean f){
         if(f) {
             viewGPSLayout.setVisibility(View.VISIBLE);
-            ivGpsStatus.setVisibility(View.VISIBLE);
+            ivGpsFixStatus.setVisibility(View.VISIBLE);
         }
         else {
             viewGPSLayout.setVisibility(View.INVISIBLE);
-            ivGpsStatus.setVisibility(View.INVISIBLE);
+            ivGpsFixStatus.setVisibility(View.INVISIBLE);
         }
     }
 
     public class GpsConnectionStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             Log.d("GpsConnectionStatusReceiver", "onReceived");
-            updateGpsConnectionStatus();
+            updateGpsFixConnectionStatus();
         }
     }
 
@@ -227,9 +229,10 @@ public class MainActivity extends Activity{
 
     };
 
-    private void updateGpsConnectionStatus() {
+    private void updateGpsFixConnectionStatus() {
         GpsFix status = gpsManager.connectionStatus();
-        ivGpsStatus.setImageResource(status.icon());
+        ivGpsFixStatus.setImageResource(status.icon());
+        tvGpsFixStatus.setText(status.toString());
     }
 
     @Override

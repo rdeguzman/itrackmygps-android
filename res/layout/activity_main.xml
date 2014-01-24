@@ -15,7 +15,19 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@color/background_header_status" >
+            android:background="@color/background_header_status"
+            android:padding="5dp">
+
+        <TextView
+                android:text="Tracker Status"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:maxLines="2"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_marginTop="-10dp"/>
 
         <ToggleButton
                 android:id="@+id/toggleBtnService"
@@ -23,13 +35,92 @@
                 android:layout_height="wrap_content"
                 android:textOn="ON"
                 android:textOff="OFF"
-                android:onClick="onToggleClicked"/>
+                android:onClick="onToggleClicked" />
 
-        <ImageView
-                android:id="@+id/iv_gps_status"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_gravity="center_vertical"/>
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+            <TextView
+                    android:id="@+id/tv_fix"
+                    android:text="Fix"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:gravity="center" />
+
+            <ImageView
+                    android:id="@+id/iv_gps_status"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/tv_fix"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                    android:id="@+id/tv_gps_fix_status"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/tv_fix"
+                    android:layout_toRightOf="@id/iv_gps_status"
+                    android:textSize="8dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:textColor="#ffffff" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+            <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:text="Type"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/tvGPSProvider"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:textSize="10dp"
+                    android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+            <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:text="SAT"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/tvGPSFixTotalSatellites"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -97,21 +188,6 @@
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tvGPSAccuracy"
-                    style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                    android:text="Type:"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tvGPSProvider"
-                    style="@style/GPSDetailsTableData" />
-            <TextView
-                    android:text="Sat(F/T):"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tvGPSFixTotalSatellites"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 

@@ -3,7 +3,7 @@ package com.twormobile.trackble;
 public enum GpsFix {
 
     IDLE("Idle", R.drawable.ball_red),
-    ACQUIRING_FIX("Acquiring Fix", R.drawable.ball_orange),
+    ACQUIRING_FIX("Acquiring", R.drawable.ball_orange),
     CONNECTED("Connected", R.drawable.ball_green);
 
     private int icon;

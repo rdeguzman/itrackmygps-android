@@ -3,4 +3,5 @@
     <color name="table_divider">#262728</color>
     <color name="table_header">#61717b</color>
     <color name="background_gps_status">#80000000</color>
+    <color name="background_header_status">#BF000000</color>
 </resources>

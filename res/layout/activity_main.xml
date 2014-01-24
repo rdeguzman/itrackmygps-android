@@ -3,11 +3,20 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
 
+    <fragment
+            android:id="@+id/mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            class="com.google.android.gms.maps.MapFragment" />
+
     <LinearLayout
             android:id="@+id/header_layout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/background_header_status" >
+
         <ToggleButton
                 android:id="@+id/toggleBtnService"
                 android:layout_width="wrap_content"
@@ -21,16 +30,8 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center_vertical"/>
+
     </LinearLayout>
-
-    <fragment
-            android:id="@+id/mapview"
-            android:layout_below="@id/header_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            class="com.google.android.gms.maps.MapFragment" />
-
 
     <TableLayout
             android:id="@+id/table_layout"

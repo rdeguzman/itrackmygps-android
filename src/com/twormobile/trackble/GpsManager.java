@@ -390,4 +390,13 @@ public class GpsManager {
 
     }
 
+    public int getTotalSatellites(){
+        if(gpsSatelliteList != null) {
+            return gpsSatelliteList.size();
+        }
+        else
+            return 0;
+
+    }
+
 }

@@ -43,8 +43,6 @@ public class MainActivity extends Activity{
     private TextView tvGPSProvider;
     private TextView tvGPSTotalSatellites;
 
-    private ArrayList gpsSatelliteList; // loop through satellites to get status
-
     private GoogleMap gmap;
     private boolean firstFix = true;
     private Marker marker;
@@ -90,7 +88,6 @@ public class MainActivity extends Activity{
         ActionBar actionBar = getActionBar();
         actionBar.show();
 
-        gpsSatelliteList = new ArrayList<GpsSatellite>();
         gmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapview)).getMap();
 
         mGpsNetworkStatusReceiver = new GpsConnectionStatusReceiver();
@@ -265,7 +262,7 @@ public class MainActivity extends Activity{
         tvGPSDateTime.setText(gpsDateTime);
 
         int satellitesWithFix = location.getExtras().getInt("satellites");
-        int satellitesTotal = gpsSatelliteList.size();
+        int satellitesTotal = gpsManager.getTotalSatellites();
         String s = Integer.toString(satellitesWithFix) + "/" + satellitesTotal;
         tvGPSTotalSatellites.setText(s);
     }

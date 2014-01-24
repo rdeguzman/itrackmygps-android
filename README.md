@@ -1,4 +1,4 @@
-gpslogger
+trackble-android
 =========
 
 # Features

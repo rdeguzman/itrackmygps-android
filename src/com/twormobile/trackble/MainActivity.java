@@ -25,6 +25,8 @@ public class MainActivity extends Activity{
 
     private int ctrUpdate = 0;
 
+    private TextView tvUsername;
+
     private ToggleButton toggleBtnService;
     private ImageView ivGpsFixStatus;
     private TextView tvGpsFixStatus;
@@ -66,6 +68,8 @@ public class MainActivity extends Activity{
             displayLocationAccessDialog();
         }
 
+        tvUsername = (TextView)findViewById(R.id.tv_username);
+
         toggleBtnService = (ToggleButton)findViewById(R.id.btn_toggle_tracker_status);
         ivGpsFixStatus = (ImageView)findViewById(R.id.iv_gps_status);
         tvGpsFixStatus = (TextView)findViewById(R.id.tv_gps_fix_status);
@@ -94,10 +98,23 @@ public class MainActivity extends Activity{
         mGpsNetworkStatusReceiver = new GpsConnectionStatusReceiver();
 
         showGPSStatus(false);
-        updateFromPreferences();
+        updateFromSettingsPreferences();
+
+        checkUserInPreferences();
     }
 
-    private void updateFromPreferences() {
+    private void checkUserInPreferences() {
+        if(gpsApp.isLoggedIn()){
+            tvUsername.setText(gpsApp.getUsername());
+            toggleBtnService.setEnabled(true);
+        }
+        else {
+            tvUsername.setText("User not logged in.");
+            toggleBtnService.setEnabled(false);
+        }
+    }
+
+    private void updateFromSettingsPreferences() {
         Context context = getApplicationContext();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -280,7 +297,7 @@ public class MainActivity extends Activity{
 
         Log.d(TAG, "resume");
         updateToggleButtonService();
-        updateFromPreferences();
+        updateFromSettingsPreferences();
     }
 
 

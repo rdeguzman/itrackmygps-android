@@ -19,8 +19,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
-
 public class MainActivity extends Activity{
     private static final String TAG = "MainActivity";
     public static final int ENTRY_SETTINGS = 10;
@@ -31,7 +29,9 @@ public class MainActivity extends Activity{
     private ImageView ivGpsFixStatus;
     private TextView tvGpsFixStatus;
 
-    private TableLayout viewGPSLayout;
+    private LinearLayout layoutGPSStatus;
+
+    private TableLayout layoutGPSDetails;
     private TextView tvGPSCounter;
     private TextView tvGPSLatitude;
     private TextView tvGPSLongitude;
@@ -71,7 +71,8 @@ public class MainActivity extends Activity{
         tvGpsFixStatus = (TextView)findViewById(R.id.tv_gps_fix_status);
 
         //find the view layouts
-        viewGPSLayout = (TableLayout)findViewById(R.id.gps_status_layout);
+        layoutGPSDetails = (TableLayout)findViewById(R.id.layout_gps_details);
+        layoutGPSStatus = (LinearLayout)findViewById(R.id.layout_status_header);
 
         //find the textviews
         tvGPSCounter = (TextView)findViewById(R.id.tv_gps_counter);
@@ -138,12 +139,14 @@ public class MainActivity extends Activity{
 
     private void showGPSStatus(boolean f){
         if(f) {
-            viewGPSLayout.setVisibility(View.VISIBLE);
+            layoutGPSDetails.setVisibility(View.VISIBLE);
             ivGpsFixStatus.setVisibility(View.VISIBLE);
+            layoutGPSStatus.setVisibility(View.VISIBLE);
         }
         else {
-            viewGPSLayout.setVisibility(View.INVISIBLE);
+            layoutGPSDetails.setVisibility(View.INVISIBLE);
             ivGpsFixStatus.setVisibility(View.INVISIBLE);
+            layoutGPSStatus.setVisibility(View.INVISIBLE);
         }
     }
 

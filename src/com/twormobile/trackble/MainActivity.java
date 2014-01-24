@@ -293,28 +293,6 @@ public class MainActivity extends Activity{
         startActivityForResult(intent, ENTRY_SETTINGS);
     }
 
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Toast.makeText(this, "Switched to Landscape", Toast.LENGTH_SHORT).show();
-            viewTableLayout.setVisibility(View.INVISIBLE);
-
-            TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, 0);
-            viewTableLayout.setLayoutParams(params);
-
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-
-            Toast.makeText(this, "Switched to Portrait", Toast.LENGTH_SHORT).show();
-
-            viewTableLayout.setVisibility(View.VISIBLE);
-
-            TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
-            viewTableLayout.setLayoutParams(params);
-        }
-    }
-
     private void displayLocationAccessDialog(){
         AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
         dialog.setMessage(R.string.gps_network_not_enabled);

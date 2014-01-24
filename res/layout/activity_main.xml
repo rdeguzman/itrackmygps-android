@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
 
+    <LinearLayout
+            android:id="@+id/header_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <ToggleButton
+                android:id="@+id/toggleBtnService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="ON"
+                android:textOff="OFF"
+                android:onClick="onToggleClicked"/>
+
+        <ImageView
+                android:id="@+id/iv_gps_status"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <fragment
+            android:id="@+id/mapview"
+            android:layout_below="@id/header_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            class="com.google.android.gms.maps.MapFragment" />
+
+
     <TableLayout
             android:id="@+id/table_layout"
+            android:layout_below="@id/header_layout"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-        <TableRow>
-            <ToggleButton
-                    android:id="@+id/toggleBtnService"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textOn="ON"
-                    android:textOff="OFF"
-                    android:onClick="onToggleClicked"/>
-
-            <ImageView
-                    android:id="@+id/iv_gps_status"
-                    android:layout_width="16dip"
-                    android:layout_height="16dip"
-                    android:layout_gravity="center_vertical"/>
-
-        </TableRow>
+            android:layout_height="wrap_content"
+            android:background="@color/background_gps_status" >
 
         <TableRow>
             <TextView
@@ -41,8 +54,6 @@
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
         <TableRow>
             <TextView
                     android:text="Lat:"
@@ -57,8 +68,6 @@
                     android:id="@+id/tvGPSLongitude"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
 
         <TableRow>
             <TextView
@@ -75,8 +84,6 @@
                     style="@style/GPSDetailsTableData" />
         </TableRow>
 
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
         <TableRow>
             <TextView
                     android:text="Altitude (m):"
@@ -91,14 +98,6 @@
                     android:id="@+id/tvGPSAccuracy"
                     style="@style/GPSDetailsTableData" />
         </TableRow>
-
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
-
-        <TableRow>
-        </TableRow>
-
-        <View android:layout_height="1dp" android:background="@color/table_divider" />
 
         <TableRow>
             <TextView
@@ -117,13 +116,6 @@
 
     </TableLayout>
 
-    <fragment
-            android:id="@+id/mapview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            class="com.google.android.gms.maps.MapFragment" />
-
-</LinearLayout>
+</RelativeLayout>
 
 

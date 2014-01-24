@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.*;
-import android.content.res.Configuration;
 import android.location.*;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -31,7 +30,7 @@ public class MainActivity extends Activity{
     private ToggleButton toggleBtnService;
     private ImageView ivGpsStatus;
 
-    private TableLayout viewTableLayout;
+    private TableLayout viewGPSLayout;
     private TextView tvGPSCounter;
     private TextView tvGPSLatitude;
     private TextView tvGPSLongitude;
@@ -72,7 +71,7 @@ public class MainActivity extends Activity{
         ivGpsStatus = (ImageView)findViewById(R.id.iv_gps_status);
 
         //find the view layouts
-        viewTableLayout = (TableLayout)findViewById(R.id.table_layout);
+        viewGPSLayout = (TableLayout)findViewById(R.id.gps_status_layout);
 
         //find the textviews
         tvGPSCounter = (TextView)findViewById(R.id.tvGPSCounter);
@@ -94,8 +93,8 @@ public class MainActivity extends Activity{
 
         mGpsNetworkStatusReceiver = new GpsConnectionStatusReceiver();
 
+        showGPSStatus(false);
         updateFromPreferences();
-        updateGpsConnectionStatus();
     }
 
     private void updateFromPreferences() {
@@ -127,9 +126,25 @@ public class MainActivity extends Activity{
 
         if (on) {
             Log.i(TAG, "buttonStartPressed");
+            showGPSStatus(true);
+
             startService(new Intent(this, GpsLoggerService.class));
         } else {
+            Log.i(TAG, "buttonStopPressed");
+            showGPSStatus(false);
+
             stopService(new Intent(this, GpsLoggerService.class));
+        }
+    }
+
+    private void showGPSStatus(boolean f){
+        if(f) {
+            viewGPSLayout.setVisibility(View.VISIBLE);
+            ivGpsStatus.setVisibility(View.VISIBLE);
+        }
+        else {
+            viewGPSLayout.setVisibility(View.INVISIBLE);
+            ivGpsStatus.setVisibility(View.INVISIBLE);
         }
     }
 

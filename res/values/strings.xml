@@ -13,4 +13,8 @@
     <string name="label_dynamic_zoom">Adjust Map zoom when vehicle is moving in high speeds.</string>
 
     <string name="spinner_map_layers_prompt">Switch Map Layer</string>
+
+    <string name="dialog_signin_title">Please register or login.</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
 </resources>

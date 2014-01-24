@@ -111,6 +111,7 @@ public class MainActivity extends Activity{
         else {
             tvUsername.setText("User not logged in.");
             toggleBtnService.setEnabled(false);
+            displaySignInDialog();
         }
     }
 
@@ -348,6 +349,25 @@ public class MainActivity extends Activity{
 
     private boolean isBetween(int x, int lower, int upper) {
         return lower <= x && x <= upper;
+    }
+
+    private void displaySignInDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+        dialog.setMessage(R.string.dialog_signin_title);
+        dialog.setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        });
+        dialog.setNegativeButton(R.string.register, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+            }
+        });
+        dialog.show();
     }
 
 }

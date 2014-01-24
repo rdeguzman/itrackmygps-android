@@ -15,7 +15,7 @@ gpslogger
 
 # Instructions
 
-- Clone the project `git clone git@github.com:rdeguzman/gpslogger-android.git`
+- Clone the project `git clone git@github.com:rdeguzman/trackble-android.git`
 - Get a google maps API Key.
 - Copy `api_key.xml` to `res/values`
 

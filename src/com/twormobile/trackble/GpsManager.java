@@ -21,8 +21,8 @@ import java.util.Map;
 public class GpsManager {
     private static final String TAG = "GpsManager";
 
-    public static final String ACTION_LOCATION = "com.example.gpslogger.ACTION_LOCATION";
-    public static final String ACTION_GPS_NETWORK_STATUS = "com.example.gpslogger.ACTION_GPS_NETWORK_STATUS";
+    public static final String ACTION_LOCATION = "com.twormobile.trackble.ACTION_LOCATION";
+    public static final String ACTION_GPS_NETWORK_STATUS = "com.twormobile.trackble.ACTION_GPS_NETWORK_STATUS";
 
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 

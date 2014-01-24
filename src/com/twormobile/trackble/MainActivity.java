@@ -372,4 +372,12 @@ public class MainActivity extends Activity{
         dialog.show();
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_CANCELED){
+           displaySignInDialog();
+        }
+    }
+
+
 }

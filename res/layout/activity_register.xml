@@ -24,9 +24,9 @@
             android:padding="5dp"/>
 
     <EditText
+            android:id="@+id/etxt_username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etxt_username"
             android:padding="5dp" />
 
     <TextView
@@ -37,9 +37,9 @@
             android:padding="5dp"/>
 
     <EditText
+            android:id="@+id/etxt_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etxt_password"
             android:inputType="textPassword"
             android:padding="5dp" />
 
@@ -52,9 +52,9 @@
             android:padding="5dp"/>
 
     <EditText
+            android:id="@+id/etxt_password_confirmation"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etxt_password_confirmation"
             android:inputType="textPassword"
             android:padding="5dp" />
 

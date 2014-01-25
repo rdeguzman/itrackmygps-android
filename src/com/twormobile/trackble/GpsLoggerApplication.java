@@ -1,11 +1,14 @@
 package com.twormobile.trackble;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.twormobile.trackble.android.DialogBoxFactory;
 
 public class GpsLoggerApplication extends Application {
     private static final String TAG = GpsLoggerApplication.class.getSimpleName();
@@ -84,4 +87,10 @@ public class GpsLoggerApplication extends Application {
             bLoggedIn = true;
         }
     }
+
+    public void showDialog(String title, String message, Activity activity){
+        AlertDialog dialog = DialogBoxFactory.setDialog(title, message, activity);
+        dialog.show();
+    }
+
 }

@@ -17,4 +17,7 @@
     <string name="dialog_signin_title">Please register or login.</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+
+    <string name="invalid_username">Please specify a valid username.</string>
+    <string name="password_mismatch">Passwords did not match.</string>
 </resources>

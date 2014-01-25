@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import com.android.volley.toolbox.StringRequest;
 
 public class RegisterActivity extends Activity {
 
@@ -36,7 +35,7 @@ public class RegisterActivity extends Activity {
 
     public void buttonSubmitPressed(View view){
         boolean valid = true;
-        if( isUsernameValid() && isPasswordMatch()){
+        if( isUsernameValid() && isPasswordMatch() && isEmailValid()){
             valid = true;
         }
         else {
@@ -73,6 +72,21 @@ public class RegisterActivity extends Activity {
 
         if(!valid){
             String message = getResources().getString(R.string.invalid_username);
+            gpsApp.showDialog("Error", message, this);
+        }
+
+        return valid;
+    }
+
+    private boolean isEmailValid(){
+        boolean valid = false;
+        String value = String.valueOf(etxtEmail.getText());
+        if(value != null && value.trim().length() > 0) {
+            valid = true;
+        }
+
+        if(!valid){
+            String message = getResources().getString(R.string.invalid_email);
             gpsApp.showDialog("Error", message, this);
         }
 

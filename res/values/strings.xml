@@ -19,5 +19,6 @@
     <string name="login">Login</string>
 
     <string name="invalid_username">Please specify a valid username.</string>
+    <string name="invalid_email">Please specify a valid email.</string>
     <string name="password_mismatch">Passwords did not match.</string>
 </resources>

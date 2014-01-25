@@ -10,7 +10,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -119,35 +122,38 @@ public class RegisterActivity extends Activity {
         final String passwordConfirmation = getCleanString(etxtPasswordConfirmation);
         final String uuid = gpsApp.getUUID();
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>(){
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject = new JSONObject();
+            jsonObject.put("uuid", uuid);
+
+            JSONObject user = new JSONObject();
+            user.put("username", username);
+            user.put("email", email);
+            user.put("password", password);
+            user.put("password_confirmation", passwordConfirmation);
+
+            jsonObject.put("user", user);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                new Response.Listener<JSONObject>(){
                     @Override
-                    public void onResponse(String response){
-                        VolleyLog.v("Response:%n %s", response);
+                    public void onResponse(JSONObject response){
+                        Log.v(TAG, "REGISTER Response: " + response.toString());
                     }
                 },
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
-                        Log.d(TAG, "Error on " + url);
-                        VolleyLog.e("Error: ", error.getMessage());
+                        Log.e(TAG, "REGISTER Error:" + error.getLocalizedMessage());
+
+                        gpsApp.showDialog("Error", error.getMessage(), RegisterActivity.this);
                     }
-                })
-        {
-
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("uuid", uuid);
-                params.put("user[username]", username);
-                params.put("user[email]", email);
-                params.put("user[password]", password);
-                params.put("user[password_confirmation]", passwordConfirmation);
-
-                return params;
-            }
-        };
+                });
 
         gpsApp.getVolleyRequestQueue().add(postRequest);
 

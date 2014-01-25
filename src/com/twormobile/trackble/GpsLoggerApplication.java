@@ -14,6 +14,7 @@ public class GpsLoggerApplication extends Application {
     private static final String TAG = GpsLoggerApplication.class.getSimpleName();
 
     public static String LOCATION_NEW_URL;
+    public static String REGISTER_URL;
 
     private DeviceUUIDFactory uuidFactory;
     private String deviceId;
@@ -70,6 +71,7 @@ public class GpsLoggerApplication extends Application {
 
     public void setURLs(){
         LOCATION_NEW_URL = getResources().getString(R.string.NEW_LOCATION_URL);
+        REGISTER_URL = getResources().getString(R.string.REGISTER_URL);
     }
 
     public boolean isLoggedIn() {

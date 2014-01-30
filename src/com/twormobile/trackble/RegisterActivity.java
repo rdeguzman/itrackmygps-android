@@ -143,7 +143,26 @@ public class RegisterActivity extends Activity {
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response){
+
                         Log.v(TAG, "REGISTER Response: " + response.toString());
+
+                        try {
+                            boolean valid = response.getBoolean("valid");
+
+                            if(valid) {
+
+                            }
+                            else {
+                                String message = response.getString("errors");
+                                Log.e(TAG, message);
+                                gpsApp.showDialog("Error", message, RegisterActivity.this);
+                            }
+
+                        } catch (JSONException e) {
+                            String message = "Cannot parse response from " + url + "(" + response.toString() + ")";
+                            Log.e(TAG, message);
+                            gpsApp.showDialog("Error", message, RegisterActivity.this);
+                        }
                     }
                 },
                 new Response.ErrorListener(){

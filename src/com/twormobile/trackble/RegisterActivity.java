@@ -149,9 +149,9 @@ public class RegisterActivity extends Activity {
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
-                        Log.e(TAG, "REGISTER Error:" + error.getLocalizedMessage());
-
-                        gpsApp.showDialog("Error", error.getMessage(), RegisterActivity.this);
+                        String message = "A network error has occurred on " + url + "(" + error.toString() + ")";
+                        Log.e(TAG, message);
+                        gpsApp.showDialog("Error", message, RegisterActivity.this);
                     }
                 });
 

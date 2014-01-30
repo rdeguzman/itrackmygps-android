@@ -95,4 +95,8 @@ public class GpsLoggerApplication extends Application {
         dialog.show();
     }
 
+    public void setLoggedIn(String u){
+        username = u;
+        bLoggedIn = true;
+    }
 }

@@ -1,8 +1,13 @@
 package com.twormobile.trackble;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -150,7 +155,21 @@ public class RegisterActivity extends Activity {
                             boolean valid = response.getBoolean("valid");
 
                             if(valid) {
+                                String message = "Registration successful!";
+                                Log.e(TAG, message);
 
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(RegisterActivity.this);
+                                dialog.setTitle("Info");
+                                dialog.setMessage(message);
+                                dialog.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                        save();
+                                        done();
+                                    }
+                                });
+
+                                dialog.show();
                             }
                             else {
                                 String message = response.getString("errors");
@@ -176,6 +195,29 @@ public class RegisterActivity extends Activity {
 
         gpsApp.getVolleyRequestQueue().add(postRequest);
 
+    }
+
+    public void done(){
+        Intent resultIntent = new Intent();
+        setResult(Activity.RESULT_OK, resultIntent);
+        super.finish();
+    }
+
+    public void save(){
+        final String username = getCleanString(etxtUsername);
+        final String email = getCleanString(etxtEmail);
+        final String uuid = gpsApp.getUUID();
+
+        Context context = getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("username", username);
+        editor.putString("email", email);
+        editor.putString("uuid", uuid);
+        editor.commit();
+
+        gpsApp.setLoggedIn(username);
     }
 
 }

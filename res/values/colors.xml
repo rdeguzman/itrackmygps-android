@@ -5,4 +5,5 @@
     <color name="background_user_status">#D9000000</color>
     <color name="background_tracker_status">#BF000000</color>
     <color name="background_gps_status">#80000000</color>
+    <color name="hint">#ffe89f4b</color>
 </resources>

@@ -374,8 +374,11 @@ public class MainActivity extends Activity{
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_CANCELED){
+        if(resultCode == Activity.RESULT_CANCELED) {
            displaySignInDialog();
+        }
+        else if(resultCode == Activity.RESULT_OK) {
+           checkUserInPreferences();
         }
     }
 

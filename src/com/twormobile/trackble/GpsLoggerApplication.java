@@ -3,6 +3,7 @@ package com.twormobile.trackble;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -16,6 +17,7 @@ public class GpsLoggerApplication extends Application {
 
     public static String LOCATION_NEW_URL;
     public static String REGISTER_URL;
+    public static String LOGIN_URL;
 
     private DeviceUUIDFactory uuidFactory;
     private String deviceId;
@@ -73,6 +75,7 @@ public class GpsLoggerApplication extends Application {
     public void setURLs(){
         LOCATION_NEW_URL = getResources().getString(R.string.NEW_LOCATION_URL);
         REGISTER_URL = getResources().getString(R.string.REGISTER_URL);
+        LOGIN_URL =  getResources().getString(R.string.LOGIN_URL);
     }
 
     public boolean isLoggedIn() {
@@ -133,5 +136,37 @@ public class GpsLoggerApplication extends Application {
 
         return valid;
     }
+
+    public boolean isPasswordValid(EditText etxt, Activity activity){
+        boolean valid = true;
+        String password = String.valueOf(etxt.getText());
+
+        if(password.isEmpty()){
+            valid = false;
+        }
+
+        if(!valid){
+            String message = getResources().getString(R.string.password_mismatch);
+            showDialog("Error", message, activity);
+        }
+
+        return valid;
+    }
+
+    public void saveLogin(String username, String email){
+        final String uuid = getUUID();
+
+        Context context = getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("username", username);
+        editor.putString("email", email);
+        editor.putString("uuid", uuid);
+        editor.commit();
+
+        setLoggedIn(username);
+    }
+
 
 }

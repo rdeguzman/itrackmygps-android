@@ -83,7 +83,7 @@ public class RegisterActivity extends Activity {
         // &user[email]=rupert@2rmobile.com
         // &user[password]=junjunmalupet
         // &user[password_confirmation]=junjunmalupet'
-        // http://127.0.0.1:3000/api/users.json
+        // http://127.0.0.1:3000/api/register
 
         final String username = getCleanString(etxtUsername);
         final String email = getCleanString(etxtEmail);
@@ -167,17 +167,8 @@ public class RegisterActivity extends Activity {
     public void save(){
         final String username = getCleanString(etxtUsername);
         final String email = getCleanString(etxtEmail);
-        final String uuid = gpsApp.getUUID();
 
-        Context context = getApplicationContext();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("username", username);
-        editor.putString("email", email);
-        editor.putString("uuid", uuid);
-        editor.commit();
-
+        gpsApp.saveLogin(username, email);
         gpsApp.setLoggedIn(username);
     }
 

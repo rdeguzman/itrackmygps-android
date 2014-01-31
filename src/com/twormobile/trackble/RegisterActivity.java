@@ -14,14 +14,9 @@ import android.widget.EditText;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends Activity {
     private static final String TAG = "RegisterActivity";
@@ -52,7 +47,9 @@ public class RegisterActivity extends Activity {
     }
 
     public void buttonSubmitPressed(View view){
-        if( isUsernameValid() && isPasswordMatch() && isEmailValid()){
+        if( gpsApp.isUsernameValid(etxtUsername, this)
+                && isPasswordMatch()
+                && gpsApp.isEmailValid(etxtEmail, this)){
             register();
         }
     }
@@ -68,39 +65,6 @@ public class RegisterActivity extends Activity {
 
         if(!valid){
             String message = getResources().getString(R.string.password_mismatch);
-            gpsApp.showDialog("Error", message, this);
-        }
-
-        return valid;
-    }
-
-    private boolean isUsernameValid(){
-        boolean valid = false;
-        String value = String.valueOf(etxtUsername.getText());
-        if(value != null && value.trim().length() > 0) {
-            int length = value.trim().length();
-            if(length > 0 && length <= 16) {
-                valid = true;
-            }
-        }
-
-        if(!valid){
-            String message = getResources().getString(R.string.invalid_username);
-            gpsApp.showDialog("Error", message, this);
-        }
-
-        return valid;
-    }
-
-    private boolean isEmailValid(){
-        boolean valid = false;
-        String value = String.valueOf(etxtEmail.getText());
-        if(value != null && value.trim().length() > 0) {
-            valid = true;
-        }
-
-        if(!valid){
-            String message = getResources().getString(R.string.invalid_email);
             gpsApp.showDialog("Error", message, this);
         }
 

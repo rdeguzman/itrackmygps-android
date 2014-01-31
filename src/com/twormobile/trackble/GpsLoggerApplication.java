@@ -6,6 +6,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.twormobile.trackble.android.DialogBoxFactory;
@@ -99,4 +100,38 @@ public class GpsLoggerApplication extends Application {
         username = u;
         bLoggedIn = true;
     }
+
+    public boolean isUsernameValid(EditText etxt, Activity activity){
+        boolean valid = false;
+        String value = String.valueOf(etxt.getText());
+        if(value != null && value.trim().length() > 0) {
+            int length = value.trim().length();
+            if(length > 0 && length <= 16) {
+                valid = true;
+            }
+        }
+
+        if(!valid){
+            String message = getResources().getString(R.string.invalid_username);
+            showDialog("Error", message, activity);
+        }
+
+        return valid;
+    }
+
+    public boolean isEmailValid(EditText etxt, Activity activity){
+        boolean valid = false;
+        String value = String.valueOf(etxt.getText());
+        if(value != null && value.trim().length() > 0) {
+            valid = true;
+        }
+
+        if(!valid){
+            String message = getResources().getString(R.string.invalid_email);
+            showDialog("Error", message, activity);
+        }
+
+        return valid;
+    }
+
 }

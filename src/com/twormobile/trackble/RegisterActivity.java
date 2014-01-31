@@ -173,14 +173,12 @@ public class RegisterActivity extends Activity {
                             }
                             else {
                                 String message = response.getString("errors");
-                                Log.e(TAG, message);
-                                gpsApp.showDialog("Error", message, RegisterActivity.this);
+                                showDialog(message);
                             }
 
                         } catch (JSONException e) {
                             String message = "Cannot parse response from " + url + "(" + response.toString() + ")";
-                            Log.e(TAG, message);
-                            gpsApp.showDialog("Error", message, RegisterActivity.this);
+                            showDialog(message);
                         }
                     }
                 },
@@ -188,8 +186,7 @@ public class RegisterActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError error){
                         String message = "A network error has occurred on " + url + "(" + error.toString() + ")";
-                        Log.e(TAG, message);
-                        gpsApp.showDialog("Error", message, RegisterActivity.this);
+                        showDialog(message);
                     }
                 });
 
@@ -218,6 +215,11 @@ public class RegisterActivity extends Activity {
         editor.commit();
 
         gpsApp.setLoggedIn(username);
+    }
+
+    private void showDialog(String message){
+        Log.e(TAG, message);
+        gpsApp.showDialog("Error", message, RegisterActivity.this);
     }
 
 }

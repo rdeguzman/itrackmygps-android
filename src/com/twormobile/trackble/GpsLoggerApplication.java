@@ -146,7 +146,7 @@ public class GpsLoggerApplication extends Application {
         }
 
         if(!valid){
-            String message = getResources().getString(R.string.password_mismatch);
+            String message = getResources().getString(R.string.invalid_password);
             showDialog("Error", message, activity);
         }
 

@@ -2,6 +2,7 @@ package com.twormobile.trackble;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ public class LoginActivity extends Activity {
 
     private EditText etxtUsername;
     private EditText etxtPassword;
+
+    private ProgressDialog pd;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,8 @@ public class LoginActivity extends Activity {
     }
 
     private void login(){
+        pd = ProgressDialog.show(this,"Please Wait...","Trying to Login");
+
         final String url = gpsApp.LOGIN_URL;
 
         final String username = getCleanString(etxtUsername);
@@ -76,6 +81,7 @@ public class LoginActivity extends Activity {
                     public void onResponse(JSONObject response){
 
                         Log.v(TAG, "LOGIN Response: " + response.toString());
+                        pd.dismiss();
 
                         try {
                             boolean valid = response.getBoolean("valid");
@@ -113,13 +119,13 @@ public class LoginActivity extends Activity {
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
+                        pd.dismiss();
                         String message = "A network error has occurred on " + url + "(" + error.toString() + ")";
                         showDialog(message);
                     }
                 });
 
         gpsApp.getVolleyRequestQueue().add(postRequest);
-
     }
 
     public void done(){

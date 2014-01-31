@@ -2,6 +2,7 @@ package com.twormobile.trackble;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +28,8 @@ public class RegisterActivity extends Activity {
     private EditText etxtPassword;
     private EditText etxtPasswordConfirmation;
     private EditText etxtEmail;
+
+    private ProgressDialog pd;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,8 @@ public class RegisterActivity extends Activity {
     }
 
     private void register(){
+        pd = ProgressDialog.show(this, "Please Wait...", "Trying to Register");
+
         final String url = gpsApp.REGISTER_URL;
 
         //curl -i -H "Content-Type applicationjson" -X POST --data
@@ -114,6 +119,7 @@ public class RegisterActivity extends Activity {
                     public void onResponse(JSONObject response){
 
                         Log.v(TAG, "REGISTER Response: " + response.toString());
+                        pd.dismiss();
 
                         try {
                             boolean valid = response.getBoolean("valid");
@@ -149,6 +155,7 @@ public class RegisterActivity extends Activity {
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error){
+                        pd.dismiss();
                         String message = "A network error has occurred on " + url + "(" + error.toString() + ")";
                         showDialog(message);
                     }

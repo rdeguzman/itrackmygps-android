@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="NEW_LOCATION_URL">http://track.geocoding.io:8080/location</string>
-    <string name="REGISTER_URL">http://trackble.geocoding.io/api/users.json</string>
+    <string name="REGISTER_URL">http://trackble.geocoding.io/api/register</string>
+    <string name="LOGIN_URL">http://trackble.geocoding.io/api/login</string>
 </resources>

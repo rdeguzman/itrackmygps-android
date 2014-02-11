@@ -19,6 +19,25 @@
             android:padding="5dp">
 
         <TextView
+                android:text="Tracker Status"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:maxLines="2"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_marginTop="-10dp"/>
+
+        <ToggleButton
+                android:id="@+id/btn_toggle_tracker_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textOn="ON"
+                android:textOff="OFF"
+                android:onClick="onToggleClicked" />
+
+        <TextView
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -39,25 +58,6 @@
             android:orientation="horizontal"
             android:background="@color/background_tracker_status"
             android:padding="5dp">
-
-        <TextView
-                android:text="Tracker Status"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:maxLines="2"
-                android:padding="5dp"
-                android:gravity="center"
-                android:layout_marginTop="-10dp"/>
-
-        <ToggleButton
-                android:id="@+id/btn_toggle_tracker_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textOn="ON"
-                android:textOff="OFF"
-                android:onClick="onToggleClicked" />
 
         <LinearLayout
                 android:id="@+id/layout_status_header"

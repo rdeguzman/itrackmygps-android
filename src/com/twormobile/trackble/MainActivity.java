@@ -313,7 +313,7 @@ public class MainActivity extends Activity{
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.action_configure:
                 displaySettingsActivity();
                 return true;
             default:

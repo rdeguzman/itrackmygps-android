@@ -31,10 +31,10 @@
 
         <ImageButton
                 android:id="@+id/btn_tracker"
-                android:layout_width="67dp"
+                android:layout_width="70dp"
                 android:layout_height="32dp"
                 android:onClick="buttonTrackClicked"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="4dp" />
 
         <Space
                 android:layout_width="wrap_content"

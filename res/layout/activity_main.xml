@@ -153,6 +153,78 @@
                         android:textColor="#ffffff" />
             </LinearLayout>
 
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:text="kpH"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                <TextView
+                        android:id="@+id/tv_gps_speed"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                <TextView
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:text="Alt"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                <TextView
+                        android:id="@+id/tv_gps_altitude"
+                        android:layout_width="40dp"
+                        android:layout_height="20dp"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                <TextView
+                        android:text="Time"
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:textColor="#ffffff" />
+
+                <TextView
+                        android:id="@+id/tv_gps_timestamp"
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:textColor="#ffffff" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
@@ -196,25 +268,10 @@
 
         <TableRow>
             <TextView
-                    android:text="Speed (mps):"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tv_gps_speed"
-                    style="@style/GPSDetailsTableData" />
-            <TextView
                     android:text="Heading (º):"
                     style="@style/GPSDetailsTableColumn" />
             <TextView
                     android:id="@+id/tv_gps_bearing"
-                    style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                    android:text="Altitude (m):"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tv_gps_altitude"
                     style="@style/GPSDetailsTableData" />
             <TextView
                     android:text="Err (m):"
@@ -222,6 +279,9 @@
             <TextView
                     android:id="@+id/tv_gps_accuracy"
                     style="@style/GPSDetailsTableData" />
+        </TableRow>
+
+        <TableRow>
         </TableRow>
 
     </TableLayout>

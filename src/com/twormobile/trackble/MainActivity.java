@@ -26,7 +26,7 @@ public class MainActivity extends Activity{
 
     private TextView tvUsername;
 
-    private ToggleButton toggleBtnService;
+    private ImageButton btnTracker;
     private ImageView ivGpsFixStatus;
     private TextView tvGpsFixStatus;
 
@@ -69,7 +69,7 @@ public class MainActivity extends Activity{
 
         tvUsername = (TextView)findViewById(R.id.tv_username);
 
-        toggleBtnService = (ToggleButton)findViewById(R.id.btn_toggle_tracker_status);
+        btnTracker = (ImageButton)findViewById(R.id.btn_tracker);
         ivGpsFixStatus = (ImageView)findViewById(R.id.iv_gps_status);
         tvGpsFixStatus = (TextView)findViewById(R.id.tv_gps_fix_status);
 
@@ -100,16 +100,17 @@ public class MainActivity extends Activity{
         updateFromSettingsPreferences();
 
         checkUserInPreferences();
+        updateButtonTrackerStatus();
     }
 
     private void checkUserInPreferences() {
         if(gpsApp.isLoggedIn()){
             tvUsername.setText(gpsApp.getUsername());
-            toggleBtnService.setEnabled(true);
+            btnTracker.setEnabled(true);
         }
         else {
             tvUsername.setText("User not logged in.");
-            toggleBtnService.setEnabled(false);
+            btnTracker.setEnabled(false);
             displaySignInDialog();
         }
     }
@@ -133,24 +134,27 @@ public class MainActivity extends Activity{
         gpsManager.updateLocationUpdateSettings(minTimeInSeconds, minDistanceInMeters);
     }
 
-    public void updateToggleButtonService(){
-        toggleBtnService.setChecked(gpsApp.isServiceRunning());
+    public void updateButtonTrackerStatus(){
+        if(gpsApp.isServiceRunning())
+            btnTracker.setImageResource(R.drawable.track_on);
+        else
+            btnTracker.setImageResource(R.drawable.track_off);
     }
 
-    public void onToggleClicked(View view) {
-        // Is the toggle on?
-        boolean on = ((ToggleButton) view).isChecked();
-
-        if (on) {
-            Log.i(TAG, "buttonStartPressed");
-            showGPSStatus(true);
-
-            startService(new Intent(this, GpsLoggerService.class));
-        } else {
+    public void buttonTrackClicked(View view){
+        if (gpsApp.isServiceRunning()) {
             Log.i(TAG, "buttonStopPressed");
             showGPSStatus(false);
 
+            btnTracker.setImageResource(R.drawable.track_off);
             stopService(new Intent(this, GpsLoggerService.class));
+        }
+        else {
+            Log.i(TAG, "buttonStartPressed");
+            showGPSStatus(true);
+
+            btnTracker.setImageResource(R.drawable.track_on);
+            startService(new Intent(this, GpsLoggerService.class));
         }
     }
 
@@ -296,7 +300,7 @@ public class MainActivity extends Activity{
         super.onResume();  // Always call the superclass method first
 
         Log.d(TAG, "resume");
-        updateToggleButtonService();
+        updateButtonTrackerStatus();
         updateFromSettingsPreferences();
     }
 

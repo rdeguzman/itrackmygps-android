@@ -29,16 +29,13 @@
                 android:gravity="center"
                 android:layout_marginTop="-10dp"/>
 
-        <ToggleButton
-                android:id="@+id/btn_toggle_tracker_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textOn="ON"
-                android:textOff="OFF"
-                android:textSize="26dp"
-                android:textStyle="bold"
-                android:onClick="onToggleClicked" />
-        
+        <ImageButton
+                android:id="@+id/btn_tracker"
+                android:layout_width="67dp"
+                android:layout_height="32dp"
+                android:onClick="buttonTrackClicked"
+                android:layout_marginTop="5dp" />
+
         <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +77,7 @@
 
                 <TextView
                         android:id="@+id/tv_fix"
-                        android:text="Fix"
+                        android:text="GPS Fix"
                         android:layout_width="50dp"
                         android:layout_height="20dp"
                         android:textStyle="bold"

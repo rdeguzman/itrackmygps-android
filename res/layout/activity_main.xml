@@ -55,7 +55,7 @@
     </LinearLayout>
 
     <LinearLayout
-            android:id="@+id/layout_tracker_status"
+            android:id="@+id/layout_gps_status"
             android:layout_below="@id/layout_user_status"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -64,9 +64,9 @@
             android:padding="5dp">
 
         <LinearLayout
-                android:id="@+id/layout_status_header"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:orientation="horizontal" >
 
             <RelativeLayout
@@ -109,7 +109,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp">
 
                 <TextView
                         android:layout_width="40dp"
@@ -133,7 +135,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp">
 
                 <TextView
                         android:layout_width="40dp"
@@ -147,7 +151,6 @@
                         android:id="@+id/tv_gps_fix_total_satellites"
                         android:layout_width="40dp"
                         android:layout_height="20dp"
-                        android:text="0"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:textColor="#ffffff" />
@@ -157,7 +160,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp">
 
                 <TextView
                         android:layout_width="40dp"
@@ -171,7 +176,6 @@
                         android:id="@+id/tv_gps_speed"
                         android:layout_width="40dp"
                         android:layout_height="20dp"
-                        android:text="0"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:textColor="#ffffff" />
@@ -181,7 +185,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:orientation="vertical"
-                    android:padding="5dp">
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp">
 
                 <TextView
                         android:layout_width="40dp"
@@ -195,7 +201,6 @@
                         android:id="@+id/tv_gps_altitude"
                         android:layout_width="40dp"
                         android:layout_height="20dp"
-                        android:text="0"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:textColor="#ffffff" />
@@ -219,10 +224,10 @@
                         android:id="@+id/tv_gps_timestamp"
                         android:layout_width="60dp"
                         android:layout_height="20dp"
-                        android:text="0"
                         android:textStyle="bold"
                         android:gravity="right"
                         android:textColor="#ffffff" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -231,7 +236,7 @@
 
     <TableLayout
             android:id="@+id/layout_gps_details"
-            android:layout_below="@id/layout_tracker_status"
+            android:layout_below="@id/layout_gps_status"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_gps_status" >

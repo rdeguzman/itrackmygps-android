@@ -74,8 +74,8 @@ public class MainActivity extends Activity{
         tvGpsFixStatus = (TextView)findViewById(R.id.tv_gps_fix_status);
 
         //find the view layouts
+        layoutGPSStatus = (LinearLayout)findViewById(R.id.layout_gps_status);
         layoutGPSDetails = (TableLayout)findViewById(R.id.layout_gps_details);
-        layoutGPSStatus = (LinearLayout)findViewById(R.id.layout_status_header);
 
         //find the textviews
         tvGPSCounter = (TextView)findViewById(R.id.tv_gps_counter);

@@ -63,148 +63,179 @@
             android:background="@color/background_tracker_status"
             android:padding="5dp">
 
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
+
+            <TextView
+                    android:id="@+id/tv_fix"
+                    android:text="GPS Fix"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:gravity="center" />
+
+            <ImageView
+                    android:id="@+id/iv_gps_status"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/tv_fix"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                    android:id="@+id/tv_gps_fix_status"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/tv_fix"
+                    android:layout_toRightOf="@id/iv_gps_status"
+                    android:textSize="8dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:textColor="#ffffff" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp">
+
+            <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:text="Type"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/tv_gps_provider"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:textSize="10dp"
+                    android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp">
+
+            <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:text="SAT"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/tv_gps_fix_total_satellites"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+            <TextView
+                    android:text="Time"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/tv_gps_timestamp"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+            <TextView
+                    android:text="Accuracy"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/tv_gps_accuracy"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:text="25.0000"
+                    android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+            <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:text="Speed"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:textColor="#ffffff" />
+
+            <TextView
+                    android:id="@+id/tv_gps_speed"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:textColor="#ffffff" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/layout_gps_details"
+            android:layout_below="@id/layout_gps_status"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/background_gps_status"
+            android:padding="5dp">
+
         <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:orientation="horizontal" >
-
-            <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp">
-
-                <TextView
-                        android:id="@+id/tv_fix"
-                        android:text="GPS Fix"
-                        android:layout_width="50dp"
-                        android:layout_height="20dp"
-                        android:textStyle="bold"
-                        android:textColor="#ffffff"
-                        android:gravity="center" />
-
-                <ImageView
-                        android:id="@+id/iv_gps_status"
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_below="@id/tv_fix"
-                        android:layout_marginTop="5dp"
-                        android:layout_gravity="center_horizontal"/>
-
-                <TextView
-                        android:id="@+id/tv_gps_fix_status"
-                        android:layout_width="50dp"
-                        android:layout_height="20dp"
-                        android:layout_below="@id/tv_fix"
-                        android:layout_toRightOf="@id/iv_gps_status"
-                        android:textSize="8dp"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp"
-                        android:textColor="#ffffff" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:orientation="vertical"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp">
-
-                <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:text="Type"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textColor="#ffffff" />
-
-                <TextView
-                        android:id="@+id/tv_gps_provider"
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:gravity="center"
-                        android:textSize="10dp"
-                        android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:orientation="vertical"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp">
-
-                <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:text="SAT"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textColor="#ffffff" />
-
-                <TextView
-                        android:id="@+id/tv_gps_fix_total_satellites"
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textColor="#ffffff" />
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:orientation="vertical"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp">
-
-                <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:text="kpH"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textColor="#ffffff" />
-
-                <TextView
-                        android:id="@+id/tv_gps_speed"
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textColor="#ffffff" />
-            </LinearLayout>
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:orientation="vertical"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="10dp">
-
-                <TextView
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:text="Alt"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textColor="#ffffff" />
-
-                <TextView
-                        android:id="@+id/tv_gps_altitude"
-                        android:layout_width="40dp"
-                        android:layout_height="20dp"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textColor="#ffffff" />
-            </LinearLayout>
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -213,83 +244,129 @@
                     android:padding="5dp">
 
                 <TextView
-                        android:text="Time"
-                        android:layout_width="60dp"
+                        android:layout_width="55dp"
                         android:layout_height="20dp"
+                        android:text="Counter"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#ffffff" />
+
+                <TextView
+                        android:id="@+id/tv_gps_counter"
+                        android:layout_width="55dp"
+                        android:layout_height="20dp"
+                        android:gravity="right"
+                        android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
+
+
+                <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
+                        android:text="Lat:"
                         android:textStyle="bold"
                         android:gravity="right"
                         android:textColor="#ffffff" />
 
                 <TextView
-                        android:id="@+id/tv_gps_timestamp"
-                        android:layout_width="60dp"
+                        android:layout_width="30dp"
                         android:layout_height="20dp"
+                        android:text="Lon:"
                         android:textStyle="bold"
                         android:gravity="right"
                         android:textColor="#ffffff" />
 
             </LinearLayout>
 
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
+
+                <TextView
+                        android:id="@+id/tv_gps_latitude"
+                        android:layout_width="90dp"
+                        android:layout_height="20dp"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:textSize="14dp"
+                        android:textColor="#ffffff" />
+
+                <TextView
+                        android:id="@+id/tv_gps_longitude"
+                        android:layout_width="90dp"
+                        android:layout_height="20dp"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:textSize="14dp"
+                        android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
+
+                <TextView
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
+                        android:text="Bearing(º)"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="right"
+                        android:textColor="#ffffff" />
+
+                <TextView
+                        android:id="@+id/tv_gps_bearing"
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
+
+                <TextView
+                        android:layout_width="65dp"
+                        android:layout_height="20dp"
+                        android:text="Altitude(m)"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="right"
+                        android:textColor="#ffffff" />
+
+                <TextView
+                        android:id="@+id/tv_gps_altitude"
+                        android:layout_width="65dp"
+                        android:layout_height="20dp"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:textColor="#ffffff" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
-
-    <TableLayout
-            android:id="@+id/layout_gps_details"
-            android:layout_below="@id/layout_gps_status"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_gps_status" >
-
-        <TableRow>
-            <TextView
-                    android:text="Ctr:"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tv_gps_counter"
-                    style="@style/GPSDetailsTableData" />
-            <TextView
-                    android:text="Time:"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tv_gps_timestamp"
-                    style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                    android:text="Lat:"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tv_gps_latitude"
-                    style="@style/GPSDetailsTableData" />
-            <TextView
-                    android:text="Lon:"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tv_gps_longitude"
-                    style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                    android:text="Heading (º):"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tv_gps_bearing"
-                    style="@style/GPSDetailsTableData" />
-            <TextView
-                    android:text="Err (m):"
-                    style="@style/GPSDetailsTableColumn" />
-            <TextView
-                    android:id="@+id/tv_gps_accuracy"
-                    style="@style/GPSDetailsTableData" />
-        </TableRow>
-
-        <TableRow>
-        </TableRow>
-
-    </TableLayout>
 
 </RelativeLayout>
 

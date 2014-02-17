@@ -22,8 +22,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MainActivity extends Activity{
     private static final String TAG = "MainActivity";
 
-    private int ctrUpdate = 0;
-
     private TextView tvUsername;
 
     private ImageButton btnTracker;
@@ -31,8 +29,8 @@ public class MainActivity extends Activity{
     private TextView tvGpsFixStatus;
 
     private LinearLayout layoutGPSStatus;
+    private LinearLayout layoutGPSDetails;
 
-    private TableLayout layoutGPSDetails;
     private TextView tvGPSCounter;
     private TextView tvGPSLatitude;
     private TextView tvGPSLongitude;
@@ -75,7 +73,7 @@ public class MainActivity extends Activity{
 
         //find the view layouts
         layoutGPSStatus = (LinearLayout)findViewById(R.id.layout_gps_status);
-        layoutGPSDetails = (TableLayout)findViewById(R.id.layout_gps_details);
+        layoutGPSDetails = (LinearLayout)findViewById(R.id.layout_gps_details);
 
         //find the textviews
         tvGPSCounter = (TextView)findViewById(R.id.tv_gps_counter);
@@ -271,8 +269,6 @@ public class MainActivity extends Activity{
     }
 
     private void displayGPSDetails(Location location, int ctr) {
-        ctrUpdate++;
-
         tvGPSCounter.setText(Integer.toString(ctr));
         tvGPSLatitude.setText(Double.toString(location.getLatitude()));
         tvGPSLongitude.setText(Double.toString(location.getLongitude()));

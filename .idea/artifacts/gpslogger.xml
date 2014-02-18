@@ -13,7 +13,7 @@
       </options>
     </properties>
     <root id="archive" name="gpslogger.apk">
-      <element id="android-final-package" facet="trackble/android/Android" />
+      <element id="android-final-package" facet="itrackmygps/android/Android" />
     </root>
   </artifact>
 </component>

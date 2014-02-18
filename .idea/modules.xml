@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/libs/volley/Volley.iml" filepath="$PROJECT_DIR$/libs/volley/Volley.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/libs/google-play-services_lib/google-play-services_lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/trackble.iml" filepath="$PROJECT_DIR$/trackble.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itrackmygps.iml" filepath="$PROJECT_DIR$/itrackmygps.iml" />
     </modules>
   </component>
 </project>

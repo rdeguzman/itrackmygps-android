@@ -1,4 +1,4 @@
-package com.twormobile.trackble;
+package com.twormobile.itrackmygps;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,24 +16,28 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends Activity {
-    private static final String TAG = "LoginActivity";
+public class RegisterActivity extends Activity {
+    private static final String TAG = "RegisterActivity";
 
     private GpsLoggerApplication gpsApp;
 
     private EditText etxtUsername;
     private EditText etxtPassword;
+    private EditText etxtPasswordConfirmation;
+    private EditText etxtEmail;
 
     private ProgressDialog pd;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
         this.gpsApp = (GpsLoggerApplication)getApplication();
 
         etxtUsername = (EditText)findViewById(R.id.etxt_username);
         etxtPassword = (EditText)findViewById(R.id.etxt_password);
+        etxtPasswordConfirmation  = (EditText)findViewById(R.id.etxt_password_confirmation);
+        etxtEmail = (EditText)findViewById(R.id.etxt_email);
     }
 
     public void buttonCancelPressed(View view){
@@ -44,22 +48,49 @@ public class LoginActivity extends Activity {
 
     public void buttonSubmitPressed(View view){
         if( gpsApp.isUsernameValid(etxtUsername, this)
-                && gpsApp.isPasswordValid(etxtPassword, this)){
-            login();
+                && isPasswordMatch()
+                && gpsApp.isEmailValid(etxtEmail, this)){
+            register();
         }
+    }
+
+    private boolean isPasswordMatch(){
+        boolean valid = true;
+        String password = String.valueOf(etxtPassword.getText());
+        String passwordConfirm = String.valueOf(etxtPasswordConfirmation.getText());
+
+        if(password.isEmpty() || passwordConfirm.isEmpty() || password.equals(passwordConfirm) == false){
+            valid = false;
+        }
+
+        if(!valid){
+            String message = getResources().getString(R.string.password_mismatch);
+            gpsApp.showDialog("Error", message, this);
+        }
+
+        return valid;
     }
 
     private String getCleanString(EditText etxt) {
         return String.valueOf(etxt.getText()).trim();
     }
 
-    private void login(){
-        pd = ProgressDialog.show(this,"Please Wait...","Trying to Login");
+    private void register(){
+        pd = ProgressDialog.show(this, "Please Wait...", "Trying to Register");
 
-        final String url = gpsApp.LOGIN_URL;
+        final String url = gpsApp.REGISTER_URL;
+
+        //curl -i -H "Content-Type applicationjson" -X POST --data
+        // 'user[username]=rupert
+        // &user[email]=rupert@2rmobile.com
+        // &user[password]=junjunmalupet
+        // &user[password_confirmation]=junjunmalupet'
+        // http://127.0.0.1:3000/api/register
 
         final String username = getCleanString(etxtUsername);
+        final String email = getCleanString(etxtEmail);
         final String password = getCleanString(etxtPassword);
+        final String passwordConfirmation = getCleanString(etxtPasswordConfirmation);
         final String uuid = gpsApp.getUUID();
 
         JSONObject jsonObject = null;
@@ -67,38 +98,40 @@ public class LoginActivity extends Activity {
         try {
             jsonObject = new JSONObject();
             jsonObject.put("uuid", uuid);
-            jsonObject.put("username", username);
-            jsonObject.put("password", password);
+
+            JSONObject user = new JSONObject();
+            user.put("username", username);
+            user.put("email", email);
+            user.put("password", password);
+            user.put("password_confirmation", passwordConfirmation);
+
+            jsonObject.put("user", user);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST,
-                url,
-                jsonObject,
+        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response){
 
-                        Log.v(TAG, "LOGIN Response: " + response.toString());
+                        Log.v(TAG, "REGISTER Response: " + response.toString());
                         pd.dismiss();
 
                         try {
                             boolean valid = response.getBoolean("valid");
 
                             if(valid) {
-                                String message = "Login successful!";
+                                String message = "Registration successful!";
                                 Log.e(TAG, message);
 
-                                final String email = response.getString("email");
-
-                                AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(RegisterActivity.this);
                                 dialog.setTitle("Info");
                                 dialog.setMessage(message);
                                 dialog.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                                        save(email);
+                                        save();
                                         done();
                                     }
                                 });
@@ -126,6 +159,7 @@ public class LoginActivity extends Activity {
                 });
 
         gpsApp.getVolleyRequestQueue().add(postRequest);
+
     }
 
     public void done(){
@@ -134,8 +168,9 @@ public class LoginActivity extends Activity {
         super.finish();
     }
 
-    public void save(String email){
+    public void save(){
         final String username = getCleanString(etxtUsername);
+        final String email = getCleanString(etxtEmail);
 
         gpsApp.saveLogin(username, email);
         gpsApp.setLoggedIn(username);
@@ -143,7 +178,7 @@ public class LoginActivity extends Activity {
 
     private void showDialog(String message){
         Log.e(TAG, message);
-        gpsApp.showDialog("Error", message, LoginActivity.this);
+        gpsApp.showDialog("Error", message, RegisterActivity.this);
     }
 
 }

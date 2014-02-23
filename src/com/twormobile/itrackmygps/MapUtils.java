@@ -1,4 +1,4 @@
-package com.twormobile.trackble;
+package com.twormobile.itrackmygps;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;

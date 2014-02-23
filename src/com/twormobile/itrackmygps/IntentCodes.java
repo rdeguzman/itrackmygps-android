@@ -1,4 +1,4 @@
-package com.twormobile.trackble;
+package com.twormobile.itrackmygps;
 
 public class IntentCodes {
     public static final int REGISTER = 10;

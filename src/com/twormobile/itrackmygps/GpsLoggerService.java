@@ -1,4 +1,4 @@
-package com.twormobile.trackble;
+package com.twormobile.itrackmygps;
 
 import android.app.Service;
 import android.content.Intent;

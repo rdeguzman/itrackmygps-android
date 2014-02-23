@@ -1,4 +1,4 @@
-package com.twormobile.trackble;
+package com.twormobile.itrackmygps;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.twormobile.trackble.android.DialogBoxFactory;
+import com.twormobile.itrackmygps.android.DialogBoxFactory;
 
 public class GpsLoggerApplication extends Application {
     private static final String TAG = GpsLoggerApplication.class.getSimpleName();

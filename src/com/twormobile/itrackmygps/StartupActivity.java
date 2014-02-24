@@ -1,9 +1,11 @@
 package com.twormobile.itrackmygps;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
@@ -48,5 +50,15 @@ public class StartupActivity extends Activity {
         settings.setBlockNetworkLoads(false);
         settings.setBlockNetworkImage(false);
         settings.setJavaScriptEnabled(true);        
+    }
+
+    public void buttonRegisterPressed(View view){
+        Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    public void buttonLoginPressed(View view){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

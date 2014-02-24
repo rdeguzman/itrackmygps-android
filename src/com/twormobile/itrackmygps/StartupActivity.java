@@ -1,11 +1,17 @@
 package com.twormobile.itrackmygps;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 public class StartupActivity extends Activity {
 
     private GpsLoggerApplication gpsApp;
+
+    private WebView wvAds;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -15,11 +21,32 @@ public class StartupActivity extends Activity {
 
         if(gpsApp.isLoggedIn()){
             setContentView(R.layout.activity_splash_ads);
+
+            wvAds = (WebView) findViewById(R.id.wv_ads);
+            initAds();
+
+            String ADS_URL = getResources().getString(R.string.ADS_URL);
+            wvAds.loadUrl(ADS_URL);
         }
         else {
             // Register or Login
             setContentView(R.layout.activity_splash_startup);
         }
 
+    }
+
+    private void initAds() {
+        WebSettings settings = wvAds.getSettings();
+        wvAds.setSaveEnabled(true);
+        wvAds.setBackgroundColor(Color.TRANSPARENT);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            wvAds.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+        }
+
+        settings.setLoadsImagesAutomatically(true);
+        settings.setBlockNetworkLoads(false);
+        settings.setBlockNetworkImage(false);
+        settings.setJavaScriptEnabled(true);        
     }
 }

@@ -11,8 +11,8 @@
             android:layout_height="20dp" />
 
     <WebView
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="@dimen/startup_ads_width"
+            android:layout_height="@dimen/startup_ads_height"
             android:layout_gravity="center"
             android:background="@android:color/transparent"/>
 

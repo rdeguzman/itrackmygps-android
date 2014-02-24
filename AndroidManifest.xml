@@ -39,9 +39,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.twormobile.itrackmygps.StartupActivity"/>
+
         <activity android:name="com.twormobile.itrackmygps.SettingsActivity"/>
 
         <activity android:name="com.twormobile.itrackmygps.RegisterActivity"/>
+
         <activity android:name="com.twormobile.itrackmygps.LoginActivity"/>
 
         <receiver android:name="com.twormobile.itrackmygps.LocationReceiver"

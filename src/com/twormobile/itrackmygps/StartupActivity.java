@@ -5,9 +5,21 @@ import android.os.Bundle;
 
 public class StartupActivity extends Activity {
 
+    private GpsLoggerApplication gpsApp;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_startup);
+
+        this.gpsApp = (GpsLoggerApplication)getApplication();
+
+        if(gpsApp.isLoggedIn()){
+            setContentView(R.layout.activity_splash_ads);
+        }
+        else {
+            // Register or Login
+            setContentView(R.layout.activity_splash_startup);
+        }
+
     }
 }

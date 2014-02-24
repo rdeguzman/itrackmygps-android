@@ -6,4 +6,6 @@
     <color name="background_tracker_status">#BF000000</color>
     <color name="background_gps_status">#80000000</color>
     <color name="hint">#ffe89f4b</color>
+    <color name="button_register">#ffb94d2e</color>
+    <color name="button_login">#ff89b94a</color>
 </resources>

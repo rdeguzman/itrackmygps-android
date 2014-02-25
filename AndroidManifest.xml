@@ -42,8 +42,7 @@
 
         <activity android:name="com.twormobile.itrackmygps.MainActivity"
                   android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:label="@string/app_name">
-        </activity>
+                  android:launchMode="singleTop" />
 
         <activity android:name="com.twormobile.itrackmygps.SettingsActivity"/>
 

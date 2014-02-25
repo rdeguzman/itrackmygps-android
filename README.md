@@ -4,8 +4,8 @@ trackble-android
 # Features
 
 - Logs gps of your Android Device
-- Saves gps coorindates to sqlite database on internal storage
-- Sends gps coordinate to remote server
+- Saves gps coordinates to sqlite database on internal storage
+- Sends gps coordinates to remote server
 
 
 # Prerequisites

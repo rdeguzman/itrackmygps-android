@@ -75,4 +75,9 @@ public class StartupActivity extends Activity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        //Ensures that we don't go back to previous activity
+    }
+
 }

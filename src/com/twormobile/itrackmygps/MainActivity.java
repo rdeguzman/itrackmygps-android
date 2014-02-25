@@ -349,4 +349,9 @@ public class MainActivity extends Activity{
         return lower <= x && x <= upper;
     }
 
+    @Override
+    public void onBackPressed() {
+        //Ensures that we don't go back to previous activity
+    }
+
 }

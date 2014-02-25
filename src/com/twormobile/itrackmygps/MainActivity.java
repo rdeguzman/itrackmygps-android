@@ -109,7 +109,6 @@ public class MainActivity extends Activity{
         else {
             tvUsername.setText("User not logged in.");
             btnTracker.setEnabled(false);
-            displaySignInDialog();
         }
     }
 
@@ -349,38 +348,5 @@ public class MainActivity extends Activity{
     private boolean isBetween(int x, int lower, int upper) {
         return lower <= x && x <= upper;
     }
-
-    private void displaySignInDialog() {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-        dialog.setMessage(R.string.dialog_signin_title);
-        dialog.setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivityForResult(intent, IntentCodes.LOGIN);
-
-            }
-        });
-        dialog.setNegativeButton(R.string.register, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivityForResult(intent, IntentCodes.REGISTER);
-            }
-        });
-
-        dialog.show();
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_CANCELED) {
-           displaySignInDialog();
-        }
-        else if(resultCode == Activity.RESULT_OK) {
-           checkUserInPreferences();
-        }
-    }
-
 
 }

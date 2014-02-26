@@ -50,6 +50,8 @@
 
         <activity android:name="com.twormobile.itrackmygps.LoginActivity"/>
 
+        <activity android:name="com.twormobile.itrackmygps.ShareActivity"/>
+
         <receiver android:name="com.twormobile.itrackmygps.LocationReceiver"
                   android:exported="false">
             <intent-filter>

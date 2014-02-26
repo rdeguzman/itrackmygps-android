@@ -312,18 +312,15 @@ public class MainActivity extends Activity{
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
+            case R.id.action_share:
+                buttonSharePressed();
+                return true;
             case R.id.action_configure:
-                displaySettingsActivity();
+                buttonSettingsPressed();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void displaySettingsActivity(){
-        Log.d(TAG, "displaySettingsActivity");
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivityForResult(intent, IntentCodes.SETTINGS);
     }
 
     private void displayLocationAccessDialog(){
@@ -353,5 +350,19 @@ public class MainActivity extends Activity{
     public void onBackPressed() {
         //Ensures that we don't go back to previous activity
     }
+
+    private void buttonSettingsPressed(){
+        Log.d(TAG, "buttonSettingsPressed");
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivityForResult(intent, IntentCodes.SETTINGS);
+    }
+
+    private void buttonSharePressed(){
+        Log.d(TAG, "buttonSharePressed");
+        Intent intent = new Intent(this, ShareActivity.class);
+        startActivityForResult(intent, IntentCodes.SHARE);
+    }
+
+
 
 }

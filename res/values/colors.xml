@@ -8,4 +8,7 @@
     <color name="hint">#ffe89f4b</color>
     <color name="button_register">#ffb94d2e</color>
     <color name="button_login">#ff89b94a</color>
+    <color name="button_share">#ffe89f4b</color>
+    <color name="edittext_background">#ffdbdbdb</color>
+    <color name="edittext_color">#000000</color>
 </resources>

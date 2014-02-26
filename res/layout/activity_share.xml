@@ -5,4 +5,124 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <TextView
+            android:id="@+id/tv_title"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Share your location"
+            android:textStyle="bold"
+            android:padding="5dp"/>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/tv_pin_title"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="1. Protect by Pin:"
+                android:padding="5dp"/>
+
+        <EditText
+                android:id="@+id/etxt_pin"
+                android:layout_toRightOf="@id/tv_pin_title"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:background="@color/edittext_background"
+                android:textColor="@color/edittext_color" />
+
+        <TextView
+                android:layout_below="@id/etxt_pin"
+                android:layout_toRightOf="@id/tv_pin_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:textColor="@color/hint"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Minimum of 4 digits" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+        <TextView
+                android:id="@+id/tv_viewer_title"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="2."
+                android:padding="5dp"/>
+
+        <Button
+                android:id="@+id/btn_contacts_list"
+                android:layout_toRightOf="@id/tv_viewer_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Choose your viewers"
+                android:onClick="buttonContactsPressed" />
+
+        <EditText
+                android:id="@+id/etxt_contact_list"
+                android:background="@color/edittext_background"
+                android:layout_below="@+id/btn_contacts_list"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:inputType="textMultiLine"
+                android:textColor="@color/edittext_color" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+        <TextView
+                android:id="@+id/tv_message"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="3.Your message"
+                android:padding="5dp"/>
+
+        <EditText
+                android:id="@+id/etxt_message"
+                android:background="@color/edittext_background"
+                android:layout_below="@+id/tv_message"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:inputType="textMultiLine"
+                android:textColor="@color/edittext_color" />
+
+    </RelativeLayout>
+
+    <Button
+            android:id="@+id/btn_submit"
+            android:background="@color/button_share"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:textSize="26dp"
+            android:textStyle="normal"
+            android:text="Share"
+            android:onClick="buttonSharePressed" />
+
 </LinearLayout>

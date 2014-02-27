@@ -33,6 +33,7 @@
                 android:layout_toRightOf="@id/tv_pin_title"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
+                android:inputType="number"
                 android:padding="5dp"
                 android:background="@color/edittext_background"
                 android:textColor="@color/edittext_color" />
@@ -75,13 +76,17 @@
 
         <EditText
                 android:id="@+id/etxt_contact_list"
+                android:hint="Enter email addresses here separated by comma."
                 android:background="@color/edittext_background"
                 android:layout_below="@+id/btn_contacts_list"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="20dp"
                 android:layout_width="fill_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 android:inputType="textMultiLine"
+                android:gravity="left"
                 android:textColor="@color/edittext_color" />
 
     </RelativeLayout>
@@ -108,6 +113,9 @@
                 android:layout_marginRight="20dp"
                 android:layout_width="fill_parent"
                 android:layout_height="100dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:gravity="left"
                 android:inputType="textMultiLine"
                 android:textColor="@color/edittext_color" />
 

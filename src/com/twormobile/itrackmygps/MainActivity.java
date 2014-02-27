@@ -360,9 +360,6 @@ public class MainActivity extends Activity{
     private void buttonSharePressed(){
         Log.d(TAG, "buttonSharePressed");
         Intent intent = new Intent(this, ShareActivity.class);
-        startActivityForResult(intent, IntentCodes.SHARE);
+        startActivity(intent);
     }
-
-
-
 }

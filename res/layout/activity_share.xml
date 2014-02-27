@@ -57,52 +57,12 @@
             android:layout_marginTop="20dp">
 
         <TextView
-                android:id="@+id/tv_viewer_title"
-                android:layout_marginLeft="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="2."
-                android:padding="5dp"/>
-
-        <Button
-                android:id="@+id/btn_contacts_list"
-                android:layout_toRightOf="@id/tv_viewer_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Choose your viewers"
-                android:onClick="buttonContactsPressed" />
-
-        <EditText
-                android:id="@+id/etxt_contact_list"
-                android:hint="Enter email addresses here separated by comma."
-                android:background="@color/edittext_background"
-                android:layout_below="@+id/btn_contacts_list"
-                android:layout_marginLeft="45dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="fill_parent"
-                android:layout_height="80dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:inputType="textMultiLine"
-                android:gravity="left"
-                android:textColor="@color/edittext_color" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-        <TextView
                 android:id="@+id/tv_message"
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="3.Your message"
+                android:text="2.Your message"
                 android:padding="5dp"/>
 
         <EditText
@@ -123,14 +83,29 @@
 
     <Button
             android:id="@+id/btn_submit"
-            android:background="@color/button_share"
-            android:layout_marginLeft="40dp"
+            android:background="@color/button_send"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="30dp"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
             android:textSize="26dp"
             android:textStyle="normal"
-            android:text="Share"
-            android:onClick="buttonSharePressed" />
+            android:text="Send by SMS"
+            android:onClick="buttonSMSPressed" />
+
+    <Button
+            android:id="@+id/btn_cancel"
+            android:background="@color/button_cancel"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:textSize="26dp"
+            android:textStyle="normal"
+            android:text="Cancel"
+            android:onClick="buttonCancelPressed" />
+
 
 </LinearLayout>

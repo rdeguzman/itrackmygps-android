@@ -4,4 +4,5 @@
     <string name="REGISTER_URL">http://itrackmygps.com/api/register</string>
     <string name="LOGIN_URL">http://itrackmygps.com/api/login</string>
     <string name="ADS_URL">http://www.mytravel-asia.com/mobile/adsense</string>
+    <string name="TRACK_URL">http://itrackmygps.com/access?u=</string>
 </resources>

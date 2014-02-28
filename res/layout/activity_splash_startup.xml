@@ -8,47 +8,57 @@
 
     <Space
             android:layout_width="fill_parent"
-            android:layout_height="20dp" />
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
 
-    <ImageView
+    <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/tracker_status"
-            android:layout_weight="1" />
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/tracker_status" />
+
+        <Space
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"/>
+
+        <Button android:id="@+id/button_register"
+                android:text="Register"
+                android:onClick="buttonRegisterPressed"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:background="@color/button_register" />
+
+        <Space
+                android:layout_width="fill_parent"
+                android:layout_height="20dp" />
+
+        <Button android:id="@+id/button_login"
+                android:text="Login"
+                android:onClick="buttonLoginPressed"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:background="@color/button_login"/>
+
+    </LinearLayout>
 
     <Space
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_weight="1"/>
-
-    <Button android:id="@+id/button_register"
-            android:text="Register"
-            android:onClick="buttonRegisterPressed"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:gravity="center"
-            android:textSize="26dp"
-            android:textStyle="normal"
-            android:background="@color/button_register" />
-
-    <Space
-            android:layout_width="fill_parent"
-            android:layout_height="20dp" />
-
-    <Button android:id="@+id/button_login"
-            android:text="Login"
-            android:onClick="buttonLoginPressed"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:gravity="center"
-            android:textSize="26dp"
-            android:textStyle="normal"
-            android:background="@color/button_login"/>
-
-    <Space
-            android:layout_width="fill_parent"
-            android:layout_height="20dp" />
+            android:layout_weight="1" />
 
 </LinearLayout>

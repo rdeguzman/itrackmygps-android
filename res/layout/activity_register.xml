@@ -4,144 +4,149 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:background="@drawable/bg_blur"
-              android:paddingRight="30dp"
-              android:paddingLeft="30dp">
+              android:background="@drawable/bg_blur">
 
     <Space
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"/>
 
-    <TextView
-            android:layout_width="fill_parent"
+    <LinearLayout
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:textSize="26dp"
-            android:textStyle="bold"
-            android:text="Register"
-            android:gravity="center" />
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Username"
-            android:layout_marginLeft="5dp" />
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                android:text="Register"
+                android:gravity="center" />
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:textColor="@color/hint"
-            android:layout_marginLeft="5dp"
-            android:text="Minimum of 6 characters. Any letter, number or underscore allowed." />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Username"
+                android:layout_marginLeft="5dp" />
 
-    <EditText
-            android:id="@+id/etxt_username"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            style="@style/EditTextField" />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:textColor="@color/hint"
+                android:layout_marginLeft="5dp"
+                android:text="Minimum of 6 characters. Any letter, number or underscore allowed." />
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Password"
-            android:layout_marginLeft="5dp" />
+        <EditText
+                android:id="@+id/etxt_username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                style="@style/EditTextField" />
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/hint"
-            android:layout_marginLeft="5dp"
-            android:textSize="10dp"
-            android:text="Minimum of 8 characters." />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Password"
+                android:layout_marginLeft="5dp" />
 
-    <EditText
-            android:id="@+id/etxt_password"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            style="@style/EditTextField" />
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/hint"
+                android:layout_marginLeft="5dp"
+                android:textSize="10dp"
+                android:text="Minimum of 8 characters." />
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Password Confirmation"
-            android:layout_marginLeft="5dp" />
+        <EditText
+                android:id="@+id/etxt_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                style="@style/EditTextField" />
 
-    <EditText
-            android:id="@+id/etxt_password_confirmation"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            style="@style/EditTextField" />
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Password Confirmation"
+                android:layout_marginLeft="5dp" />
 
-
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Email"
-            android:layout_marginLeft="5dp" />
-
-    <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etxt_email"
-            android:inputType="textEmailAddress"
-            style="@style/EditTextField" />
+        <EditText
+                android:id="@+id/etxt_password_confirmation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                style="@style/EditTextField" />
 
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Pin"
-            android:layout_marginLeft="5dp" />
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Email"
+                android:layout_marginLeft="5dp" />
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:textColor="@color/hint"
-            android:layout_marginLeft="5dp"
-            android:text="Securely share your location to your map viewers by a 4 digit pin." />
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etxt_email"
+                android:inputType="textEmailAddress"
+                style="@style/EditTextField" />
 
-    <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etxt_pin"
-            android:inputType="numberPassword"
-            style="@style/EditTextField" />
 
-    <Button
-            android:id="@+id/button_submit"
-            android:onClick="buttonSubmitPressed"
-            android:text="Submit"
-            android:layout_marginTop="10dp"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:gravity="center"
-            android:textSize="26dp"
-            android:textStyle="normal"
-            android:background="@color/button_login" />
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Pin"
+                android:layout_marginLeft="5dp" />
 
-    <Button
-            android:id="@+id/button_cancel"
-            android:onClick="buttonCancelPressed"
-            android:text="Cancel"
-            android:layout_marginTop="10dp"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:gravity="center"
-            android:textSize="26dp"
-            android:textStyle="normal"
-            android:background="@color/button_cancel" />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:textColor="@color/hint"
+                android:layout_marginLeft="5dp"
+                android:text="Securely share your location to your map viewers by a 4 digit pin." />
+
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etxt_pin"
+                android:inputType="numberPassword"
+                style="@style/EditTextField" />
+
+        <Button
+                android:id="@+id/button_submit"
+                android:onClick="buttonSubmitPressed"
+                android:text="Submit"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:background="@color/button_login" />
+
+        <Button
+                android:id="@+id/button_cancel"
+                android:onClick="buttonCancelPressed"
+                android:text="Cancel"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:background="@color/button_cancel" />
+    </LinearLayout>
 
     <Space
             android:layout_width="fill_parent"

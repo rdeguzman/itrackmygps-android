@@ -2,73 +2,91 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="10dp">
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@drawable/bg_blur">
 
-    <TextView
+    <Space
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="26dp"
-            android:textStyle="bold"
-            android:text="Login"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:layout_height="fill_parent"
+            android:layout_weight="1"/>
 
-    <TextView
-            android:layout_width="fill_parent"
+    <LinearLayout
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Username"
-            android:padding="5dp"/>
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
-    <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etxt_username"
-            android:padding="5dp" />
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                android:text="Login"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
 
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Password"
-            android:padding="5dp"/>
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Username"
+                android:padding="5dp"/>
 
-    <EditText
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/etxt_password"
-            android:inputType="textPassword"
-            android:padding="5dp" />
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etxt_username"
+                android:padding="5dp"
+                style="@style/EditTextField" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="10dp">
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Password"
+                android:padding="5dp"/>
+
+        <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etxt_password"
+                android:inputType="textPassword"
+                android:padding="5dp"
+                style="@style/EditTextField" />
 
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
+                android:id="@+id/button_submit"
                 android:onClick="buttonSubmitPressed"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp" />
-
-        <Space android:layout_width="fill_parent"
-               android:layout_height="fill_parent"
-               android:layout_weight="1" />
+                android:text="Submit"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:background="@color/button_login" />
 
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
+                android:id="@+id/button_cancel"
                 android:onClick="buttonCancelPressed"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp" />
+                android:text="Cancel"
+                android:layout_marginTop="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:gravity="center"
+                android:textSize="26dp"
+                android:textStyle="normal"
+                android:background="@color/button_cancel" />
 
     </LinearLayout>
+
+    <Space
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"/>
 
 </LinearLayout>

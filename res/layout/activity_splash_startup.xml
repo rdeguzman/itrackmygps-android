@@ -4,7 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@drawable/bg">
+              android:background="@drawable/bg_splash_startup">
 
     <Space
             android:layout_width="fill_parent"
@@ -24,7 +24,7 @@
     <Button android:id="@+id/button_register"
             android:text="Register"
             android:onClick="buttonRegisterPressed"
-            android:layout_width="200dp"
+            android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:gravity="center"
@@ -39,7 +39,7 @@
     <Button android:id="@+id/button_login"
             android:text="Login"
             android:onClick="buttonLoginPressed"
-            android:layout_width="200dp"
+            android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:gravity="center"

@@ -5,11 +5,12 @@
     <color name="background_user_status">#D9000000</color>
     <color name="background_tracker_status">#BF000000</color>
     <color name="background_gps_status">#80000000</color>
-    <color name="hint">#ffe89f4b</color>
+    <color name="hint">#ffe8d90c</color>
     <color name="button_register">#ffb94d2e</color>
     <color name="button_login">#ff89b94a</color>
     <color name="button_send">#ff89b94a</color>
     <color name="button_cancel">#ffb94d2e</color>
-    <color name="edittext_background">#ffdbdbdb</color>
-    <color name="edittext_color">#000000</color>
+    <color name="edittext_background">#80000000</color>
+    <color name="edittext_color">#ffffffff</color>
+    <color name="edittext_color_green">#ff31ff99</color>
 </resources>

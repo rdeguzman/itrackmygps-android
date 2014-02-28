@@ -31,4 +31,13 @@
         <item name="android:padding">2dp</item>
         <item name="android:gravity">center</item>
     </style>
+    <style name="EditTextField">
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:background">@color/edittext_background</item>
+        <item name="android:textColor">@color/edittext_color_green</item>
+    </style>
 </resources>

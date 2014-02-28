@@ -2,9 +2,16 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:padding="10dp">
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@drawable/bg_blur"
+              android:paddingRight="30dp"
+              android:paddingLeft="30dp">
+
+    <Space
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"/>
 
     <TextView
             android:layout_width="fill_parent"
@@ -12,16 +19,14 @@
             android:textSize="26dp"
             android:textStyle="bold"
             android:text="Register"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp" />
+            android:gravity="center" />
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Username"
-            android:padding="5dp"/>
+            android:layout_marginLeft="5dp" />
 
     <TextView
             android:layout_width="wrap_content"
@@ -35,14 +40,14 @@
             android:id="@+id/etxt_username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp" />
+            style="@style/EditTextField" />
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Password"
-            android:padding="5dp"/>
+            android:layout_marginLeft="5dp" />
 
     <TextView
             android:layout_width="fill_parent"
@@ -58,63 +63,89 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:padding="5dp" />
+            style="@style/EditTextField" />
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Password Confirmation"
-            android:padding="5dp"/>
+            android:layout_marginLeft="5dp" />
 
     <EditText
             android:id="@+id/etxt_password_confirmation"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:padding="5dp" />
+            style="@style/EditTextField" />
+
 
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Email"
-            android:padding="5dp"/>
+            android:layout_marginLeft="5dp" />
 
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/etxt_email"
             android:inputType="textEmailAddress"
-            android:padding="5dp" />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:padding="10dp">
-
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:onClick="buttonSubmitPressed"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp" />
-
-        <Space android:layout_width="fill_parent"
-               android:layout_height="fill_parent"
-               android:layout_weight="1" />
-
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:onClick="buttonCancelPressed"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp" />
+            style="@style/EditTextField" />
 
 
-    </LinearLayout>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Pin"
+            android:layout_marginLeft="5dp" />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textColor="@color/hint"
+            android:layout_marginLeft="5dp"
+            android:text="Securely share your location to your map viewers by a 4 digit pin." />
+
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etxt_pin"
+            android:inputType="numberPassword"
+            style="@style/EditTextField" />
+
+    <Button
+            android:id="@+id/button_submit"
+            android:onClick="buttonSubmitPressed"
+            android:text="Submit"
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity="center"
+            android:textSize="26dp"
+            android:textStyle="normal"
+            android:background="@color/button_login" />
+
+    <Button
+            android:id="@+id/button_cancel"
+            android:onClick="buttonCancelPressed"
+            android:text="Cancel"
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity="center"
+            android:textSize="26dp"
+            android:textStyle="normal"
+            android:background="@color/button_cancel" />
+
+    <Space
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"/>
 
 </LinearLayout>

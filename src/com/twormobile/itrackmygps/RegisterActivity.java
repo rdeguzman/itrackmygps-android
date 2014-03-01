@@ -59,9 +59,24 @@ public class RegisterActivity extends Activity {
     public void buttonSubmitPressed(View view){
         if( gpsApp.isUsernameValid(etxtUsername, this)
                 && isPasswordMatch()
-                && gpsApp.isEmailValid(etxtEmail, this)){
+                && gpsApp.isEmailValid(etxtEmail, this)
+                && isPinValid()){
             register();
         }
+    }
+
+    private boolean isPinValid() {
+        boolean valid = true;
+        String pin = String.valueOf(etxtPin.getText());
+        if(pin.isEmpty() || pin.length() != 4){
+            valid = false;
+        }
+
+        if(!valid){
+            String message = getResources().getString(R.string.invalid_pin);
+            gpsApp.showDialog("Error", message, this);
+        }
+        return valid;
     }
 
     private boolean isPasswordMatch(){

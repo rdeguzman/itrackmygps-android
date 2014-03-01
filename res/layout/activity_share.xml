@@ -35,8 +35,8 @@
                 android:layout_height="30dp"
                 android:inputType="number"
                 android:padding="5dp"
-                android:background="@color/edittext_background"
-                android:textColor="@color/edittext_color" />
+                android:background="@color/edittext_white_background"
+                android:textColor="@color/edittext_black_color" />
 
         <TextView
                 android:layout_below="@id/etxt_pin"
@@ -67,7 +67,7 @@
 
         <EditText
                 android:id="@+id/etxt_message"
-                android:background="@color/edittext_background"
+                android:background="@color/edittext_white_background"
                 android:layout_below="@+id/tv_message"
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="20dp"
@@ -77,7 +77,7 @@
                 android:paddingRight="5dp"
                 android:gravity="left"
                 android:inputType="textMultiLine"
-                android:textColor="@color/edittext_color" />
+                android:textColor="@color/edittext_black_color" />
 
     </RelativeLayout>
 

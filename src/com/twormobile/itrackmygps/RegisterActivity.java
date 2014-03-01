@@ -27,6 +27,7 @@ public class RegisterActivity extends Activity {
     private EditText etxtPassword;
     private EditText etxtPasswordConfirmation;
     private EditText etxtEmail;
+    private EditText etxtPin;
 
     private ProgressDialog pd;
 
@@ -46,6 +47,7 @@ public class RegisterActivity extends Activity {
         etxtPassword = (EditText)findViewById(R.id.etxt_password);
         etxtPasswordConfirmation  = (EditText)findViewById(R.id.etxt_password_confirmation);
         etxtEmail = (EditText)findViewById(R.id.etxt_email);
+        etxtPin = (EditText)findViewById(R.id.etxt_pin);
     }
 
     public void buttonCancelPressed(View view){
@@ -99,6 +101,7 @@ public class RegisterActivity extends Activity {
         final String email = getCleanString(etxtEmail);
         final String password = getCleanString(etxtPassword);
         final String passwordConfirmation = getCleanString(etxtPasswordConfirmation);
+        final String pin = getCleanString(etxtPin);
         final String uuid = gpsApp.getUUID();
 
         JSONObject jsonObject = null;
@@ -112,6 +115,7 @@ public class RegisterActivity extends Activity {
             user.put("email", email);
             user.put("password", password);
             user.put("password_confirmation", passwordConfirmation);
+            user.put("pin", pin);
 
             jsonObject.put("user", user);
         } catch (JSONException e) {
@@ -179,8 +183,9 @@ public class RegisterActivity extends Activity {
     public void save(){
         final String username = getCleanString(etxtUsername);
         final String email = getCleanString(etxtEmail);
+        final String pin = getCleanString(etxtPin);
 
-        gpsApp.saveLogin(username, email);
+        gpsApp.saveLogin(username, email, pin);
         gpsApp.setLoggedIn(username);
     }
 

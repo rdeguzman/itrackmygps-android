@@ -99,6 +99,7 @@ public class LoginActivity extends Activity {
                                 Log.e(TAG, message);
 
                                 final String email = response.getString("email");
+                                final String pin = response.getString("pin");
 
                                 AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
                                 dialog.setTitle("Info");
@@ -106,7 +107,7 @@ public class LoginActivity extends Activity {
                                 dialog.setPositiveButton(R.string.done, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-                                        save(email);
+                                        save(email, pin);
                                         done();
                                     }
                                 });
@@ -142,10 +143,10 @@ public class LoginActivity extends Activity {
         startActivity(intent);
     }
 
-    public void save(String email){
+    public void save(String email, String pin){
         final String username = getCleanString(etxtUsername);
 
-        gpsApp.saveLogin(username, email);
+        gpsApp.saveLogin(username, email, pin);
         gpsApp.setLoggedIn(username);
     }
 

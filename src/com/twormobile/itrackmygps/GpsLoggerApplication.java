@@ -153,7 +153,7 @@ public class GpsLoggerApplication extends Application {
         return valid;
     }
 
-    public void saveLogin(String username, String email){
+    public void saveLogin(String username, String email, String pin){
         final String uuid = getUUID();
 
         Context context = getApplicationContext();
@@ -163,6 +163,7 @@ public class GpsLoggerApplication extends Application {
         editor.putString("username", username);
         editor.putString("email", email);
         editor.putString("uuid", uuid);
+        editor.putString("pin", pin);
         editor.commit();
 
         setLoggedIn(username);

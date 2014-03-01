@@ -2,7 +2,9 @@ package com.twormobile.itrackmygps;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -12,19 +14,26 @@ public class ShareActivity extends Activity {
 
     private GpsLoggerApplication gpsApp;
     private EditText etxtMessage;
+    private EditText etxtPin;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_share);
 
         etxtMessage = (EditText)findViewById(R.id.etxt_message);
+        etxtPin = (EditText)findViewById(R.id.etxt_pin);
 
         this.gpsApp = (GpsLoggerApplication)getApplication();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String pin = prefs.getString("pin", null);
 
         String trackURL = getResources().getString(R.string.TRACK_URL) + gpsApp.getUsername();
         String message = "Track me in realtime " + trackURL;
 
         etxtMessage.setText(message);
+        etxtPin.setText(pin);
+        etxtPin.setEnabled(false);
     }
 
     public void buttonSMSPressed(View view){

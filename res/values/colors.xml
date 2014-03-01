@@ -12,7 +12,6 @@
     <color name="button_cancel">#ffb94d2e</color>
     <color name="edittext_background">#80000000</color>
     <color name="edittext_color">#ffffffff</color>
-    <color name="edittext_white_background">#80ffffff</color>
-    <color name="edittext_black_color">#ff000000</color>
+    <color name="edittext_white_background">#33ffffff</color>
     <color name="edittext_color_green">#ff31ff99</color>
 </resources>

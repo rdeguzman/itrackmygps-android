@@ -6,8 +6,6 @@
 #Android
 .metadata
 *.class
-#*.apk
-*.ap_
 *.dex
 *.iws
 bin/

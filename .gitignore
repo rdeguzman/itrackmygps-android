@@ -6,7 +6,7 @@
 #Android
 .metadata
 *.class
-*.apk
+#*.apk
 *.ap_
 *.dex
 *.iws

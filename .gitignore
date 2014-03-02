@@ -21,3 +21,6 @@ local.properties
 #.idea/misc.xml
 proguard_logs/
 res/values/api_keys.xml
+
+#Application
+docs/screenshots

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Location;
-import android.util.Log;
+import com.twormobile.itrackmygps.android.Log;
 
 public class LocationDatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "database.sqlite";

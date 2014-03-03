@@ -6,7 +6,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
+import com.twormobile.itrackmygps.android.Log;
 import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;

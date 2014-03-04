@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">itrackmygps</string>
+    <string name="tag_line">Securely share your location in realtime.</string>
     <string name="action_share">Share</string>
     <string name="action_configure">Settings</string>
 

@@ -17,11 +17,27 @@
             android:orientation="vertical"
             android:layout_gravity="center">
 
+
+        <TextView
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:textSize="26dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:textColor="#ffffffff"
+                android:textAlignment="center"
+                android:text="@string/tag_line"
+                android:maxLines="2"
+                android:gravity="center_horizontal"/>
+
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/tracker_status" />
+                android:src="@drawable/pin" />
+
 
         <Space
                 android:layout_width="fill_parent"

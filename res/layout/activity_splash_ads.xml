@@ -39,7 +39,7 @@
                 android:padding="10dp"
                 android:textColor="#ffffffff"
                 android:textAlignment="center"
-                android:text="Securely share your location in realtime."
+                android:text="@string/tag_line"
                 android:maxLines="2"
                 android:gravity="center_horizontal"/>
 

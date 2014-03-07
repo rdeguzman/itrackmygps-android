@@ -1,6 +1,10 @@
 trackble-android
 =========
 
+![Splash Screen](screenshots/overview.jpg)
+
+For more info, see <http://itrackmygps.com>
+
 # Features
 
 - Logs gps of your Android Device

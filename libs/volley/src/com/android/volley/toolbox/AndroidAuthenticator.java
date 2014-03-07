@@ -70,9 +70,10 @@ public class AndroidAuthenticator implements Authenticator {
     @Override
     public String getAuthToken() throws AuthFailureError {
         final AccountManager accountManager = AccountManager.get(mContext);
-        AccountManagerFuture<Bundle> future = accountManager.getAuthToken(mAccount,
-                mAuthTokenType, mNotifyAuthFailure, null, null);
-        Bundle result;
+        Bundle result = null;
+
+        AccountManagerFuture<Bundle> future = accountManager.getAuthToken(mAccount, mAuthTokenType, result, mNotifyAuthFailure, null, null);
+
         try {
             result = future.getResult();
         } catch (Exception e) {

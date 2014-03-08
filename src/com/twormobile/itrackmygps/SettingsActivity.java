@@ -90,7 +90,7 @@ public class SettingsActivity extends Activity {
             gpsApp.showDialog("Warning", "Time and Distance intervals should be a number bigger than 0", this);
         }
 
-        return false;
+        return valid;
     }
 
     private void savePreferences() {

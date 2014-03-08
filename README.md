@@ -5,6 +5,9 @@ trackble-android
 
 For more info, see <http://itrackmygps.com>
 
+Want to become a tester?
+[Google Plus Community "itrackmygps - testers"](https://plus.google.com/communities/100298062955164933715)
+
 # Features
 
 - Logs gps of your Android Device

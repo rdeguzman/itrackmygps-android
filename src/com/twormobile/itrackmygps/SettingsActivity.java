@@ -31,9 +31,13 @@ public class SettingsActivity extends Activity {
 
     SharedPreferences prefs;
 
+    private GpsLoggerApplication gpsApp;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        this.gpsApp = (GpsLoggerApplication)getApplication();
 
         mapLayerSpinner = (Spinner)findViewById(R.id.spinner_map_layers);
         chkDynamicZoom = (CheckBox)findViewById(R.id.chk_dynamic_zoom_on_speed);
@@ -68,9 +72,25 @@ public class SettingsActivity extends Activity {
 
     public void buttonSavePressed(View view){
         Log.d(TAG, "buttonSavePressed");
-        savePreferences();
-        SettingsActivity.this.setResult(RESULT_OK);
-        finish();
+        if(isTimeDistanceIntervalValid()){
+            savePreferences();
+            SettingsActivity.this.setResult(RESULT_OK);
+            finish();
+        }
+    }
+
+    private boolean isTimeDistanceIntervalValid() {
+        boolean valid = true;
+        try {
+            int timeIntervalInSecs = Integer.parseInt(String.valueOf(etxtTimeInterval.getText()));
+            int distanceIntervalInMeters = Integer.parseInt(String.valueOf(etxtDistanceInterval.getText()));
+        }
+        catch (Exception ex) {
+            valid = false;
+            gpsApp.showDialog("Warning", "Time and Distance intervals should be a number bigger than 0", this);
+        }
+
+        return false;
     }
 
     private void savePreferences() {

@@ -1,110 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
-    <TableRow>
-        <Button
-                android:id="@+id/btn_cancel"
-                android:text="Cancel"
-                android:onClick="buttonCancelPressed"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"/>
+    <TableLayout
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content">
 
-        <Button
-                android:id="@+id/btn_save"
-                android:text="Save"
-                android:onClick="buttonSavePressed"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"/>
-    </TableRow>
+        <TableRow>
+            <TextView
+                    android:text="GPS Settings"
+                    style="@style/SettingsTableHeader" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-                android:text="GPS Settings"
-                style="@style/SettingsTableHeader" />
-    </TableRow>
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
 
-    <View android:layout_height="1dp" android:background="@color/table_divider" />
+        <TableRow android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/label_min_time_interval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
+            <EditText
+                    android:id="@+id/etxt_time_interval"
+                    android:layout_width="50dp"
+                    android:text=""
+                    android:gravity="right"
+                    android:padding="10dp" android:layout_gravity="center_vertical"/>
+        </TableRow>
 
-    <TableRow android:layout_height="wrap_content">
-        <TextView
-                android:text="@string/label_min_time_interval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"/>
-        <EditText
-                android:id="@+id/etxt_time_interval"
-                android:layout_width="50dp"
-                android:text="3"
-                android:gravity="right"
-                android:padding="10dp" android:layout_gravity="center_vertical"/>
-    </TableRow>
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
 
-    <View android:layout_height="1dp" android:background="@color/table_divider" />
+        <TableRow android:layout_height="wrap_content">
+            <TextView
+                    android:text="@string/label_min_distance_interval"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
+            <EditText
+                    android:id="@+id/etxt_distance_interval"
+                    android:layout_width="50dp"
+                    android:text=""
+                    android:gravity="right"
+                    android:padding="10dp" android:layout_gravity="center_vertical"/>
+        </TableRow>
 
-    <TableRow android:layout_height="wrap_content">
-        <TextView
-                android:text="@string/label_min_distance_interval"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"/>
-        <EditText
-                android:id="@+id/etxt_distance_interval"
-                android:layout_width="50dp"
-                android:text="3"
-                android:gravity="right"
-                android:padding="10dp" android:layout_gravity="center_vertical"/>
-    </TableRow>
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
 
-    <View android:layout_height="1dp" android:background="@color/table_divider" />
+        <TableRow>
+            <TextView
+                    android:text="Map Settings"
+                    style="@style/SettingsTableHeader" />
+        </TableRow>
 
-    <TableRow>
-        <TextView
-                android:text="Map Settings"
-                style="@style/SettingsTableHeader" />
-    </TableRow>
+        <View android:layout_height="1dp" android:background="@color/table_divider" />
 
-    <View android:layout_height="1dp" android:background="@color/table_divider" />
+        <TableRow>
+            <TextView
+                    android:text="@string/label_map_layers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
 
-    <TableRow>
-        <TextView
-                android:text="@string/label_map_layers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"/>
-    </TableRow>
-    <TableRow>
-        <Spinner android:id="@+id/spinner_map_layers"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:drawSelectorOnTop="true"
-                 android:prompt="@string/spinner_map_layers_prompt"
-                />
-    </TableRow>
+            <Spinner android:id="@+id/spinner_map_layers"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:drawSelectorOnTop="true"
+                     android:prompt="@string/spinner_map_layers_prompt" />
 
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <TextView
-                android:text="@string/label_dynamic_zoom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"/>
-        <CheckBox
-                android:id="@+id/chk_dynamic_zoom_on_speed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="" />
-    </TableRow>
+        </TableRow>
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <TextView
+                    android:text="@string/label_dynamic_zoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"/>
+            <CheckBox
+                    android:id="@+id/chk_dynamic_zoom_on_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="" />
+        </TableRow>
 
 
-</TableLayout>
+    </TableLayout>
+
+    <Button android:id="@+id/button_save"
+            android:text="Save"
+            android:onClick="buttonSavePressed"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="26dp"
+            android:textStyle="normal"
+            android:background="@color/button_login"/>
+
+    <Button android:id="@+id/button_cancel"
+            android:text="Cancel"
+            android:onClick="buttonCancelPressed"
+            android:layout_marginTop="20dp"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="26dp"
+            android:textStyle="normal"
+            android:background="@color/button_register" />
+
+</LinearLayout>
+

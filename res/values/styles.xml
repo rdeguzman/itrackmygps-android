@@ -39,5 +39,7 @@
         <item name="android:textSize">20dp</item>
         <item name="android:background">@color/edittext_background</item>
         <item name="android:textColor">@color/edittext_color</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:imeOptions">actionNext</item>
     </style>
 </resources>

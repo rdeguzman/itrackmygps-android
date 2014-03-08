@@ -1,4 +1,4 @@
-trackble-android
+itrackmygps-android
 =========
 
 ![Splash Screen](screenshots/overview.jpg)

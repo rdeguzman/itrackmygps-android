@@ -29,6 +29,7 @@
                     android:layout_width="50dp"
                     android:text=""
                     android:gravity="right"
+                    android:inputType="number"
                     android:padding="10dp" android:layout_gravity="center_vertical"/>
         </TableRow>
 
@@ -45,6 +46,7 @@
                     android:id="@+id/etxt_distance_interval"
                     android:layout_width="50dp"
                     android:text=""
+                    android:inputType="number"
                     android:gravity="right"
                     android:padding="10dp" android:layout_gravity="center_vertical"/>
         </TableRow>

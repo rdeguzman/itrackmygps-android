@@ -38,6 +38,6 @@
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:textSize">20dp</item>
         <item name="android:background">@color/edittext_background</item>
-        <item name="android:textColor">@color/edittext_color_green</item>
+        <item name="android:textColor">@color/edittext_color</item>
     </style>
 </resources>

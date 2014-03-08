@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="background">#ff3e8a2a</color>
     <color name="table_divider">#262728</color>
     <color name="table_header">#61717b</color>
     <color name="background_user_status">#D9000000</color>
@@ -10,8 +11,8 @@
     <color name="button_login">#ff89b94a</color>
     <color name="button_send">#ff89b94a</color>
     <color name="button_cancel">#ffb94d2e</color>
-    <color name="edittext_background">#80000000</color>
-    <color name="edittext_color">#ffffffff</color>
+    <color name="edittext_background">#80ffffff</color>
+    <color name="edittext_color">#ff000000</color>
     <color name="edittext_white_background">#33ffffff</color>
-    <color name="edittext_color_green">#ff31ff99</color>
+    <color name="edittext_color_green">#ffffffff</color>
 </resources>

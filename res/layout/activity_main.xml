@@ -159,7 +159,7 @@
 
             <TextView
                     android:text="Time"
-                    android:layout_width="50dp"
+                    android:layout_width="60dp"
                     android:layout_height="20dp"
                     android:textStyle="bold"
                     android:gravity="right"
@@ -167,7 +167,7 @@
 
             <TextView
                     android:id="@+id/tv_gps_timestamp"
-                    android:layout_width="50dp"
+                    android:layout_width="60dp"
                     android:layout_height="20dp"
                     android:textStyle="bold"
                     android:gravity="right"
@@ -193,7 +193,6 @@
                     android:layout_height="20dp"
                     android:textStyle="bold"
                     android:gravity="right"
-                    android:text="25.0000"
                     android:textColor="#ffffff" />
         </LinearLayout>
 
@@ -267,7 +266,6 @@
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp">
 
-
                 <TextView
                         android:layout_width="30dp"
                         android:layout_height="20dp"
@@ -295,7 +293,7 @@
 
                 <TextView
                         android:id="@+id/tv_gps_latitude"
-                        android:layout_width="90dp"
+                        android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:textStyle="bold"
                         android:gravity="right"
@@ -304,7 +302,7 @@
 
                 <TextView
                         android:id="@+id/tv_gps_longitude"
-                        android:layout_width="90dp"
+                        android:layout_width="100dp"
                         android:layout_height="20dp"
                         android:textStyle="bold"
                         android:gravity="right"

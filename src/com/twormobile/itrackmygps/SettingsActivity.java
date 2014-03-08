@@ -22,7 +22,7 @@ public class SettingsActivity extends Activity {
     public static final String PREF_TIME_INTERVAL_IN_METERS = "PREF_TIME_INTERVAL_IN_METERS";
 
     public static final int DEFAULT_TIME_INTERVAL_IN_SECONDS = 60;
-    public static final int DEFAULT_DISTANCE_INTERVAL_IN_METERS = 10;
+    public static final int DEFAULT_DISTANCE_INTERVAL_IN_METERS = 50;
 
     private Spinner mapLayerSpinner;
     private CheckBox chkDynamicZoom;

@@ -44,7 +44,7 @@
                 android:id="@+id/etxt_username"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                style="@style/EditTextField" />
+                style="@style/EditTextFieldNext" />
 
         <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                style="@style/EditTextField" />
+                style="@style/EditTextFieldNext" />
 
         <TextView
                 android:layout_width="fill_parent"
@@ -81,7 +81,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                style="@style/EditTextField" />
+                style="@style/EditTextFieldNext" />
 
 
         <TextView
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/etxt_email"
                 android:inputType="textEmailAddress"
-                style="@style/EditTextField" />
+                style="@style/EditTextFieldNext" />
 
 
         <TextView
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/etxt_pin"
                 android:inputType="numberPassword"
-                style="@style/EditTextField" />
+                style="@style/EditTextFieldDone" />
 
         <Button
                 android:id="@+id/button_submit"

@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/etxt_username"
                 android:padding="5dp"
-                style="@style/EditTextField" />
+                style="@style/EditTextFieldNext" />
 
         <TextView
                 android:layout_width="fill_parent"
@@ -54,7 +54,7 @@
                 android:id="@+id/etxt_password"
                 android:inputType="textPassword"
                 android:padding="5dp"
-                style="@style/EditTextField" />
+                style="@style/EditTextFieldDone" />
 
         <Button
                 android:id="@+id/button_submit"

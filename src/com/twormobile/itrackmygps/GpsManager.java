@@ -139,6 +139,9 @@ public class GpsManager {
 
     private void startLocationListener(MyLocationListener listener, String provider){
         if(isProviderAllowed(provider) && mLocationManager.isProviderEnabled(provider)){
+            // http://developer.android.com/reference/android/location/LocationManager.html
+            // If it is greater than 0 then the location provider will only send your application an update when the
+            // location has changed by at least minDistance meters, AND at least minTime milliseconds have passed.
             mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
             locationListeners.add(listener);
         }

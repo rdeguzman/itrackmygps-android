@@ -109,7 +109,7 @@ public class GpsLoggerApplication extends Application {
         String value = String.valueOf(etxt.getText());
         if(value != null && value.trim().length() > 0) {
             int length = value.trim().length();
-            if(length > 0 && length <= 16) {
+            if(length >= 6 && length <= 16) {
                 valid = true;
             }
         }

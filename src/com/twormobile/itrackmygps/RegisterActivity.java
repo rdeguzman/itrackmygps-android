@@ -84,7 +84,8 @@ public class RegisterActivity extends Activity {
         String password = String.valueOf(etxtPassword.getText());
         String passwordConfirm = String.valueOf(etxtPasswordConfirmation.getText());
 
-        if(password.isEmpty() || passwordConfirm.isEmpty() || password.equals(passwordConfirm) == false){
+        if(password.isEmpty() || passwordConfirm.isEmpty() || (password.equals(passwordConfirm) == false)
+                || (password.length() < 8) || passwordConfirm.length() < 8){
             valid = false;
         }
 

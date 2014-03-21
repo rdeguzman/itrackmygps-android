@@ -141,12 +141,12 @@ public class GpsLoggerApplication extends Application {
         boolean valid = true;
         String password = String.valueOf(etxt.getText());
 
-        if(password.isEmpty()){
+        if(password.isEmpty() && password.length() >= 8){
             valid = false;
         }
 
         if(!valid){
-            String message = getResources().getString(R.string.invalid_password);
+            String message =  getResources().getString(R.string.invalid_password);
             showDialog("Error", message, activity);
         }
 

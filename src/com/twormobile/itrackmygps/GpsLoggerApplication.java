@@ -141,7 +141,7 @@ public class GpsLoggerApplication extends Application {
         boolean valid = true;
         String password = String.valueOf(etxt.getText());
 
-        if(password.isEmpty() && password.length() >= 8){
+        if(password.isEmpty() || password.length() < 8){
             valid = false;
         }
 

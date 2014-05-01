@@ -53,11 +53,18 @@ public class MainActivity extends Activity{
     private GpsLoggerApplication gpsApp;
     private GpsManager gpsManager;
     private GpsConnectionStatusReceiver mGpsNetworkStatusReceiver;
+    private WifiStatusReceiver mWifiStatusReceiver;
 
     public class GpsConnectionStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             Log.d("GpsConnectionStatusReceiver", "onReceived");
             updateGpsFixConnectionStatus();
+        }
+    }
+
+    public class WifiStatusReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            Log.d("WifiStatusReceiver", "onReceived");
         }
     }
 
@@ -172,6 +179,7 @@ public class MainActivity extends Activity{
         gmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapview)).getMap();
 
         mGpsNetworkStatusReceiver = new GpsConnectionStatusReceiver();
+        mWifiStatusReceiver = new WifiStatusReceiver();
 
         showGPSStatus(false);
         updateFromSettingsPreferences();

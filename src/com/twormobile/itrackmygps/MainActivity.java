@@ -266,12 +266,19 @@ public class MainActivity extends Activity{
         super.onStart();
         this.registerReceiver(mLocationReceiver, new IntentFilter(IntentCodes.ACTION_LOCATION));
         this.registerReceiver(mGpsNetworkStatusReceiver, new IntentFilter(IntentCodes.ACTION_GPS_NETWORK_STATUS));
+
+        final IntentFilter wifiFilters = new IntentFilter();
+        wifiFilters.addAction("android.net.wifi.WIFI_STATE_CHANGED");
+        wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
+        this.registerReceiver(mWifiStatusReceiver, wifiFilters);
     }
 
     @Override
     public void onStop() {
         this.unregisterReceiver(mLocationReceiver);
         this.unregisterReceiver(mGpsNetworkStatusReceiver);
+        this.unregisterReceiver(mWifiStatusReceiver);
+        
         super.onStop();
     }
 

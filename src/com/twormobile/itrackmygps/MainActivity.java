@@ -54,6 +54,85 @@ public class MainActivity extends Activity{
     private GpsManager gpsManager;
     private GpsConnectionStatusReceiver mGpsNetworkStatusReceiver;
 
+    public class GpsConnectionStatusReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            Log.d("GpsConnectionStatusReceiver", "onReceived");
+            updateGpsFixConnectionStatus();
+        }
+    }
+
+    private BroadcastReceiver mLocationReceiver = new LocationReceiver() {
+
+        @Override
+        protected void onLocationReceived(Context context, Location loc, int ctr) {
+            displayGPSDetails(loc, ctr);
+
+            if(gmap != null){
+                LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
+                float maxZoom = gmap.getMaxZoomLevel();
+
+                if(marker == null){
+                    MarkerOptions markerOptions = new MarkerOptions().position(pos);
+                    marker = gmap.addMarker(markerOptions);
+                }
+
+                marker.setPosition(pos);
+
+                // If this is the first fix, zoom to the new position
+                if(firstFix){
+                    firstFix = false;
+                    currentZoom = maxZoom/2.0f;
+                    gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
+                }
+                else {
+                    // Dynamic zoom based on speed
+                    if(isZoomBasedOnSpeed){
+                        int speed = (int)loc.getSpeed();
+
+                        boolean isMoving = speed > 1;
+                        boolean isSpeedSlow = isBetween(speed, 10, 40);
+                        boolean isSpeedModerate = isBetween(speed, 41, 60);
+                        boolean isSpeedQuiteFast = isBetween(speed, 61, 80);
+                        boolean isSpeedFast = speed > 81;
+
+                        if(isSpeedSlow){
+                            currentZoom = maxZoom - 3.0f; //zoom = 18
+                        }
+                        else if(isSpeedModerate){
+                            currentZoom = maxZoom - 4.0f; //zoom = 17
+                        }
+                        else if(isSpeedQuiteFast){
+                            currentZoom = maxZoom - 5.0f; //zoom = 16
+                        }
+                        else if(isSpeedFast){
+                            currentZoom = maxZoom - 6.0f; //zoom = 15
+                        }
+                        else{ //crawling
+                            currentZoom = maxZoom - 2.0f; //zoom = 19
+                        }
+
+                        if(isMoving){
+                            gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
+                        }
+                        else{
+                            if(MapUtils.isLatLngNotVisible(pos, gmap)){
+                                gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                                return;
+                            }
+                        }
+                    }
+
+                    if(MapUtils.isLatLngNotVisible(pos, gmap)){
+                        gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                        return;
+                    }
+
+                }
+            }
+        }
+
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,85 +246,6 @@ public class MainActivity extends Activity{
             layoutGPSStatus.setVisibility(View.INVISIBLE);
         }
     }
-
-    public class GpsConnectionStatusReceiver extends BroadcastReceiver {
-        public void onReceive(Context context, Intent intent) {
-            Log.d("GpsConnectionStatusReceiver", "onReceived");
-            updateGpsFixConnectionStatus();
-        }
-    }
-
-    private BroadcastReceiver mLocationReceiver = new LocationReceiver() {
-
-        @Override
-        protected void onLocationReceived(Context context, Location loc, int ctr) {
-            displayGPSDetails(loc, ctr);
-
-            if(gmap != null){
-                LatLng pos = new LatLng(loc.getLatitude(), loc.getLongitude());
-                float maxZoom = gmap.getMaxZoomLevel();
-
-                if(marker == null){
-                    MarkerOptions markerOptions = new MarkerOptions().position(pos);
-                    marker = gmap.addMarker(markerOptions);
-                }
-
-                marker.setPosition(pos);
-
-                // If this is the first fix, zoom to the new position
-                if(firstFix){
-                    firstFix = false;
-                    currentZoom = maxZoom/2.0f;
-                    gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
-                }
-                else {
-                    // Dynamic zoom based on speed
-                    if(isZoomBasedOnSpeed){
-                        int speed = (int)loc.getSpeed();
-
-                        boolean isMoving = speed > 1;
-                        boolean isSpeedSlow = isBetween(speed, 10, 40);
-                        boolean isSpeedModerate = isBetween(speed, 41, 60);
-                        boolean isSpeedQuiteFast = isBetween(speed, 61, 80);
-                        boolean isSpeedFast = speed > 81;
-
-                        if(isSpeedSlow){
-                            currentZoom = maxZoom - 3.0f; //zoom = 18
-                        }
-                        else if(isSpeedModerate){
-                            currentZoom = maxZoom - 4.0f; //zoom = 17
-                        }
-                        else if(isSpeedQuiteFast){
-                            currentZoom = maxZoom - 5.0f; //zoom = 16
-                        }
-                        else if(isSpeedFast){
-                            currentZoom = maxZoom - 6.0f; //zoom = 15
-                        }
-                        else{ //crawling
-                            currentZoom = maxZoom - 2.0f; //zoom = 19
-                        }
-
-                        if(isMoving){
-                            gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, currentZoom));
-                        }
-                        else{
-                            if(MapUtils.isLatLngNotVisible(pos, gmap)){
-                                gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
-                                return;
-                            }
-                        }
-                    }
-
-                    if(MapUtils.isLatLngNotVisible(pos, gmap)){
-                        gmap.moveCamera(CameraUpdateFactory.newLatLng(pos));
-                        return;
-                    }
-
-                }
-            }
-        }
-
-    };
 
     private void updateGpsFixConnectionStatus() {
         GpsFix status = gpsManager.connectionStatus();

@@ -5,7 +5,11 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 import com.twormobile.itrackmygps.android.Log;
 import android.widget.EditText;
 import com.android.volley.RequestQueue;
@@ -97,6 +101,10 @@ public class GpsLoggerApplication extends Application {
     public void showDialog(String title, String message, Activity activity){
         AlertDialog dialog = DialogBoxFactory.setDialog(title, message, activity);
         dialog.show();
+    }
+
+    public void showToast(String message){
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     public void setLoggedIn(String u){

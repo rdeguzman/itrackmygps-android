@@ -5,9 +5,8 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 import com.twormobile.itrackmygps.android.Log;
@@ -177,5 +176,14 @@ public class GpsLoggerApplication extends Application {
         setLoggedIn(username);
     }
 
+    public boolean isWiFiConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager)
+                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = null;
+        if (connectivityManager != null) {
+            networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        }
+        return networkInfo == null ? false : networkInfo.isConnected();
+    }
 
 }

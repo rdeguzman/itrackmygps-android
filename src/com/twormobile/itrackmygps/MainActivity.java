@@ -65,6 +65,7 @@ public class MainActivity extends Activity{
     public class WifiStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             Log.d("WifiStatusReceiver", "onReceived");
+            gpsApp.showToast("Wifi Connected: " + gpsApp.isWiFiConnected());
         }
     }
 

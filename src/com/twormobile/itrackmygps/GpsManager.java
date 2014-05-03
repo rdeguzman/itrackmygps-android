@@ -147,7 +147,11 @@ public class GpsManager {
         }
     }
 
-    public boolean isTrackingRun() {
+    /**
+     * Returns true if the location listeners are running and getting active updates from onLocationChanged
+     *
+     */
+    public boolean isGPSRunning() {
         return mRunning;
     }
 
@@ -362,7 +366,7 @@ public class GpsManager {
     public void updateLocationUpdateSettings(int secs, int meters){
         minTimeInMilliseconds = secs * 1000L;
         minDistanceInMeters = meters * 1.0f;
-        if(isTrackingRun()){
+        if(isGPSRunning()){
             stopLocationUpdates();
             startLocationListeners();
         }

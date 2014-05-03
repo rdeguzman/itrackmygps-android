@@ -30,7 +30,7 @@ public class GpsLoggerService extends Service {
         super.onStartCommand(intent, flags, startId);
         Log.d(TAG, "onStarted");
 
-        if(!gpsApp.isServiceRunning() && !gpsManager.isTrackingRun()){
+        if(!gpsApp.isServiceRunning() && !gpsManager.isGPSRunning()){
             gpsApp.setServiceRunning(true);
             gpsManager.startLocationUpdates();
         }
@@ -43,7 +43,7 @@ public class GpsLoggerService extends Service {
         super.onDestroy();
         Log.d(TAG, "onDestroyed");
 
-        if(gpsApp.isServiceRunning() && gpsManager.isTrackingRun()){
+        if(gpsApp.isServiceRunning() && gpsManager.isGPSRunning()){
             gpsApp.setServiceRunning(false);
             gpsManager.stopLocationUpdates();
         }

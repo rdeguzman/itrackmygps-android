@@ -155,6 +155,11 @@ public class GpsManager {
         return mRunning;
     }
 
+    /**
+     * Broadcast the location to receivers. Afterwards, insert the location to the database and post the location via HTTP.
+     *
+     * @param location The accepted location from onLocationChanged.
+     */
     private void broadcastLocation(Location location) {
         if(location != null){
             counter++;

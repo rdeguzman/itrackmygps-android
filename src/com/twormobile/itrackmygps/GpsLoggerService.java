@@ -27,7 +27,7 @@ public class GpsLoggerService extends Service {
             }
             else {
                 start();
-                gpsManager.adjustLocationUpdateInterval(10, 10);
+                gpsManager.adjustLocationUpdateInterval(30, 10);
             }
         }
     }

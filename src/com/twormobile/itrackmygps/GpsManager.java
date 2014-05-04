@@ -271,26 +271,14 @@ public class GpsManager {
                 boolean mChange = false;
 
                 // Speed is slow
-                if(location.getSpeed() >= 10 && location.getSpeed() <= 40) {
-                    seconds = 30;
-                    distance = 10;
-                    mChange = true;
-                }
-                // Speed is moderate
-                else if(location.getSpeed() > 40 && location.getSpeed() <= 80) {
+                if(location.getSpeed() >= 20 && location.getSpeed() <= 100) {
                     seconds = 60;
                     distance = 10;
                     mChange = true;
                 }
                 // Speed is high
-                else if(location.getSpeed() >= 80 && location.getSpeed() <= 100) {
-                    seconds = 120;
-                    distance = 10;
-                    mChange = true;
-                }
-                // Speed is high
                 else if(location.getSpeed() > 100) {
-                    seconds = 180;
+                    seconds = 120;
                     distance = 10;
                     mChange = true;
                 }

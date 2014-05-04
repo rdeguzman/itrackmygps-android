@@ -1,7 +1,10 @@
 package com.twormobile.itrackmygps;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 import com.twormobile.itrackmygps.android.Log;
 
@@ -10,6 +13,24 @@ public class GpsLoggerService extends Service {
 
     private GpsLoggerApplication gpsApp;
     private GpsManager gpsManager;
+    private WifiStatusReceiver mWifiStatusReceiver;
+
+    /**
+     * When WIFI is disconnected, starts the location service.
+     * When WIFI is connected and the service is running, change the interval to every 5 minutes.
+     */
+    public class WifiStatusReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            if(gpsApp.isWiFiConnected()) {
+                gpsManager.adjustLocationUpdateInterval(300, 100);
+                // stop();
+            }
+            else {
+                start();
+                gpsManager.adjustLocationUpdateInterval(10, 10);
+            }
+        }
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -21,6 +42,12 @@ public class GpsLoggerService extends Service {
         super.onCreate();
         this.gpsApp = (GpsLoggerApplication)getApplication();
         this.gpsManager = gpsApp.getGpsManager();
+        this.mWifiStatusReceiver = new WifiStatusReceiver();
+
+        final IntentFilter wifiFilters = new IntentFilter();
+        wifiFilters.addAction("android.net.wifi.WIFI_STATE_CHANGED");
+        wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
+        this.registerReceiver(mWifiStatusReceiver, wifiFilters);
 
         Log.d(TAG, "onCreated");
     }
@@ -30,10 +57,7 @@ public class GpsLoggerService extends Service {
         super.onStartCommand(intent, flags, startId);
         Log.d(TAG, "onStarted");
 
-        if(!gpsApp.isServiceRunning() && !gpsManager.isGPSRunning()){
-            gpsApp.setServiceRunning(true);
-            gpsManager.startLocationUpdates();
-        }
+        start();
 
         return START_STICKY;
     }
@@ -43,10 +67,23 @@ public class GpsLoggerService extends Service {
         super.onDestroy();
         Log.d(TAG, "onDestroyed");
 
+        stop();
+    }
+
+    private void start(){
+        if(!gpsApp.isServiceRunning() && !gpsManager.isGPSRunning()){
+            gpsApp.setServiceRunning(true);
+            gpsManager.startLocationUpdates();
+        }
+    }
+
+    private void stop() {
         if(gpsApp.isServiceRunning() && gpsManager.isGPSRunning()){
             gpsApp.setServiceRunning(false);
             gpsManager.stopLocationProviders();
         }
+
+        this.unregisterReceiver(mWifiStatusReceiver);
     }
 
 }

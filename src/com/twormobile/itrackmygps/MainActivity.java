@@ -66,12 +66,6 @@ public class MainActivity extends Activity{
         public void onReceive(Context context, Intent intent) {
             Log.d("WifiStatusReceiver", "onReceived");
             gpsApp.showToast("Wifi Connected: " + gpsApp.isWiFiConnected());
-            if(gpsApp.isWiFiConnected()) {
-                gpsManager.adjustLocationUpdateInterval(300, 100);
-            }
-            else {
-                gpsManager.adjustLocationUpdateInterval(10, 10);
-            }
         }
     }
 

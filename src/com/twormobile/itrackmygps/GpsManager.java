@@ -133,16 +133,19 @@ public class GpsManager {
     }
 
     public void stopLocationProviders() {
-        for (MyLocationListener listener : locationListeners) {
-            mLocationManager.removeUpdates(listener);
-        }
-        locationListeners.clear();
+        stopListenerForProvider(networkLocationListener);
+        stopListenerForProvider(gpsLocationListener);
 
         mLocationManager.removeGpsStatusListener(gpsStatusListener);
         mRunning = false;
         mGpsFixed = false;
 
         broadcastGpsNetworkStatus();
+    }
+
+    private void stopListenerForProvider(LocationListener listener) {
+        mLocationManager.removeUpdates(listener);
+        locationListeners.remove(listener);
     }
 
     /**

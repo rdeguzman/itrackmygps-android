@@ -81,7 +81,6 @@ public class GpsManager {
     }
 
     public void startLocationUpdates() {
-
         // Get the last known gps location and broadcast it if you have one
         // If you can't find one then broadcast a network location
         Location lastKnownGPSLocation = mLocationManager.getLastKnownLocation(gpsProvider);
@@ -97,20 +96,7 @@ public class GpsManager {
             }
         }
 
-        startLocationListeners();
-        broadcastGpsNetworkStatus();
-    }
-
-    public void stopLocationUpdates() {
-        for (MyLocationListener listener : locationListeners) {
-            mLocationManager.removeUpdates(listener);
-        }
-        locationListeners.clear();
-
-        mLocationManager.removeGpsStatusListener(gpsStatusListener);
-        mRunning = false;
-        mGpsFixed = false;
-
+        startLocationProviders();
         broadcastGpsNetworkStatus();
     }
 
@@ -126,18 +112,17 @@ public class GpsManager {
         return flag;
     }
 
-    private void startLocationListeners(){
+    private void startLocationProviders(){
         // Here we check for "network", "gps" in providers and start them if they are available
         // Note that "network" is not available in the emulator
-        startLocationListener(networkLocationListener, networkProvider);
-        startLocationListener(gpsLocationListener, gpsProvider);
+        startListenerForProvider(networkLocationListener, networkProvider);
+        startListenerForProvider(gpsLocationListener, gpsProvider);
         mLocationManager.addGpsStatusListener(gpsStatusListener);
 
         mRunning = true;
-
     }
 
-    private void startLocationListener(MyLocationListener listener, String provider){
+    private void startListenerForProvider(MyLocationListener listener, String provider){
         if(isProviderAllowed(provider) && mLocationManager.isProviderEnabled(provider)){
             // http://developer.android.com/reference/android/location/LocationManager.html
             // If it is greater than 0 then the location provider will only send your application an update when the
@@ -145,6 +130,19 @@ public class GpsManager {
             mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
             locationListeners.add(listener);
         }
+    }
+
+    public void stopLocationProviders() {
+        for (MyLocationListener listener : locationListeners) {
+            mLocationManager.removeUpdates(listener);
+        }
+        locationListeners.clear();
+
+        mLocationManager.removeGpsStatusListener(gpsStatusListener);
+        mRunning = false;
+        mGpsFixed = false;
+
+        broadcastGpsNetworkStatus();
     }
 
     /**
@@ -372,8 +370,8 @@ public class GpsManager {
         minTimeInMilliseconds = secs * 1000L;
         minDistanceInMeters = meters * 1.0f;
         if(isGPSRunning()){
-            stopLocationUpdates();
-            startLocationListeners();
+            stopLocationProviders();
+            startLocationProviders();
         }
     }
 

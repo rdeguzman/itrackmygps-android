@@ -45,7 +45,7 @@ public class GpsLoggerService extends Service {
 
         if(gpsApp.isServiceRunning() && gpsManager.isGPSRunning()){
             gpsApp.setServiceRunning(false);
-            gpsManager.stopLocationUpdates();
+            gpsManager.stopLocationProviders();
         }
     }
 

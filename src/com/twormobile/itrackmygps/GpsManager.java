@@ -149,6 +149,21 @@ public class GpsManager {
     }
 
     /**
+     * Adjust time and distance interval for requestLocationUpdate
+     *
+     * @param seconds Seconds for time delay.
+     * @param meters Meters for distance delay.
+     */
+    public void adjustLocationUpdateInterval(int seconds, int meters){
+        minTimeInMilliseconds = seconds * 1000L;
+        minDistanceInMeters = meters * 1.0f;
+        if(isGPSRunning()){
+            stopListenerForProvider(gpsLocationListener);
+            startListenerForProvider(gpsLocationListener, gpsProvider);
+        }
+    }
+
+    /**
      * Returns true if the location listeners are running and getting active updates from onLocationChanged
      *
      */
@@ -244,6 +259,36 @@ public class GpsManager {
             if(isBetterLocation(location, currentBestLocation)){
                 currentBestLocation = location;
                 broadcastLocation(location);
+            }
+
+            // Adjust minTime and minDistance based on Speed
+            if(location.getProvider() == LocationManager.GPS_PROVIDER) {
+
+                int seconds = (int) (minTimeInMilliseconds / 1000L);
+                int distance = (int) minDistanceInMeters;
+
+                // Speed is slow
+                if(location.getSpeed() >= 10 && location.getSpeed() <= 40) {
+                    seconds = 30;
+                    distance = 10;
+                }
+                // Speed is moderate
+                else if(location.getSpeed() > 40 && location.getSpeed() <= 80) {
+                    seconds = 60;
+                    distance = 100;
+                }
+                // Speed is high
+                else if(location.getSpeed() >= 80 && location.getSpeed() <= 100) {
+                    seconds = 120;
+                    distance = 100;
+                }
+                // Speed is high
+                else if(location.getSpeed() > 100) {
+                    seconds = 180;
+                    distance = 100;
+                }
+
+                adjustLocationUpdateInterval(seconds, distance);
             }
         }
 

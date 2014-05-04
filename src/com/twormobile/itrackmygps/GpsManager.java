@@ -155,9 +155,10 @@ public class GpsManager {
      * @param meters Meters for distance delay.
      */
     public void adjustLocationUpdateInterval(int seconds, int meters){
-        minTimeInMilliseconds = seconds * 1000L;
-        minDistanceInMeters = meters * 1.0f;
         if(isGPSRunning()){
+            minTimeInMilliseconds = seconds * 1000L;
+            minDistanceInMeters = meters * 1.0f;
+
             stopListenerForProvider(gpsLocationListener);
             startListenerForProvider(gpsLocationListener, gpsProvider);
         }

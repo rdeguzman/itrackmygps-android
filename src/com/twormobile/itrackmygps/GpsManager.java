@@ -27,7 +27,7 @@ public class GpsManager {
     private static GpsLoggerApplication gpsApp;
     private Context mAppContext;
     private LocationManager mLocationManager;
-    private boolean mRunning;
+    private boolean mActive;
     private boolean mGpsFixed;
 
     private MyLocationListener networkLocationListener;
@@ -119,7 +119,7 @@ public class GpsManager {
         startListenerForProvider(gpsLocationListener, gpsProvider);
         mLocationManager.addGpsStatusListener(gpsStatusListener);
 
-        mRunning = true;
+        mActive = true;
     }
 
     private void startListenerForProvider(MyLocationListener listener, String provider){
@@ -137,7 +137,7 @@ public class GpsManager {
         stopListenerForProvider(gpsLocationListener);
 
         mLocationManager.removeGpsStatusListener(gpsStatusListener);
-        mRunning = false;
+        mActive = false;
         mGpsFixed = false;
 
         broadcastGpsNetworkStatus();
@@ -162,7 +162,7 @@ public class GpsManager {
      * @param meters Meters for distance delay.
      */
     public void adjustLocationUpdateInterval(int seconds, int meters){
-        if(isGPSRunning()){
+        if(isGPSActive()){
             minTimeInMilliseconds = seconds * 1000L;
             minDistanceInMeters = meters * 1.0f;
 
@@ -175,8 +175,8 @@ public class GpsManager {
      * Returns true if the location listeners are running and getting active updates from onLocationChanged
      *
      */
-    public boolean isGPSRunning() {
-        return mRunning;
+    public boolean isGPSActive() {
+        return mActive;
     }
 
     /**
@@ -262,7 +262,7 @@ public class GpsManager {
     private class MyLocationListener implements LocationListener {
         @Override
         public void onLocationChanged(Location location) {
-            mRunning = true;
+            mActive = true;
 
             if(isBetterLocation(location, currentBestLocation)){
                 currentBestLocation = location;
@@ -421,7 +421,7 @@ public class GpsManager {
     public void updateLocationUpdateSettings(int secs, int meters){
         minTimeInMilliseconds = secs * 1000L;
         minDistanceInMeters = meters * 1.0f;
-        if(isGPSRunning()){
+        if(isGPSActive()){
             stopLocationProviders();
             startLocationProviders();
         }
@@ -435,7 +435,7 @@ public class GpsManager {
     }
 
     public GpsFix connectionStatus(){
-        if(mRunning){
+        if(mActive){
             if(mGpsFixed){
                 return GpsFix.CONNECTED;
             }

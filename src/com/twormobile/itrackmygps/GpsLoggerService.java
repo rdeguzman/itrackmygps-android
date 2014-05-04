@@ -74,14 +74,14 @@ public class GpsLoggerService extends Service {
     }
 
     private void start(){
-        if(!gpsApp.isON() && !gpsManager.isGPSRunning()){
+        if(!gpsApp.isON() && !gpsManager.isGPSActive()){
             gpsApp.setON(true);
             gpsManager.startLocationUpdates();
         }
     }
 
     private void stop() {
-        if(gpsApp.isON() && gpsManager.isGPSRunning()){
+        if(gpsApp.isON() && gpsManager.isGPSActive()){
             gpsApp.setON(false);
             gpsManager.stopLocationProviders();
         }

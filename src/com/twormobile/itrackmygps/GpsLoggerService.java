@@ -17,13 +17,16 @@ public class GpsLoggerService extends Service {
 
     /**
      * When WIFI is disconnected, starts the location service.
-     * When WIFI is connected and the service is running, change the interval to every 5 minutes.
+     * When WIFI is connected and the service is set to ON, poll every 5 minutes
      */
     public class WifiStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             if(gpsApp.isWiFiConnected()) {
                 stop();
-                gpsManager.startNetworkPolling(300, 10);
+
+                if(gpsApp.isServiceRunning()) {
+                    gpsManager.startNetworkPolling(300, 10);
+                }
             }
             else {
                 start();

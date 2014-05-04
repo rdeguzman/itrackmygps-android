@@ -22,8 +22,8 @@ public class GpsLoggerService extends Service {
     public class WifiStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             if(gpsApp.isWiFiConnected()) {
-                gpsManager.adjustLocationUpdateInterval(300, 100);
-                // stop();
+                stop();
+                gpsManager.startNetworkPolling(300, 10);
             }
             else {
                 start();

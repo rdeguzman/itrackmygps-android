@@ -148,6 +148,13 @@ public class GpsManager {
         locationListeners.remove(listener);
     }
 
+    public void startNetworkPolling(int seconds, int meters) {
+        minTimeInMilliseconds = seconds * 1000L;
+        minDistanceInMeters = meters * 1.0f;
+
+        startListenerForProvider(networkLocationListener, networkProvider);
+    }
+
     /**
      * Adjust time and distance interval for requestLocationUpdate
      *

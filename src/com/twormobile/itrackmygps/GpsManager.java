@@ -268,28 +268,36 @@ public class GpsManager {
                 int seconds = (int) (minTimeInMilliseconds / 1000L);
                 int distance = (int) minDistanceInMeters;
 
+                boolean mChange = false;
+
                 // Speed is slow
                 if(location.getSpeed() >= 10 && location.getSpeed() <= 40) {
                     seconds = 30;
                     distance = 10;
+                    mChange = true;
                 }
                 // Speed is moderate
                 else if(location.getSpeed() > 40 && location.getSpeed() <= 80) {
                     seconds = 60;
                     distance = 100;
+                    mChange = true;
                 }
                 // Speed is high
                 else if(location.getSpeed() >= 80 && location.getSpeed() <= 100) {
                     seconds = 120;
                     distance = 100;
+                    mChange = true;
                 }
                 // Speed is high
                 else if(location.getSpeed() > 100) {
                     seconds = 180;
                     distance = 100;
+                    mChange = true;
                 }
 
-                adjustLocationUpdateInterval(seconds, distance);
+                if(mChange) {
+                    adjustLocationUpdateInterval(seconds, distance);
+                }
             }
         }
 

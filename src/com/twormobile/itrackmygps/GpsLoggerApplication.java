@@ -26,7 +26,7 @@ public class GpsLoggerApplication extends Application {
     private String deviceId;
 
     private GpsManager gpsManager;
-    private boolean bServiceRun;
+    private boolean bServiceEnabled;
     private RequestQueue queue;
 
     private SharedPreferences prefs;
@@ -47,7 +47,7 @@ public class GpsLoggerApplication extends Application {
 
         gpsManager = GpsManager.get(getApplicationContext());
         queue = Volley.newRequestQueue(this);
-        bServiceRun = false;
+        bServiceEnabled = false;
     }
 
     @Override
@@ -63,12 +63,12 @@ public class GpsLoggerApplication extends Application {
         return queue;
     }
 
-    public boolean isServiceRunning(){
-        return bServiceRun;
+    public boolean isON(){
+        return bServiceEnabled;
     }
 
-    public void setServiceRunning(boolean b){
-        bServiceRun = b;
+    public void setON(boolean b){
+        bServiceEnabled = b;
     }
 
     public String getUUID(){

@@ -220,14 +220,14 @@ public class MainActivity extends Activity{
     }
 
     public void updateButtonTrackerStatus(){
-        if(gpsApp.isServiceRunning())
+        if(gpsApp.isON())
             btnTracker.setImageResource(R.drawable.track_on);
         else
             btnTracker.setImageResource(R.drawable.track_off);
     }
 
     public void buttonTrackClicked(View view){
-        if (gpsApp.isServiceRunning()) {
+        if (gpsApp.isON()) {
             Log.i(TAG, "buttonStopPressed");
             showGPSStatus(false);
 

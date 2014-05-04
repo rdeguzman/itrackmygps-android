@@ -24,7 +24,7 @@ public class GpsLoggerService extends Service {
             if(gpsApp.isWiFiConnected()) {
                 stop();
 
-                if(gpsApp.isServiceRunning()) {
+                if(gpsApp.isON()) {
                     gpsManager.startNetworkPolling(300, 10);
                 }
             }
@@ -74,15 +74,15 @@ public class GpsLoggerService extends Service {
     }
 
     private void start(){
-        if(!gpsApp.isServiceRunning() && !gpsManager.isGPSRunning()){
-            gpsApp.setServiceRunning(true);
+        if(!gpsApp.isON() && !gpsManager.isGPSRunning()){
+            gpsApp.setON(true);
             gpsManager.startLocationUpdates();
         }
     }
 
     private void stop() {
-        if(gpsApp.isServiceRunning() && gpsManager.isGPSRunning()){
-            gpsApp.setServiceRunning(false);
+        if(gpsApp.isON() && gpsManager.isGPSRunning()){
+            gpsApp.setON(false);
             gpsManager.stopLocationProviders();
         }
 

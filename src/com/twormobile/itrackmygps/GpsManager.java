@@ -235,6 +235,9 @@ public class GpsManager {
         final String longitude = Double.toString(location.getLongitude());
         final String speed = Float.toString(location.getSpeed());
         final String heading = Float.toString(location.getBearing());
+        final String provider = location.getProvider();
+        final String timeInterval = Integer.toString((int) minTimeInMilliseconds);
+        final String distanceInterval = Integer.toString((int) minDistanceInMeters);
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>(){
@@ -262,6 +265,9 @@ public class GpsManager {
                 params.put("gps_longitude", longitude);
                 params.put("gps_speed", speed);
                 params.put("gps_heading", heading);
+                params.put("provider", provider);
+                params.put("time_interval", timeInterval);
+                params.put("distance_interval", distanceInterval);
 
                 return params;
             }

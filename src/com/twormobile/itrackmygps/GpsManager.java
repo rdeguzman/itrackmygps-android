@@ -96,6 +96,9 @@ public class GpsManager {
             }
         }
 
+        minTimeInMilliseconds = 30 * 1000L;
+        minDistanceInMeters = 10;
+
         startLocationProviders();
         broadcastGpsNetworkStatus();
     }
@@ -129,6 +132,10 @@ public class GpsManager {
             // location has changed by at least minDistance meters, AND at least minTime milliseconds have passed.
             mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
             locationListeners.add(listener);
+
+            if(provider == gpsProvider){
+                gpsApp.showToast("GPS interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
+            }
         }
     }
 

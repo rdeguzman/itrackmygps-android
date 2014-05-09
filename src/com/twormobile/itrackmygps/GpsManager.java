@@ -156,8 +156,11 @@ public class GpsManager {
     }
 
     private void stopListenerForProvider(LocationListener listener) {
-        mLocationManager.removeUpdates(listener);
-        locationListeners.remove(listener);
+        // Safely removeUpdates for the LocationListener
+        if(locationListeners.contains(listener)){
+            mLocationManager.removeUpdates(listener);
+            locationListeners.remove(listener);
+        }
     }
 
     public void startNetworkPolling(int seconds, int meters) {

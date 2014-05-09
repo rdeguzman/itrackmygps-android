@@ -183,7 +183,6 @@ public class MainActivity extends Activity{
         mWifiStatusReceiver = new WifiStatusReceiver();
 
         showGPSStatus(false);
-        updateFromSettingsPreferences();
 
         checkUserInPreferences();
         updateButtonTrackerStatus();
@@ -314,7 +313,6 @@ public class MainActivity extends Activity{
 
         Log.d(TAG, "resume");
         updateButtonTrackerStatus();
-        updateFromSettingsPreferences();
     }
 
 

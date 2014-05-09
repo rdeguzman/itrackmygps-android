@@ -21,6 +21,11 @@ import java.util.Map;
 public class GpsManager {
     private static final String TAG = "GpsManager";
 
+    // Time Interval in seconds
+    private static final int WALKING_TIME_INTERVAL = 10;
+    private static final int SLOW_DRIVING_TIME_INTERVAL = 30;
+    private static final int FAST_DRIVING_TIME_INTERVAL = 60;
+
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
     private static GpsManager sGpsManager;
@@ -96,7 +101,7 @@ public class GpsManager {
             }
         }
 
-        minTimeInMilliseconds = 30 * 1000L;
+        minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
         minDistanceInMeters = 10;
 
         startLocationProviders();
@@ -286,13 +291,13 @@ public class GpsManager {
 
                 // Speed is slow
                 if(location.getSpeed() >= 20 && location.getSpeed() <= 100) {
-                    seconds = 60;
+                    seconds = SLOW_DRIVING_TIME_INTERVAL;
                     distance = 10;
                     mChange = true;
                 }
                 // Speed is high
                 else if(location.getSpeed() > 100) {
-                    seconds = 120;
+                    seconds = FAST_DRIVING_TIME_INTERVAL;
                     distance = 10;
                     mChange = true;
                 }

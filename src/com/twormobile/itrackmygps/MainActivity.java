@@ -231,6 +231,7 @@ public class MainActivity extends Activity{
             Log.i(TAG, "buttonStopPressed");
             showGPSStatus(false);
 
+            gpsApp.showToast("Tracker Turned OFF");
             btnTracker.setImageResource(R.drawable.track_off);
             stopService(new Intent(this, GpsLoggerService.class));
         }
@@ -238,6 +239,7 @@ public class MainActivity extends Activity{
             Log.i(TAG, "buttonStartPressed");
             showGPSStatus(true);
 
+            gpsApp.showToast("Tracker Turned ON");
             btnTracker.setImageResource(R.drawable.track_on);
             startService(new Intent(this, GpsLoggerService.class));
         }

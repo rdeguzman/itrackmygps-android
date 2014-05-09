@@ -50,7 +50,7 @@ public class GpsLoggerService extends Service {
         final IntentFilter wifiFilters = new IntentFilter();
         wifiFilters.addAction("android.net.wifi.WIFI_STATE_CHANGED");
         wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
-        this.registerReceiver(mWifiStatusReceiver, wifiFilters);
+        //this.registerReceiver(mWifiStatusReceiver, wifiFilters);
 
         Log.d(TAG, "onCreated");
     }
@@ -86,7 +86,8 @@ public class GpsLoggerService extends Service {
             gpsManager.stopLocationProviders();
         }
 
-        this.unregisterReceiver(mWifiStatusReceiver);
+
+        //this.unregisterReceiver(mWifiStatusReceiver);
     }
 
 }

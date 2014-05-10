@@ -148,9 +148,7 @@ public class GpsManager {
             mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
             locationListeners.add(listener);
 
-            if(provider == gpsProvider){
-                gpsApp.showToast("GPS interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
-            }
+            gpsApp.showToast("Interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
         }
     }
 

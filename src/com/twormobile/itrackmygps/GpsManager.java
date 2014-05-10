@@ -32,6 +32,8 @@ public class GpsManager {
 
     // Distance Interval in seconds
     private static final int ZERO_DISTANCE = 0;
+    private static final int TEN_METERS = 10;
+    private static final int TWENTY_METERS = 20;
 
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
@@ -180,7 +182,7 @@ public class GpsManager {
     }
 
     public void startActivePolling() {
-        startPolling(WALKING_TIME_INTERVAL, ZERO_DISTANCE);
+        startPolling(WALKING_TIME_INTERVAL, TWENTY_METERS);
     }
 
     private void startPolling(int time_interval, int distance) {

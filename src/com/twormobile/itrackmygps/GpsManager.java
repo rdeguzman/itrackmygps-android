@@ -28,7 +28,8 @@ public class GpsManager {
 
     private static final int WALKING_TIME_INTERVAL = 10;
     private static final int SLOW_DRIVING_TIME_INTERVAL = 30;
-    private static final int FAST_DRIVING_TIME_INTERVAL = 60;
+    private static final int MODERATE_DRIVING_TIME_INTERVAL = 60;
+    private static final int FAST_DRIVING_TIME_INTERVAL = 120;
 
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
@@ -105,7 +106,7 @@ public class GpsManager {
             }
         }
 
-        minTimeInMilliseconds = ZERO_INTERVAL * 1000L;
+        minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
         minDistanceInMeters = ZERO_INTERVAL;
 
         startLocationProviders();
@@ -302,21 +303,25 @@ public class GpsManager {
 
                 boolean mChange = false;
 
+                float speedInKPH = location.getSpeed()*KPH;
+
                 // Speed is slow
-                if(location.getSpeed() >= 20 && location.getSpeed() <= 100) {
+                if(speedInKPH >= 20 && speedInKPH < 60) {
                     seconds = SLOW_DRIVING_TIME_INTERVAL;
-                    distance = 10;
+                    mChange = true;
+                }
+                else if(speedInKPH >= 60 && speedInKPH < 100) {
+                    seconds = MODERATE_DRIVING_TIME_INTERVAL;
                     mChange = true;
                 }
                 // Speed is high
-                else if(location.getSpeed() > 100) {
+                else if(speedInKPH > 100) {
                     seconds = FAST_DRIVING_TIME_INTERVAL;
-                    distance = 10;
                     mChange = true;
                 }
 
                 if(mChange) {
-                    adjustLocationUpdateInterval(seconds, distance);
+                    adjustLocationUpdateInterval(seconds, (int)minDistanceInMeters);
                 }
             }
         }

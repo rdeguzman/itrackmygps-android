@@ -95,7 +95,7 @@ public class MainActivity extends Activity{
                 else {
                     // Dynamic zoom based on speed
                     if(isZoomBasedOnSpeed){
-                        int speed = (int)loc.getSpeed();
+                        int speed = (int) (loc.getSpeed()*GpsManager.KPH);
 
                         boolean isMoving = speed > 1;
                         boolean isSpeedSlow = isBetween(speed, 10, 40);
@@ -290,7 +290,7 @@ public class MainActivity extends Activity{
         tvGPSLongitude.setText(Double.toString(location.getLongitude()));
         tvGPSAltitude.setText(Double.toString(location.getAltitude()));
         tvGPSBearing.setText(Float.toString(location.getBearing()));
-        tvGPSSpeed.setText(Float.toString(location.getSpeed()));
+        tvGPSSpeed.setText(Float.toString(location.getSpeed()*GpsManager.KPH));
         tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
         tvGPSProvider.setText(location.getProvider());
 

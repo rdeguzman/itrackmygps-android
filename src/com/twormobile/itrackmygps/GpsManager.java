@@ -207,7 +207,7 @@ public class GpsManager {
      * @param seconds Seconds for time delay.
      * @param meters Meters for distance delay.
      */
-    public void adjustLocationUpdateInterval(int seconds, int meters){
+    public void adjustGpsUpdateInterval(int seconds, int meters){
         if(isGPSActive()){
             minTimeInMilliseconds = seconds * 1000L;
             minDistanceInMeters = meters * 1.0f;
@@ -346,7 +346,7 @@ public class GpsManager {
                 }
 
                 if(mChange) {
-                    adjustLocationUpdateInterval(seconds, (int)minDistanceInMeters);
+                    adjustGpsUpdateInterval(seconds, (int) minDistanceInMeters);
                 }
             }
         }

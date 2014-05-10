@@ -334,6 +334,17 @@ public class MainActivity extends Activity{
         updateButtonTrackerStatus();
     }
 
+    public void onDestroy() {
+        try {
+            if(mWifiStatusReceiver != null) {
+                this.unregisterReceiver(mWifiStatusReceiver);
+            }
+        }
+        catch(IllegalStateException ex) {
+            Log.d(TAG, ex.toString());
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

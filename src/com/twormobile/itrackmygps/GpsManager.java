@@ -31,6 +31,8 @@ public class GpsManager {
     private static final int MODERATE_DRIVING_TIME_INTERVAL = 60;
     private static final int FAST_DRIVING_TIME_INTERVAL = 120;
 
+    private static final int FIVE_MINUTES = 300;
+
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
     private static GpsManager sGpsManager;
@@ -106,9 +108,6 @@ public class GpsManager {
             }
         }
 
-        minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
-        minDistanceInMeters = ZERO_INTERVAL;
-
         startLocationProviders();
         broadcastGpsNetworkStatus();
     }
@@ -126,11 +125,21 @@ public class GpsManager {
     }
 
     private void startLocationProviders(){
-        // Here we check for "network", "gps" in providers and start them if they are available
-        // Note that "network" is not available in the emulator
-        startListenerForProvider(networkLocationListener, networkProvider);
-        startListenerForProvider(gpsLocationListener, gpsProvider);
-        mLocationManager.addGpsStatusListener(gpsStatusListener);
+        // If we have WIFI then it means we are at home or indoors
+        if(gpsApp.isWiFiConnected()) {
+            minTimeInMilliseconds = FIVE_MINUTES * 1000L;
+            minDistanceInMeters = ZERO_INTERVAL;
+
+            // Note that "network" is not available in the emulator
+            startListenerForProvider(networkLocationListener, networkProvider);
+        }
+        else {
+            minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
+            minDistanceInMeters = ZERO_INTERVAL;
+
+            startListenerForProvider(gpsLocationListener, gpsProvider);
+            mLocationManager.addGpsStatusListener(gpsStatusListener);
+        }
 
         mActive = true;
     }

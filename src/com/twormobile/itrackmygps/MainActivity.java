@@ -75,7 +75,7 @@ public class MainActivity extends Activity{
                 gpsManager.stopLocationProviders();
 
                 if(gpsApp.isON()) {
-                    gpsManager.startGPSPolling();
+                    gpsManager.startActivePolling();
                 }
 
             }

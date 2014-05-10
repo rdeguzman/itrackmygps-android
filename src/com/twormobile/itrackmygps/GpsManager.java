@@ -131,7 +131,7 @@ public class GpsManager {
             startPollingAfterFiveMinutes();
         }
         else {
-            startGPSPolling();
+            startActivePolling();
         }
 
         mActive = true;
@@ -188,7 +188,7 @@ public class GpsManager {
         }
     }
 
-    public void startGPSPolling() {
+    public void startActivePolling() {
         minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
         minDistanceInMeters = ZERO_INTERVAL;
 

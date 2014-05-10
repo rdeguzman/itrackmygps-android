@@ -175,22 +175,16 @@ public class GpsManager {
     }
 
     public void startPollingAfterFiveMinutes() {
-        minTimeInMilliseconds = FIVE_MINUTES * 1000L;
-        minDistanceInMeters = ZERO_INTERVAL;
-
-        // Note that "network" is not available in the emulator
-        startListenerForProvider(networkLocationListener, networkProvider);
-        startListenerForProvider(gpsLocationListener, gpsProvider);
-
-        if(!mGpsStatusListenerActive) {
-            mLocationManager.addGpsStatusListener(gpsStatusListener);
-            mGpsStatusListenerActive = true;
-        }
+        startPolling(FIVE_MINUTES, ZERO_INTERVAL);
     }
 
     public void startActivePolling() {
-        minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
-        minDistanceInMeters = ZERO_INTERVAL;
+        startPolling(WALKING_TIME_INTERVAL, ZERO_INTERVAL);
+    }
+
+    private void startPolling(int time_interval, int distance) {
+        minTimeInMilliseconds = time_interval * 1000L;
+        minDistanceInMeters = distance;
 
         startListenerForProvider(networkLocationListener, networkProvider);
         startListenerForProvider(gpsLocationListener, gpsProvider);

@@ -87,8 +87,15 @@ public class GpsLoggerService extends Service {
             gpsManager.stopLocationProviders();
         }
 
+        try {
+            if(mWifiStatusReceiver != null) {
+                this.unregisterReceiver(mWifiStatusReceiver);
+            }
+        }
+        catch(IllegalStateException ex) {
+            Log.d(TAG, ex.toString());
+        }
 
-        //this.unregisterReceiver(mWifiStatusReceiver);
     }
 
 }

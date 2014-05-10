@@ -54,6 +54,33 @@ public class MainActivity extends Activity{
     private GpsManager gpsManager;
     private GpsConnectionStatusReceiver mGpsNetworkStatusReceiver;
 
+    private WifiStatusReceiver mWifiStatusReceiver;
+
+    /**
+     * When WIFI is disconnected, starts the location service.
+     * When WIFI is connected and the service is set to ON, poll every 5 minutes
+     */
+    public class WifiStatusReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            if(gpsApp.isWiFiConnected()) {
+                gpsApp.showToast("WIFI in range");
+                gpsManager.stopLocationProviders();
+
+                if(gpsApp.isON()) {
+                    gpsManager.startNetworkPolling();
+                }
+            }
+            else {
+                gpsApp.showToast("WIFI not in range");
+                if(gpsApp.isON()) {
+                    gpsManager.startLocationUpdates();
+                }
+
+            }
+        }
+    }
+
+
     public class GpsConnectionStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             Log.d("GpsConnectionStatusReceiver", "onReceived");
@@ -177,6 +204,13 @@ public class MainActivity extends Activity{
 
         checkUserInPreferences();
         updateButtonTrackerStatus();
+
+        this.mWifiStatusReceiver = new WifiStatusReceiver();
+
+        final IntentFilter wifiFilters = new IntentFilter();
+        wifiFilters.addAction("android.net.wifi.WIFI_STATE_CHANGED");
+        wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
+        this.registerReceiver(mWifiStatusReceiver, wifiFilters);
     }
 
     private void checkUserInPreferences() {

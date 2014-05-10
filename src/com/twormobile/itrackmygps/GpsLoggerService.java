@@ -13,28 +13,6 @@ public class GpsLoggerService extends Service {
 
     private GpsLoggerApplication gpsApp;
     private GpsManager gpsManager;
-    private WifiStatusReceiver mWifiStatusReceiver;
-
-    /**
-     * When WIFI is disconnected, starts the location service.
-     * When WIFI is connected and the service is set to ON, poll every 5 minutes
-     */
-    public class WifiStatusReceiver extends BroadcastReceiver {
-        public void onReceive(Context context, Intent intent) {
-            if(gpsApp.isWiFiConnected()) {
-                gpsApp.showToast("WIFI in range");
-                stop();
-
-                if(gpsApp.isON()) {
-                    gpsManager.startNetworkPolling();
-                }
-            }
-            else {
-                gpsApp.showToast("WIFI not in range");
-                start();
-            }
-        }
-    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -46,12 +24,6 @@ public class GpsLoggerService extends Service {
         super.onCreate();
         this.gpsApp = (GpsLoggerApplication)getApplication();
         this.gpsManager = gpsApp.getGpsManager();
-        this.mWifiStatusReceiver = new WifiStatusReceiver();
-
-        final IntentFilter wifiFilters = new IntentFilter();
-        wifiFilters.addAction("android.net.wifi.WIFI_STATE_CHANGED");
-        wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
-        this.registerReceiver(mWifiStatusReceiver, wifiFilters);
 
         Log.d(TAG, "onCreated");
     }
@@ -86,16 +58,6 @@ public class GpsLoggerService extends Service {
             gpsApp.setON(false);
             gpsManager.stopLocationProviders();
         }
-
-        try {
-            if(mWifiStatusReceiver != null) {
-                this.unregisterReceiver(mWifiStatusReceiver);
-            }
-        }
-        catch(IllegalStateException ex) {
-            Log.d(TAG, ex.toString());
-        }
-
     }
 
 }

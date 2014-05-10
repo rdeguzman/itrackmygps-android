@@ -127,11 +127,7 @@ public class GpsManager {
     private void startLocationProviders(){
         // If we have WIFI then it means we are at home or indoors
         if(gpsApp.isWiFiConnected()) {
-            minTimeInMilliseconds = FIVE_MINUTES * 1000L;
-            minDistanceInMeters = ZERO_INTERVAL;
-
-            // Note that "network" is not available in the emulator
-            startListenerForProvider(networkLocationListener, networkProvider);
+            startNetworkPolling();
         }
         else {
             minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
@@ -177,10 +173,11 @@ public class GpsManager {
         }
     }
 
-    public void startNetworkPolling(int seconds, int meters) {
-        minTimeInMilliseconds = seconds * 1000L;
-        minDistanceInMeters = meters * 1.0f;
+    public void startNetworkPolling() {
+        minTimeInMilliseconds = FIVE_MINUTES * 1000L;
+        minDistanceInMeters = ZERO_INTERVAL;
 
+        // Note that "network" is not available in the emulator
         startListenerForProvider(networkLocationListener, networkProvider);
     }
 

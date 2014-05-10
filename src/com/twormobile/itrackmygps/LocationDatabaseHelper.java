@@ -65,7 +65,7 @@ public class LocationDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_LOCATION_LATITUDE, location.getLatitude());
         cv.put(COLUMN_LOCATION_LONGITUDE, location.getLongitude());
         cv.put(COLUMN_LOCATION_ALTITUDE, location.getAltitude());
-        cv.put(COLUMN_LOCATION_SPEED, location.getSpeed());
+        cv.put(COLUMN_LOCATION_SPEED, location.getSpeed()*GpsManager.KPH);
         cv.put(COLUMN_LOCATION_HEADING, location.getBearing());
         cv.put(COLUMN_LOCATION_ACCURACY, location.getAccuracy());
         cv.put(COLUMN_LOCATION_PROVIDER, location.getProvider());

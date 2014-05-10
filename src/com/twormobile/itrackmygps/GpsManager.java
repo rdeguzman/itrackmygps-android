@@ -21,6 +21,8 @@ import java.util.Map;
 public class GpsManager {
     private static final String TAG = "GpsManager";
 
+    public static float KPH = 3.6f;
+
     // Time Interval in seconds
     private static final int ZERO_INTERVAL = 0;
 
@@ -238,7 +240,7 @@ public class GpsManager {
         final String timestamp = Long.toString(location.getTime());
         final String latitude = Double.toString(location.getLatitude());
         final String longitude = Double.toString(location.getLongitude());
-        final String speed = Float.toString(location.getSpeed());
+        final String speedInKPH = Float.toString(location.getSpeed()*KPH);
         final String heading = Float.toString(location.getBearing());
         final String provider = location.getProvider();
         final String timeInterval = Integer.toString((int) minTimeInMilliseconds);
@@ -268,7 +270,7 @@ public class GpsManager {
                 params.put("gps_timestamp", timestamp);
                 params.put("gps_latitude", latitude);
                 params.put("gps_longitude", longitude);
-                params.put("gps_speed", speed);
+                params.put("gps_speed", speedInKPH);
                 params.put("gps_heading", heading);
                 params.put("provider", provider);
                 params.put("time_interval", timeInterval);

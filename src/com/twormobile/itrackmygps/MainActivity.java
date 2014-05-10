@@ -53,19 +53,11 @@ public class MainActivity extends Activity{
     private GpsLoggerApplication gpsApp;
     private GpsManager gpsManager;
     private GpsConnectionStatusReceiver mGpsNetworkStatusReceiver;
-    private WifiStatusReceiver mWifiStatusReceiver;
 
     public class GpsConnectionStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             Log.d("GpsConnectionStatusReceiver", "onReceived");
             updateGpsFixConnectionStatus();
-        }
-    }
-
-    public class WifiStatusReceiver extends BroadcastReceiver {
-        public void onReceive(Context context, Intent intent) {
-            Log.d("WifiStatusReceiver", "onReceived");
-            gpsApp.showToast("Wifi Connected: " + gpsApp.isWiFiConnected());
         }
     }
 
@@ -180,7 +172,6 @@ public class MainActivity extends Activity{
         gmap = ((MapFragment) getFragmentManager().findFragmentById(R.id.mapview)).getMap();
 
         mGpsNetworkStatusReceiver = new GpsConnectionStatusReceiver();
-        mWifiStatusReceiver = new WifiStatusReceiver();
 
         showGPSStatus(false);
 
@@ -268,19 +259,13 @@ public class MainActivity extends Activity{
         super.onStart();
         this.registerReceiver(mLocationReceiver, new IntentFilter(IntentCodes.ACTION_LOCATION));
         this.registerReceiver(mGpsNetworkStatusReceiver, new IntentFilter(IntentCodes.ACTION_GPS_NETWORK_STATUS));
-
-        final IntentFilter wifiFilters = new IntentFilter();
-        wifiFilters.addAction("android.net.wifi.WIFI_STATE_CHANGED");
-        wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
-        this.registerReceiver(mWifiStatusReceiver, wifiFilters);
     }
 
     @Override
     public void onStop() {
         this.unregisterReceiver(mLocationReceiver);
         this.unregisterReceiver(mGpsNetworkStatusReceiver);
-        this.unregisterReceiver(mWifiStatusReceiver);
-        
+
         super.onStop();
     }
 

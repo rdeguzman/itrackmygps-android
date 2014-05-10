@@ -22,15 +22,16 @@ public class GpsLoggerService extends Service {
     public class WifiStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             if(gpsApp.isWiFiConnected()) {
+                gpsApp.showToast("WIFI in range");
                 stop();
 
                 if(gpsApp.isON()) {
-                    gpsManager.startNetworkPolling(300, 10);
+                    gpsManager.startNetworkPolling();
                 }
             }
             else {
+                gpsApp.showToast("WIFI not in range");
                 start();
-                gpsManager.adjustLocationUpdateInterval(30, 10);
             }
         }
     }
@@ -50,7 +51,7 @@ public class GpsLoggerService extends Service {
         final IntentFilter wifiFilters = new IntentFilter();
         wifiFilters.addAction("android.net.wifi.WIFI_STATE_CHANGED");
         wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
-        //this.registerReceiver(mWifiStatusReceiver, wifiFilters);
+        this.registerReceiver(mWifiStatusReceiver, wifiFilters);
 
         Log.d(TAG, "onCreated");
     }

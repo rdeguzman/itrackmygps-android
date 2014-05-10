@@ -41,6 +41,7 @@ public class GpsManager {
     private LocationManager mLocationManager;
     private boolean mActive;
     private boolean mGpsFixed;
+    private boolean mGpsStatusListenerActive = false;
 
     private MyLocationListener networkLocationListener;
     private MyLocationListener gpsLocationListener;
@@ -142,13 +143,15 @@ public class GpsManager {
 
     private void startListenerForProvider(MyLocationListener listener, String provider){
         if(isProviderAllowed(provider) && mLocationManager.isProviderEnabled(provider)){
-            // http://developer.android.com/reference/android/location/LocationManager.html
-            // If it is greater than 0 then the location provider will only send your application an update when the
-            // location has changed by at least minDistance meters, AND at least minTime milliseconds have passed.
-            mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
-            locationListeners.add(listener);
+            if(locationListeners.contains(listener) == false) {
+                // http://developer.android.com/reference/android/location/LocationManager.html
+                // If it is greater than 0 then the location provider will only send your application an update when the
+                // location has changed by at least minDistance meters, AND at least minTime milliseconds have passed.
+                mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
+                locationListeners.add(listener);
 
-            gpsApp.showToast("Interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
+                gpsApp.showToast("Interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
+            }
         }
     }
 
@@ -156,7 +159,11 @@ public class GpsManager {
         stopListenerForProvider(networkLocationListener);
         stopListenerForProvider(gpsLocationListener);
 
-        mLocationManager.removeGpsStatusListener(gpsStatusListener);
+        if(mGpsStatusListenerActive) {
+            mLocationManager.removeGpsStatusListener(gpsStatusListener);
+            mGpsStatusListenerActive = false;
+        }
+
         mActive = false;
         mGpsFixed = false;
 

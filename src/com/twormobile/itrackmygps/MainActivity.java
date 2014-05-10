@@ -200,9 +200,7 @@ public class MainActivity extends Activity{
         updateButtonTrackerStatus();
 
         this.mWifiStatusReceiver = new WifiStatusReceiver();
-
         final IntentFilter wifiFilters = new IntentFilter();
-        wifiFilters.addAction("android.net.wifi.WIFI_STATE_CHANGED");
         wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
         this.registerReceiver(mWifiStatusReceiver, wifiFilters);
     }

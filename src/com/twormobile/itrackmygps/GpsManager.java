@@ -24,14 +24,14 @@ public class GpsManager {
     public static float KPH = 3.6f;
 
     // Time Interval in seconds
-    private static final int ZERO_INTERVAL = 0;
-
     private static final int WALKING_TIME_INTERVAL = 10;
     private static final int SLOW_DRIVING_TIME_INTERVAL = 30;
     private static final int MODERATE_DRIVING_TIME_INTERVAL = 60;
     private static final int FAST_DRIVING_TIME_INTERVAL = 120;
-
     private static final int FIVE_MINUTES = 300;
+
+    // Distance Interval in seconds
+    private static final int ZERO_DISTANCE = 0;
 
     private static final int TWO_MINUTES = 1000 * 60 * 2;
 
@@ -175,11 +175,11 @@ public class GpsManager {
     }
 
     public void startPollingAfterFiveMinutes() {
-        startPolling(FIVE_MINUTES, ZERO_INTERVAL);
+        startPolling(FIVE_MINUTES, ZERO_DISTANCE);
     }
 
     public void startActivePolling() {
-        startPolling(WALKING_TIME_INTERVAL, ZERO_INTERVAL);
+        startPolling(WALKING_TIME_INTERVAL, ZERO_DISTANCE);
     }
 
     private void startPolling(int time_interval, int distance) {

@@ -308,7 +308,6 @@ public class GpsManager {
             if(location.getProvider() == LocationManager.GPS_PROVIDER) {
 
                 int seconds = (int) (minTimeInMilliseconds / 1000L);
-                int distance = (int) minDistanceInMeters;
 
                 boolean mChange = false;
 

@@ -22,6 +22,8 @@ public class GpsManager {
     private static final String TAG = "GpsManager";
 
     // Time Interval in seconds
+    private static final int ZERO_INTERVAL = 0;
+
     private static final int WALKING_TIME_INTERVAL = 10;
     private static final int SLOW_DRIVING_TIME_INTERVAL = 30;
     private static final int FAST_DRIVING_TIME_INTERVAL = 60;
@@ -101,8 +103,8 @@ public class GpsManager {
             }
         }
 
-        minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
-        minDistanceInMeters = 10;
+        minTimeInMilliseconds = ZERO_INTERVAL * 1000L;
+        minDistanceInMeters = ZERO_INTERVAL;
 
         startLocationProviders();
         broadcastGpsNetworkStatus();

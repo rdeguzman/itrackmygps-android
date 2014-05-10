@@ -133,8 +133,6 @@ public class GpsManager {
         else {
             startActivePolling();
         }
-
-        mActive = true;
     }
 
     private void startListenerForProvider(MyLocationListener listener, String provider){
@@ -196,6 +194,8 @@ public class GpsManager {
             mLocationManager.addGpsStatusListener(gpsStatusListener);
             mGpsStatusListenerActive = true;
         }
+
+        mActive = true;
     }
 
     /**

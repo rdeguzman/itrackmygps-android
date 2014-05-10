@@ -128,14 +128,10 @@ public class GpsManager {
     private void startLocationProviders(){
         // If we have WIFI then it means we are at home or indoors
         if(gpsApp.isWiFiConnected()) {
-            startNetworkPolling();
+            startPollingAfterFiveMinutes();
         }
         else {
-            minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
-            minDistanceInMeters = ZERO_INTERVAL;
-
-            startListenerForProvider(gpsLocationListener, gpsProvider);
-            mLocationManager.addGpsStatusListener(gpsStatusListener);
+            startGPSPolling();
         }
 
         mActive = true;
@@ -178,12 +174,31 @@ public class GpsManager {
         }
     }
 
-    public void startNetworkPolling() {
+    public void startPollingAfterFiveMinutes() {
         minTimeInMilliseconds = FIVE_MINUTES * 1000L;
         minDistanceInMeters = ZERO_INTERVAL;
 
         // Note that "network" is not available in the emulator
         startListenerForProvider(networkLocationListener, networkProvider);
+        startListenerForProvider(gpsLocationListener, gpsProvider);
+
+        if(!mGpsStatusListenerActive) {
+            mLocationManager.addGpsStatusListener(gpsStatusListener);
+            mGpsStatusListenerActive = true;
+        }
+    }
+
+    public void startGPSPolling() {
+        minTimeInMilliseconds = WALKING_TIME_INTERVAL * 1000L;
+        minDistanceInMeters = ZERO_INTERVAL;
+
+        startListenerForProvider(networkLocationListener, networkProvider);
+        startListenerForProvider(gpsLocationListener, gpsProvider);
+
+        if(!mGpsStatusListenerActive) {
+            mLocationManager.addGpsStatusListener(gpsStatusListener);
+            mGpsStatusListenerActive = true;
+        }
     }
 
     /**

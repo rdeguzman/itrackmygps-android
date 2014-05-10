@@ -67,15 +67,15 @@ public class MainActivity extends Activity{
                 gpsManager.stopLocationProviders();
 
                 if(gpsApp.isON()) {
-                    gpsManager.startNetworkPolling();
+                    gpsManager.startPollingAfterFiveMinutes();
                 }
             }
             else {
                 gpsApp.showToast("WIFI not in range");
                 gpsManager.stopLocationProviders();
-                
+
                 if(gpsApp.isON()) {
-                    gpsManager.startLocationUpdates();
+                    gpsManager.startGPSPolling();
                 }
 
             }

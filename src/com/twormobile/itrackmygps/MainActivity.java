@@ -62,22 +62,14 @@ public class MainActivity extends Activity{
      */
     public class WifiStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
-            if(gpsApp.isWiFiConnected()) {
+            if(gpsApp.isWiFiConnected())
                 gpsApp.showToast("WIFI in range");
-                gpsManager.stopLocationProviders();
-
-                if(gpsApp.isON()) {
-                    gpsManager.startPollingAfterFiveMinutes();
-                }
-            }
-            else {
+            else
                 gpsApp.showToast("WIFI not in range");
+
+            if(gpsApp.isON()) {
                 gpsManager.stopLocationProviders();
-
-                if(gpsApp.isON()) {
-                    gpsManager.startActivePolling();
-                }
-
+                gpsManager.startLocationProviders();
             }
         }
     }

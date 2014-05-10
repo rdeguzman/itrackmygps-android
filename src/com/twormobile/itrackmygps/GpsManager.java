@@ -125,7 +125,7 @@ public class GpsManager {
         return flag;
     }
 
-    private void startLocationProviders(){
+    public void startLocationProviders(){
         // If we have WIFI then it means we are at home or indoors
         if(gpsApp.isWiFiConnected()) {
             startPollingAfterFiveMinutes();

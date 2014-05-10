@@ -72,6 +72,8 @@ public class MainActivity extends Activity{
             }
             else {
                 gpsApp.showToast("WIFI not in range");
+                gpsManager.stopLocationProviders();
+                
                 if(gpsApp.isON()) {
                     gpsManager.startLocationUpdates();
                 }

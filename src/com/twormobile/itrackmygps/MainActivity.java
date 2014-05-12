@@ -340,8 +340,9 @@ public class MainActivity extends Activity{
         catch(IllegalStateException ex) {
             Log.d(TAG, ex.toString());
         }
-    }
 
+        super.onDestroy();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

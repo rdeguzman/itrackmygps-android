@@ -9,7 +9,12 @@
     <string name="enable">Enable</string>
     <string name="cancel">Cancel</string>
 
-    <string name="label_min_time_interval">Time Interval in Seconds - minimum time interval between location updates</string>
+    <string name="label_min_time_interval">
+        Time Interval (in seconds) when WIFI is connected.
+        Usually when you are at home or at the office your mobile device is connected to WIFI.
+        To reduce battery drain, adjust the time interval between location updates. Minimum is 5 minutes.
+        Maximum of 1 hour.
+    </string>
     <string name="label_min_distance_interval">Distance Interval in Meters - minimum distance between location updates</string>
     <string name="label_map_layers">Switch Map Layer</string>
     <string name="label_dynamic_zoom">Adjust Map zoom when vehicle is moving in high speeds.</string>

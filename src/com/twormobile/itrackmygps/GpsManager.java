@@ -321,7 +321,7 @@ public class GpsManager {
             }
 
             // Adjust minTime and minDistance based on Speed
-            if(location.getProvider() == LocationManager.GPS_PROVIDER) {
+            if(location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
 
                 int seconds = (int) (minTimeInMilliseconds / 1000L);
 

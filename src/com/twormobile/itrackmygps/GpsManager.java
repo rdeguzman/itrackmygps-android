@@ -63,8 +63,8 @@ public class GpsManager {
     private long minTimeInMilliseconds;
     private float minDistanceInMeters;
 
-    private long minTimeInMillisecondsFromSettings;
-    private float minDistanceInMetersFromSettings;
+    private int minTimeInSecondsFromSettings;
+    private int minDistanceInMetersFromSettings;
 
     // The private constructor forces users to use GpsManager.get(Context)
     private GpsManager(Context appContext) {
@@ -81,11 +81,10 @@ public class GpsManager {
 
         // get time and distance interval from preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mAppContext);
-        int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS,
+        minTimeInSecondsFromSettings = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS,
                 SettingsActivity.DEFAULT_TIME_INTERVAL_IN_SECONDS);
-        minTimeInMillisecondsFromSettings = minTimeInSeconds * 1000L;
         minDistanceInMetersFromSettings = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS,
-                SettingsActivity.DEFAULT_DISTANCE_INTERVAL_IN_METERS) * 1.0f;
+                SettingsActivity.DEFAULT_DISTANCE_INTERVAL_IN_METERS);
     }
 
     public static GpsManager get(Context c) {
@@ -181,7 +180,18 @@ public class GpsManager {
     }
 
     public void startPollingAfterFiveMinutes() {
-        startPolling(FIVE_MINUTES, ZERO_DISTANCE);
+        int seconds = FIVE_MINUTES;
+        int distance = ZERO_DISTANCE;
+
+        if(minTimeInSecondsFromSettings > FIVE_MINUTES) {
+            seconds = minTimeInSecondsFromSettings;
+        }
+
+        if(minDistanceInMetersFromSettings > ZERO_DISTANCE) {
+            distance = minDistanceInMetersFromSettings;
+        }
+
+        startPolling(seconds, distance);
     }
 
     public void startActivePolling() {
@@ -480,8 +490,8 @@ public class GpsManager {
     }
 
     public void updateFromSettings(int secs, int meters){
-        minTimeInMillisecondsFromSettings = secs * 1000L;
-        minDistanceInMetersFromSettings = meters * 1.0f;
+        minTimeInSecondsFromSettings = secs;
+        minDistanceInMetersFromSettings = meters;
         if(isGPSActive()){
             stopLocationProviders();
             startLocationProviders();
@@ -532,5 +542,4 @@ public class GpsManager {
     public Location getCurrentLocation() {
         return currentBestLocation;
     }
-
 }

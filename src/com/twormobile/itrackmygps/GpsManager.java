@@ -403,7 +403,7 @@ public class GpsManager {
                     break;
                 case GpsStatus.GPS_EVENT_FIRST_FIX:
                     Log.d(TAG, "GPS_EVENT_FIRST_FIX");
-                    gpsApp.showToast("Receive First Fix");
+                    gpsApp.showToast("Received First Fix");
                     stopListenerForProvider(networkLocationListener);
                     break;
                 case GpsStatus.GPS_EVENT_STOPPED:

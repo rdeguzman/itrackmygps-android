@@ -63,6 +63,9 @@ public class GpsManager {
     private long minTimeInMilliseconds;
     private float minDistanceInMeters;
 
+    private long minTimeInMillisecondsFromSettings;
+    private float minDistanceInMetersFromSettings;
+
     // The private constructor forces users to use GpsManager.get(Context)
     private GpsManager(Context appContext) {
         mAppContext = appContext;
@@ -80,8 +83,8 @@ public class GpsManager {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mAppContext);
         int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS,
                 SettingsActivity.DEFAULT_TIME_INTERVAL_IN_SECONDS);
-        minTimeInMilliseconds = minTimeInSeconds * 1000L;
-        minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS,
+        minTimeInMillisecondsFromSettings = minTimeInSeconds * 1000L;
+        minDistanceInMetersFromSettings = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS,
                 SettingsActivity.DEFAULT_DISTANCE_INTERVAL_IN_METERS) * 1.0f;
     }
 
@@ -474,9 +477,9 @@ public class GpsManager {
         return provider1.equals(provider2);
     }
 
-    public void updateLocationUpdateSettings(int secs, int meters){
-        minTimeInMilliseconds = secs * 1000L;
-        minDistanceInMeters = meters * 1.0f;
+    public void updateFromSettings(int secs, int meters){
+        minTimeInMillisecondsFromSettings = secs * 1000L;
+        minDistanceInMetersFromSettings = meters * 1.0f;
         if(isGPSActive()){
             stopLocationProviders();
             startLocationProviders();

@@ -232,7 +232,7 @@ public class MainActivity extends Activity{
                 SettingsActivity.DEFAULT_TIME_INTERVAL_IN_SECONDS);
         int minDistanceInMeters = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_METERS,
                 SettingsActivity.DEFAULT_DISTANCE_INTERVAL_IN_METERS);
-        gpsManager.updateLocationUpdateSettings(minTimeInSeconds, minDistanceInMeters);
+        gpsManager.updateFromSettings(minTimeInSeconds, minDistanceInMeters);
     }
 
     public void updateButtonTrackerStatus(){
@@ -405,5 +405,12 @@ public class MainActivity extends Activity{
         Log.d(TAG, "buttonSharePressed");
         Intent intent = new Intent(this, ShareActivity.class);
         startActivity(intent);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == IntentCodes.SETTINGS && resultCode == Activity.RESULT_OK){
+            updateFromSettingsPreferences();
+        }
     }
 }

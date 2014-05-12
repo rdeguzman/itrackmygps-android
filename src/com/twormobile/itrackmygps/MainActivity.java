@@ -324,6 +324,11 @@ public class MainActivity extends Activity{
 
         Log.d(TAG, "resume");
         updateButtonTrackerStatus();
+
+        // Update the counter and location details from last currentLocation when
+        // the app resumes from background
+        if(gpsApp.isON())
+            displayGPSDetails(gpsManager.getCurrentLocation(), gpsManager.getCounter());
     }
 
     public void onDestroy() {

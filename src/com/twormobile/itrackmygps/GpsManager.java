@@ -514,4 +514,18 @@ public class GpsManager {
 
     }
 
+    /**
+     * Returns the number of location updates received from location listeners.
+     */
+    public int getCounter() {
+        return counter;
+    }
+
+    /**
+     * Returns currentLocation
+     */
+    public Location getCurrentLocation() {
+        return currentBestLocation;
+    }
+
 }

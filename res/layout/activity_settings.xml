@@ -30,7 +30,8 @@
                     android:text=""
                     android:gravity="right"
                     android:inputType="number"
-                    android:padding="10dp" android:layout_gravity="center_vertical"/>
+                    android:padding="10dp"
+                    android:layout_gravity="top"/>
         </TableRow>
 
         <View android:layout_height="1dp" android:background="@color/table_divider" />

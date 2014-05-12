@@ -326,7 +326,8 @@ public class GpsManager {
             // Adjust minTime and minDistance based on Speed
             if(location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
 
-                int seconds = (int) (minTimeInMilliseconds / 1000L);
+                int currentTimeIntervalInSeconds = (int) (minTimeInMilliseconds / 1000L);
+                int seconds = currentTimeIntervalInSeconds;
 
                 boolean mChange = false;
 
@@ -347,7 +348,8 @@ public class GpsManager {
                     mChange = true;
                 }
 
-                if(mChange) {
+                // Only adjust the interval if the current time interval is different from the new time interval
+                if(mChange && currentTimeIntervalInSeconds != seconds) {
                     adjustGpsUpdateInterval(seconds, (int) minDistanceInMeters);
                 }
             }

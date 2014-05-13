@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.WindowManager;
 import com.twormobile.itrackmygps.android.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -43,6 +44,8 @@ public class SettingsActivity extends Activity {
         chkDynamicZoom = (CheckBox)findViewById(R.id.chk_dynamic_zoom_on_speed);
         etxtTimeInterval = (EditText)findViewById(R.id.etxt_time_interval);
         etxtDistanceInterval = (EditText)findViewById(R.id.etxt_distance_interval);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         populate();
 

@@ -1,8 +1,8 @@
 package com.twormobile.itrackmygps;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.*;
 import android.location.*;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,6 +20,7 @@ import java.util.Map;
 
 public class GpsManager {
     private static final String TAG = "GpsManager";
+    protected static String SINGLE_LOCATION_UPDATE_ACTION = "com.twormobile.itrackmygps.SINGLE_LOCATION_UPDATE_ACTION";
 
     public static float KPH = 3.6f;
 
@@ -35,19 +36,23 @@ public class GpsManager {
     private static final int TEN_METERS = 10;
     private static final int TWENTY_METERS = 20;
 
-    private static final int TWO_MINUTES = 1000 * 60 * 2;
+    private static final int ONE_MINUTE = 1000 * 60;
+    private static final int TWO_MINUTES = ONE_MINUTE * 2;
 
     private static GpsManager sGpsManager;
     private static GpsLoggerApplication gpsApp;
     private Context mAppContext;
     private LocationManager mLocationManager;
     private boolean mActive;
+    private boolean mActiveLongPolling = false;
     private boolean mGpsFixed;
     private boolean mGpsStatusListenerActive = false;
 
     private MyLocationListener networkLocationListener;
     private MyLocationListener gpsLocationListener;
     private MyGpsStatusListener gpsStatusListener;
+    protected AlarmManager alarmManager;
+    protected PendingIntent singleUpdatePI;
 
     private String networkProvider;
     private String gpsProvider;
@@ -75,6 +80,11 @@ public class GpsManager {
         networkLocationListener = new MyLocationListener();
         gpsLocationListener = new MyLocationListener();
         gpsStatusListener = new MyGpsStatusListener();
+
+        alarmManager = (AlarmManager)mAppContext.getSystemService(Context.ALARM_SERVICE);
+
+        Intent updateIntent = new Intent(SINGLE_LOCATION_UPDATE_ACTION);
+        singleUpdatePI = PendingIntent.getBroadcast(mAppContext, 0, updateIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         gpsProvider = LocationManager.GPS_PROVIDER;
         networkProvider = LocationManager.NETWORK_PROVIDER;
@@ -165,6 +175,11 @@ public class GpsManager {
             mGpsStatusListenerActive = false;
         }
 
+        if (alarmManager != null) {
+            alarmManager.cancel(singleUpdatePI);
+            mAppContext.unregisterReceiver(singleUpdateReceiver);
+        }
+
         mActive = false;
         mGpsFixed = false;
 
@@ -179,6 +194,21 @@ public class GpsManager {
         }
     }
 
+    protected BroadcastReceiver singleUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            gpsApp.showToast("Received pending intent");
+
+            String key = LocationManager.KEY_LOCATION_CHANGED;
+            Location location = (Location)intent.getExtras().get(key);
+
+            if (gpsLocationListener != null && location != null)
+                gpsLocationListener.onLocationChanged(location);
+
+            mLocationManager.removeUpdates(singleUpdatePI);
+        }
+    };
+
     public void startPollingAfterFiveMinutes() {
         int seconds = FIVE_MINUTES;
         int distance = ZERO_DISTANCE;
@@ -191,7 +221,29 @@ public class GpsManager {
             distance = minDistanceInMetersFromSettings;
         }
 
-        startPolling(seconds, distance);
+        //startPolling(seconds, distance);
+//        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
+//                System.currentTimeMillis()+(FIVE_MINUTES*1000),
+//                FIVE_MINUTES*1000, singleUpdatePI);
+
+        gpsApp.showToast("Creating repeating alarm");
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC,
+                System.currentTimeMillis()+(ONE_MINUTE),
+                ONE_MINUTE, singleUpdatePI);
+
+        IntentFilter locIntentFilter = new IntentFilter(SINGLE_LOCATION_UPDATE_ACTION);
+        mAppContext.registerReceiver(singleUpdateReceiver, locIntentFilter);
+
+        // Coarse accuracy is specified here to get the fastest possible result.
+        // The calling Activity will likely (or have already) request ongoing
+        // updates using the Fine location provider.
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_LOW);
+
+        mLocationManager.requestSingleUpdate(criteria, singleUpdatePI);
+
+        mActive = true;
     }
 
     public void startActivePolling() {

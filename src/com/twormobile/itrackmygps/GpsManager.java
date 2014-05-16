@@ -31,15 +31,16 @@ public class GpsManager {
     private static final int SLOW_DRIVING_TIME_INTERVAL = 30;
     private static final int MODERATE_DRIVING_TIME_INTERVAL = 60;
     private static final int FAST_DRIVING_TIME_INTERVAL = 120;
-    private static final int FIVE_MINUTES = 300;
 
     // Distance Interval in seconds
     private static final int ZERO_DISTANCE = 0;
     private static final int TEN_METERS = 10;
     private static final int TWENTY_METERS = 20;
 
-    private static final int ONE_MINUTE = 1000 * 60;
+    private static final int ONE_SECOND = 1;
+    private static final int ONE_MINUTE = ONE_SECOND * 60;
     private static final int TWO_MINUTES = ONE_MINUTE * 2;
+    private static final int FIVE_MINUTES = ONE_MINUTE * 5;
 
     private static GpsManager sGpsManager;
     private static GpsLoggerApplication gpsApp;
@@ -74,6 +75,8 @@ public class GpsManager {
     private int minTimeInSecondsFromSettings;
     private int minDistanceInMetersFromSettings;
 
+    private Criteria criteria = new Criteria();
+
     protected BroadcastReceiver pollUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -84,7 +87,6 @@ public class GpsManager {
             // Coarse accuracy is specified here to get the fastest possible result.
             // The calling Activity will likely (or have already) request ongoing
             // updates using the Fine location provider.
-            Criteria criteria = new Criteria();
             criteria.setAccuracy(Criteria.ACCURACY_LOW);
 
             // Request a single update from location manager
@@ -199,13 +201,17 @@ public class GpsManager {
             seconds = minTimeInSecondsFromSettings;
         }
 
-        long kickInTime = System.currentTimeMillis() + ONE_MINUTE;
-        long intervalTime = seconds;
+        long kickInTime = System.currentTimeMillis() + ONE_SECOND * 1000L;
+        long intervalTime = seconds * 1000L;
         alarmManager.setInexactRepeating(AlarmManager.RTC, kickInTime, intervalTime, pollUpdatePI);
 
         // We register a POLL_UPDATE_ACTION intent for pollUpdateReceiver
         IntentFilter intentFilter = new IntentFilter(POLL_UPDATE_ACTION);
         mAppContext.registerReceiver(pollUpdateReceiver, intentFilter);
+
+        // Request a single update immediately from location manager
+        criteria.setAccuracy(Criteria.ACCURACY_LOW);
+        mLocationManager.requestSingleUpdate(criteria, singleLocationPI);
 
         mActive = true;
     }
@@ -503,8 +509,8 @@ public class GpsManager {
 
         // Check whether the new location fix is newer or older
         long timeDelta = location.getTime() - bestLocation.getTime();
-        boolean isSignificantlyNewer = timeDelta > TWO_MINUTES;
-        boolean isSignificantlyOlder = timeDelta < -TWO_MINUTES;
+        boolean isSignificantlyNewer = timeDelta > (TWO_MINUTES * 1000L);
+        boolean isSignificantlyOlder = timeDelta < (-TWO_MINUTES * 1000L);
         boolean isNewer = timeDelta > 0;
 
         // If it's been more than two minutes since the current location, use the new location

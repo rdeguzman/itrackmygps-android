@@ -47,6 +47,7 @@ public class GpsManager {
     private Context mAppContext;
     private LocationManager mLocationManager;
     private boolean mActive;
+    private boolean mPollUpdateActive = false;
     private boolean mGpsFixed;
     private boolean mGpsStatusListenerActive = false;
 
@@ -201,19 +202,23 @@ public class GpsManager {
             seconds = minTimeInSecondsFromSettings;
         }
 
-        long kickInTime = System.currentTimeMillis() + ONE_SECOND * 1000L;
-        long intervalTime = seconds * 1000L;
-        alarmManager.setInexactRepeating(AlarmManager.RTC, kickInTime, intervalTime, pollUpdatePI);
+        // We only register a POLL_UPDATE_ACTION intent for pollUpdateReceiver
+        // if it is not active by checking mPollUpdateActive
+        if(!mPollUpdateActive) {
+            long kickInTime = System.currentTimeMillis() + ONE_SECOND * 1000L;
+            long intervalTime = ONE_MINUTE * 1000L;
+            alarmManager.setInexactRepeating(AlarmManager.RTC, kickInTime, intervalTime, pollUpdatePI);
 
-        // We register a POLL_UPDATE_ACTION intent for pollUpdateReceiver
-        IntentFilter intentFilter = new IntentFilter(POLL_UPDATE_ACTION);
-        mAppContext.registerReceiver(pollUpdateReceiver, intentFilter);
+            IntentFilter intentFilter = new IntentFilter(POLL_UPDATE_ACTION);
+            mAppContext.registerReceiver(pollUpdateReceiver, intentFilter);
+            mPollUpdateActive = true;
 
-        // Request a single update immediately from location manager
-        criteria.setAccuracy(Criteria.ACCURACY_LOW);
-        mLocationManager.requestSingleUpdate(criteria, singleLocationPI);
+            // Request a single update immediately from location manager
+            criteria.setAccuracy(Criteria.ACCURACY_LOW);
+            mLocationManager.requestSingleUpdate(criteria, singleLocationPI);
 
-        mActive = true;
+            mActive = true;
+        }
     }
 
     public void startActivePolling() {
@@ -260,9 +265,14 @@ public class GpsManager {
             mGpsStatusListenerActive = false;
         }
 
-        if (alarmManager != null) {
-            alarmManager.cancel(pollUpdatePI);
+        // Ensure that we check if poll update is active before
+        // unregistering or it will throw an IllegalArgumentException
+        if (alarmManager != null && mPollUpdateActive) {
+            // Unregister the poll update receiver since it will re-register
             mAppContext.unregisterReceiver(pollUpdateReceiver);
+            mPollUpdateActive = false;
+
+            alarmManager.cancel(pollUpdatePI);
         }
 
         mActive = false;

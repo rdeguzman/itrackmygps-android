@@ -42,6 +42,9 @@ public class MainActivity extends Activity{
     private TextView tvGPSProvider;
     private TextView tvGPSTotalSatellites;
 
+    private TextView tvTimeInterval;
+    private TextView tvTimeIntervalTitle;
+
     private GoogleMap gmap;
     private boolean firstFix = true;
     private Marker marker;
@@ -55,6 +58,7 @@ public class MainActivity extends Activity{
     private GpsConnectionStatusReceiver mGpsNetworkStatusReceiver;
 
     private WifiStatusReceiver mWifiStatusReceiver;
+    private TimeIntervalChangeReceiver mTimeIntervalReceiver;
 
     /**
      * When WIFI is disconnected, starts the location service.
@@ -74,6 +78,13 @@ public class MainActivity extends Activity{
         }
     }
 
+    public class TimeIntervalChangeReceiver extends BroadcastReceiver {
+        public void onReceive(Context context, Intent intent) {
+            Log.d("Time Interval Changed", "onReceived");
+            String strInterval = intent.getStringExtra("TIME_INTERVAL");
+            tvTimeInterval.setText(strInterval);
+        }
+    }
 
     public class GpsConnectionStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
@@ -166,6 +177,8 @@ public class MainActivity extends Activity{
         }
 
         tvUsername = (TextView)findViewById(R.id.tv_username);
+        tvTimeInterval = (TextView)findViewById(R.id.tv_time_interval);
+        tvTimeIntervalTitle = (TextView)findViewById(R.id.tv_time_interval_title);
 
         btnTracker = (ImageButton)findViewById(R.id.btn_tracker);
         ivGpsFixStatus = (ImageView)findViewById(R.id.iv_gps_status);
@@ -203,6 +216,9 @@ public class MainActivity extends Activity{
         final IntentFilter wifiFilters = new IntentFilter();
         wifiFilters.addAction("android.net.wifi.STATE_CHANGE");
         this.registerReceiver(mWifiStatusReceiver, wifiFilters);
+
+        mTimeIntervalReceiver = new TimeIntervalChangeReceiver();
+        displayTimeInterval(false);
     }
 
     private void checkUserInPreferences() {
@@ -246,6 +262,7 @@ public class MainActivity extends Activity{
         if (gpsApp.isON()) {
             Log.i(TAG, "buttonStopPressed");
             showGPSStatus(false);
+            displayTimeInterval(false);
 
             gpsApp.showToast("Tracker Turned OFF");
             btnTracker.setImageResource(R.drawable.track_off);
@@ -254,10 +271,22 @@ public class MainActivity extends Activity{
         else {
             Log.i(TAG, "buttonStartPressed");
             showGPSStatus(true);
+            displayTimeInterval(true);
 
             gpsApp.showToast("Tracker Turned ON");
             btnTracker.setImageResource(R.drawable.track_on);
             startService(new Intent(this, GpsLoggerService.class));
+        }
+    }
+
+    private void displayTimeInterval(boolean f){
+        if(f) {
+            tvTimeIntervalTitle.setVisibility(View.VISIBLE);
+            tvTimeInterval.setVisibility(View.VISIBLE);
+        }
+        else {
+            tvTimeIntervalTitle.setVisibility(View.INVISIBLE);
+            tvTimeInterval.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -285,12 +314,14 @@ public class MainActivity extends Activity{
         super.onStart();
         this.registerReceiver(mLocationReceiver, new IntentFilter(IntentCodes.ACTION_LOCATION));
         this.registerReceiver(mGpsNetworkStatusReceiver, new IntentFilter(IntentCodes.ACTION_GPS_NETWORK_STATUS));
+        this.registerReceiver(mTimeIntervalReceiver, new IntentFilter(IntentCodes.ACTION_TIME_INTERVAL_CHANGE));
     }
 
     @Override
     public void onStop() {
         this.unregisterReceiver(mLocationReceiver);
         this.unregisterReceiver(mGpsNetworkStatusReceiver);
+        this.unregisterReceiver(mTimeIntervalReceiver);
 
         super.onStop();
     }
@@ -327,8 +358,14 @@ public class MainActivity extends Activity{
 
         // Update the counter and location details from last currentLocation when
         // the app resumes from background
-        if(gpsApp.isON())
+        if(gpsApp.isON()) {
             displayGPSDetails(gpsManager.getCurrentLocation(), gpsManager.getCounter());
+            displayTimeInterval(true);
+        }
+        else {
+            displayTimeInterval(false);
+        }
+
     }
 
     public void onDestroy() {

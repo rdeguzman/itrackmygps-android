@@ -206,7 +206,7 @@ public class GpsManager {
         // if it is not active by checking mPollUpdateActive
         if(!mPollUpdateActive) {
             long kickInTime = System.currentTimeMillis() + ONE_SECOND * 1000L;
-            long intervalTime = ONE_MINUTE * 1000L;
+            long intervalTime = seconds * 1000L;
             alarmManager.setInexactRepeating(AlarmManager.RTC, kickInTime, intervalTime, pollUpdatePI);
 
             IntentFilter intentFilter = new IntentFilter(POLL_UPDATE_ACTION);
@@ -216,6 +216,8 @@ public class GpsManager {
             // Request a single update immediately from location manager
             criteria.setAccuracy(Criteria.ACCURACY_LOW);
             mLocationManager.requestSingleUpdate(criteria, singleLocationPI);
+
+            broadcastTimeIntervalChange(intervalTime);
 
             mActive = true;
         }
@@ -248,6 +250,8 @@ public class GpsManager {
                 // location has changed by at least minDistance meters, AND at least minTime milliseconds have passed.
                 mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
                 locationListeners.add(listener);
+
+                broadcastTimeIntervalChange(minTimeInMilliseconds);
 
                 if(provider == gpsProvider) {
                     gpsApp.showToast("Interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
@@ -338,6 +342,21 @@ public class GpsManager {
         Intent broadcast = new Intent(IntentCodes.ACTION_GPS_NETWORK_STATUS);
         int index = connectionStatus().ordinal();
         broadcast.putExtra("GPS_NETWORK_STATUS", index);
+        mAppContext.sendBroadcast(broadcast);
+    }
+
+    private void broadcastTimeIntervalChange(long milliseconds){
+        Intent broadcast = new Intent(IntentCodes.ACTION_TIME_INTERVAL_CHANGE);
+        String str = "";
+        int seconds = (int) (milliseconds/ (1000L));
+        if(seconds < 60){
+            str = seconds + " secs";
+        }
+        else {
+            str = (seconds / 60) + " min";
+        }
+
+        broadcast.putExtra("TIME_INTERVAL", str);
         mAppContext.sendBroadcast(broadcast);
     }
 

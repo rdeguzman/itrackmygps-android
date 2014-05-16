@@ -36,6 +36,29 @@
                 android:onClick="buttonTrackClicked"
                 android:layout_marginTop="4dp" />
 
+        <TextView
+                android:id="@+id/tv_time_interval_title"
+                android:text="Time Interval"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:maxLines="2"
+                android:padding="5dp"
+                android:gravity="center"
+                android:layout_marginTop="-10dp"/>
+
+        <TextView
+                android:id="@+id/tv_time_interval"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:text=""
+                android:maxLines="1"
+                android:padding="5dp"
+                android:gravity="center_vertical" />
+
         <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

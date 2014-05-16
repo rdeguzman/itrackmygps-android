@@ -150,6 +150,18 @@ public class GpsManager {
         return sGpsManager;
     }
 
+    private boolean isProviderAllowed(String s){
+        boolean flag = false;
+        for(String provider : mLocationManager.getAllProviders()){
+            if(provider.contains(s)){
+                flag = true;
+                break;
+            }
+        }
+
+        return flag;
+    }
+
     public void startLocationUpdates() {
         // Get the last known gps location and broadcast it if you have one
         // If you can't find one then broadcast a network location
@@ -170,18 +182,6 @@ public class GpsManager {
         broadcastGpsNetworkStatus();
     }
 
-    private boolean isProviderAllowed(String s){
-        boolean flag = false;
-        for(String provider : mLocationManager.getAllProviders()){
-            if(provider.contains(s)){
-                flag = true;
-                break;
-            }
-        }
-
-        return flag;
-    }
-
     public void startLocationProviders(){
         // If we have WIFI then it means we are at home or indoors
         if(gpsApp.isWiFiConnected()) {
@@ -189,51 +189,6 @@ public class GpsManager {
         }
         else {
             startActivePolling();
-        }
-    }
-
-    private void startListenerForProvider(MyLocationListener listener, String provider){
-        if(isProviderAllowed(provider) && mLocationManager.isProviderEnabled(provider)){
-            if(locationListeners.contains(listener) == false) {
-                // http://developer.android.com/reference/android/location/LocationManager.html
-                // If it is greater than 0 then the location provider will only send your application an update when the
-                // location has changed by at least minDistance meters, AND at least minTime milliseconds have passed.
-                mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
-                locationListeners.add(listener);
-
-                if(provider == gpsProvider) {
-                    gpsApp.showToast("Interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
-                }
-
-            }
-        }
-    }
-
-    public void stopLocationProviders() {
-        stopListenerForProvider(networkLocationListener);
-        stopListenerForProvider(gpsLocationListener);
-
-        if(mGpsStatusListenerActive) {
-            mLocationManager.removeGpsStatusListener(gpsStatusListener);
-            mGpsStatusListenerActive = false;
-        }
-
-        if (alarmManager != null) {
-            alarmManager.cancel(pollUpdatePI);
-            mAppContext.unregisterReceiver(pollUpdateReceiver);
-        }
-
-        mActive = false;
-        mGpsFixed = false;
-
-        broadcastGpsNetworkStatus();
-    }
-
-    private void stopListenerForProvider(LocationListener listener) {
-        // Safely removeUpdates for the LocationListener
-        if(locationListeners.contains(listener)){
-            mLocationManager.removeUpdates(listener);
-            locationListeners.remove(listener);
         }
     }
 
@@ -272,6 +227,50 @@ public class GpsManager {
         }
 
         mActive = true;
+    }
+
+    private void startListenerForProvider(MyLocationListener listener, String provider){
+        if(isProviderAllowed(provider) && mLocationManager.isProviderEnabled(provider)){
+            if(locationListeners.contains(listener) == false) {
+                // http://developer.android.com/reference/android/location/LocationManager.html
+                // If it is greater than 0 then the location provider will only send your application an update when the
+                // location has changed by at least minDistance meters, AND at least minTime milliseconds have passed.
+                mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
+                locationListeners.add(listener);
+
+                if(provider == gpsProvider) {
+                    gpsApp.showToast("Interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
+                }
+            }
+        }
+    }
+
+    public void stopLocationProviders() {
+        stopListenerForProvider(networkLocationListener);
+        stopListenerForProvider(gpsLocationListener);
+
+        if(mGpsStatusListenerActive) {
+            mLocationManager.removeGpsStatusListener(gpsStatusListener);
+            mGpsStatusListenerActive = false;
+        }
+
+        if (alarmManager != null) {
+            alarmManager.cancel(pollUpdatePI);
+            mAppContext.unregisterReceiver(pollUpdateReceiver);
+        }
+
+        mActive = false;
+        mGpsFixed = false;
+
+        broadcastGpsNetworkStatus();
+    }
+
+    private void stopListenerForProvider(LocationListener listener) {
+        // Safely removeUpdates for the LocationListener
+        if(locationListeners.contains(listener)){
+            mLocationManager.removeUpdates(listener);
+            locationListeners.remove(listener);
+        }
     }
 
     /**

@@ -221,6 +221,10 @@ public class MainActivity extends Activity{
 
         mTimeIntervalReceiver = new TimeIntervalChangeReceiver();
         displayTimeInterval(false);
+
+        Context context = getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        getDefaultMapSettings(prefs);
     }
 
     private void checkUserInPreferences() {
@@ -234,10 +238,7 @@ public class MainActivity extends Activity{
         }
     }
 
-    private void updateFromSettingsPreferences() {
-        Context context = getApplicationContext();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-
+    private void getDefaultMapSettings(SharedPreferences prefs){
         // we add 1 since GoogleMap.MAP_TYPE_NORMAL starts at 1
         mapLayer = prefs.getInt(SettingsActivity.PREF_MAP_LAYER_INDEX, 0) + 1;
         isZoomBasedOnSpeed = prefs.getBoolean(SettingsActivity.PREF_ZOOM_BASED_ON_SPEED, true);
@@ -245,6 +246,13 @@ public class MainActivity extends Activity{
         if(gmap != null){
             gmap.setMapType(mapLayer);
         }
+    }
+
+    private void updateFromSettingsPreferences() {
+        Context context = getApplicationContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        getDefaultMapSettings(prefs);
 
         int minTimeInSeconds = prefs.getInt(SettingsActivity.PREF_TIME_INTERVAL_IN_SECONDS,
                 SettingsActivity.DEFAULT_TIME_INTERVAL_IN_SECONDS);

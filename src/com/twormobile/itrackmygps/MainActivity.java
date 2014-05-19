@@ -66,10 +66,12 @@ public class MainActivity extends Activity{
      */
     public class WifiStatusReceiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
-            if(gpsApp.isWiFiConnected())
-                gpsApp.showToast("WIFI in range");
-            else
-                gpsApp.showToast("WIFI not in range");
+            if(ApplicationConstants.DEBUG) {
+                if(gpsApp.isWiFiConnected())
+                    gpsApp.showToast("WIFI in range");
+                else
+                    gpsApp.showToast("WIFI not in range");
+            }
 
             if(gpsApp.isON()) {
                 gpsManager.stopLocationProviders();

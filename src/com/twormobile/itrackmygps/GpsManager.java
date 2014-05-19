@@ -249,7 +249,7 @@ public class GpsManager {
                 mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
                 locationListeners.add(listener);
 
-                if(provider == gpsProvider) {
+                if(provider == gpsProvider && ApplicationConstants.DEBUG) {
                     gpsApp.showToast("Interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
                 }
 

@@ -1,7 +1,9 @@
 package com.twormobile.itrackmygps.android;
 
+import com.twormobile.itrackmygps.ApplicationConstants;
+
 public class Log {
-    static final boolean LOG = false;
+    static final boolean LOG = ApplicationConstants.DEBUG;
 
     public static void i(String tag, String string) {
         if (LOG) android.util.Log.i(tag, string);

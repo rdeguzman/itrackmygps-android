@@ -251,11 +251,11 @@ public class GpsManager {
                 mLocationManager.requestLocationUpdates(provider, minTimeInMilliseconds, minDistanceInMeters, listener);
                 locationListeners.add(listener);
 
-                broadcastTimeIntervalChange(minTimeInMilliseconds);
-
                 if(provider == gpsProvider) {
                     gpsApp.showToast("Interval every " + minTimeInMilliseconds/1000L + " secs and " + minDistanceInMeters + " m");
                 }
+
+                broadcastTimeIntervalChange(minTimeInMilliseconds);
             }
         }
     }
@@ -306,6 +306,7 @@ public class GpsManager {
 
             stopListenerForProvider(gpsLocationListener);
             startListenerForProvider(gpsLocationListener, gpsProvider);
+            broadcastTimeIntervalChange(minTimeInMilliseconds);
         }
     }
 
@@ -358,6 +359,13 @@ public class GpsManager {
 
         broadcast.putExtra("TIME_INTERVAL", str);
         mAppContext.sendBroadcast(broadcast);
+    }
+
+    public void displayCurrentTimeInterval(){
+        if(mPollUpdateActive)
+            broadcastTimeIntervalChange(minTimeInSecondsFromSettings*1000L);
+        else
+            broadcastTimeIntervalChange(minTimeInMilliseconds);
     }
 
     public void insertLocation(Location location){

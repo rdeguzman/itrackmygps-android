@@ -361,6 +361,7 @@ public class MainActivity extends Activity{
         if(gpsApp.isON()) {
             displayGPSDetails(gpsManager.getCurrentLocation(), gpsManager.getCounter());
             displayTimeInterval(true);
+            gpsManager.displayCurrentTimeInterval();
         }
         else {
             displayTimeInterval(false);

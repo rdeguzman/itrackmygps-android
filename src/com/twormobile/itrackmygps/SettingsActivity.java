@@ -88,7 +88,7 @@ public class SettingsActivity extends Activity {
             int timeIntervalInSecs = Integer.parseInt(String.valueOf(etxtTimeInterval.getText()));
             int distanceIntervalInMeters = Integer.parseInt(String.valueOf(etxtDistanceInterval.getText()));
 
-            if(timeIntervalInSecs < 300 && timeIntervalInSecs > 3600){
+            if(timeIntervalInSecs < 300 || timeIntervalInSecs > 3600){
                 valid = false;
                 gpsApp.showDialog("Warning", "Time interval should be between 300 seconds (5 minutes) to 3600 seconds (1 hour)", this);
             }

@@ -20,7 +20,6 @@ public class SettingsActivity extends Activity {
     public static final String PREF_MAP_LAYER_INDEX = "PREF_MAP_LAYER_INDEX";
     public static final String PREF_ZOOM_BASED_ON_SPEED = "PREF_ZOOM_BASED_ON_SPEED";
     public static final String PREF_TIME_INTERVAL_IN_SECONDS = "PREF_TIME_INTERVAL_IN_SECONDS";
-    public static final String PREF_TIME_INTERVAL_IN_METERS = "PREF_TIME_INTERVAL_IN_METERS";
 
     public static final int DEFAULT_TIME_INTERVAL_IN_SECONDS = 300;  //5 minutes
     public static final int DEFAULT_DISTANCE_INTERVAL_IN_METERS = 0;
@@ -28,7 +27,6 @@ public class SettingsActivity extends Activity {
     private Spinner mapLayerSpinner;
     private CheckBox chkDynamicZoom;
     private EditText etxtTimeInterval;
-    private EditText etxtDistanceInterval;
 
     SharedPreferences prefs;
 
@@ -43,7 +41,6 @@ public class SettingsActivity extends Activity {
         mapLayerSpinner = (Spinner)findViewById(R.id.spinner_map_layers);
         chkDynamicZoom = (CheckBox)findViewById(R.id.chk_dynamic_zoom_on_speed);
         etxtTimeInterval = (EditText)findViewById(R.id.etxt_time_interval);
-        etxtDistanceInterval = (EditText)findViewById(R.id.etxt_distance_interval);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -57,13 +54,11 @@ public class SettingsActivity extends Activity {
     private void updateUIFromPreferences() {
         int mapLayerIndex = prefs.getInt(PREF_MAP_LAYER_INDEX, GoogleMap.MAP_TYPE_NORMAL);
         int timeIntervalInSecs = prefs.getInt(PREF_TIME_INTERVAL_IN_SECONDS, DEFAULT_TIME_INTERVAL_IN_SECONDS);
-        int distanceIntervalInMeters = prefs.getInt(PREF_TIME_INTERVAL_IN_METERS, DEFAULT_DISTANCE_INTERVAL_IN_METERS);
         boolean isZoomBasedOnSpeed = prefs.getBoolean(PREF_ZOOM_BASED_ON_SPEED, true);
 
         mapLayerSpinner.setSelection(mapLayerIndex);
         chkDynamicZoom.setChecked(isZoomBasedOnSpeed);
         etxtTimeInterval.setText(Integer.toString(timeIntervalInSecs));
-        etxtDistanceInterval.setText(Integer.toString(distanceIntervalInMeters));
     }
 
     private void populate(){
@@ -86,16 +81,10 @@ public class SettingsActivity extends Activity {
         boolean valid = true;
         try {
             int timeIntervalInSecs = Integer.parseInt(String.valueOf(etxtTimeInterval.getText()));
-            int distanceIntervalInMeters = Integer.parseInt(String.valueOf(etxtDistanceInterval.getText()));
 
             if(timeIntervalInSecs < 300){
                 valid = false;
                 gpsApp.showDialog("Warning", "Time interval should be more than 300 seconds (5 minutes)", this);
-            }
-
-            if(distanceIntervalInMeters < 0) {
-                valid = false;
-                gpsApp.showDialog("Warning", "Distance interval should be at least 0", this);
             }
         }
         catch (Exception ex) {
@@ -109,14 +98,12 @@ public class SettingsActivity extends Activity {
     private void savePreferences() {
         int mapLayerIndex = mapLayerSpinner.getSelectedItemPosition();
         int timeIntervalInSecs = Integer.parseInt(String.valueOf(etxtTimeInterval.getText()));
-        int distanceIntervalInMeters = Integer.parseInt(String.valueOf(etxtDistanceInterval.getText()));
         boolean isZoomBasedOnSpeed = chkDynamicZoom.isChecked();
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.putInt(PREF_MAP_LAYER_INDEX, mapLayerIndex);
         editor.putBoolean(PREF_ZOOM_BASED_ON_SPEED, isZoomBasedOnSpeed);
         editor.putInt(PREF_TIME_INTERVAL_IN_SECONDS, timeIntervalInSecs);
-        editor.putInt(PREF_TIME_INTERVAL_IN_METERS, distanceIntervalInMeters);
         editor.commit();
     }
 

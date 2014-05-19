@@ -42,25 +42,6 @@
 
             <View android:layout_height="1dp" android:background="@color/table_divider" />
 
-            <TableRow android:layout_height="wrap_content">
-                <TextView
-                        android:text="@string/label_min_distance_interval"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:padding="10dp"/>
-                <EditText
-                        android:id="@+id/etxt_distance_interval"
-                        android:layout_width="50dp"
-                        android:text=""
-                        android:inputType="number"
-                        android:gravity="right"
-                        android:padding="10dp"
-                        android:layout_gravity="top"/>
-            </TableRow>
-
-            <View android:layout_height="1dp" android:background="@color/table_divider" />
-
             <TableRow>
                 <TextView
                         android:text="Map Settings"

@@ -10,16 +10,8 @@
     <string name="cancel">Cancel</string>
 
     <string name="label_min_time_interval">
-        Time Interval (in seconds) when WIFI is connected.
         To reduce battery drain, adjust the time interval between location updates when you are at home or
-        at the office or whenever your mobile device is connected to WIFI. Minimum of 300 seconds (5 minutes). Maximum of 3600 (1 hour).
-        Default is 300 seconds (5 minutes).
-    </string>
-    <string name="label_min_distance_interval">
-        Distance Interval (in meters) when WIFI is connected.
-        Similar to "Time Interval" above, adjust the minimum distance between location updates.
-        If you strictly want to receive location updates based on time, set this to 0.
-        Default is 0 meters.
+        at the office or whenever your mobile device is connected to WIFI. Minimum of 300 seconds (5 minutes).
     </string>
     <string name="label_map_layers">Switch Map Layer</string>
     <string name="label_dynamic_zoom">Adjust Map zoom when vehicle is moving in high speeds.</string>

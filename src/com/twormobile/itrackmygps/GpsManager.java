@@ -114,6 +114,10 @@ public class GpsManager {
         }
     };
 
+    protected GpsManager(){
+
+    }
+
     // The private constructor forces users to use GpsManager.get(Context)
     private GpsManager(Context appContext) {
         mAppContext = appContext;
@@ -596,7 +600,7 @@ public class GpsManager {
     }
 
     /** Checks whether two gps locations are the same */
-    private boolean isSameLocation(Location loc1, Location loc2) {
+    protected boolean isSameLocation(Location loc1, Location loc2) {
         if(loc1 != null && loc2 != null) {
             return loc1.getLatitude() == loc2.getLatitude() && loc1.getLongitude() == loc2.getLongitude();
         }

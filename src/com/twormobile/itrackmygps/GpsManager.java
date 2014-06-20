@@ -544,6 +544,12 @@ public class GpsManager {
 
         // Check whether the new location fix is newer or older
         long timeDelta = location.getTime() - bestLocation.getTime();
+        boolean isSameTime = timeDelta == 0;
+
+        if (isSameTime && isSameLocation(location, bestLocation)) {
+            return false;
+        }
+
         boolean isSignificantlyNewer = timeDelta > (TWO_MINUTES * 1000L);
         boolean isSignificantlyOlder = timeDelta < (-TWO_MINUTES * 1000L);
         boolean isNewer = timeDelta > 0;
@@ -588,6 +594,17 @@ public class GpsManager {
         }
         return provider1.equals(provider2);
     }
+
+    /** Checks whether two gps locations are the same */
+    private boolean isSameLocation(Location loc1, Location loc2) {
+        if(loc1 != null && loc2 != null) {
+            return loc1.getLatitude() == loc2.getLatitude() && loc1.getLongitude() == loc2.getLongitude();
+        }
+        else {
+            return true;
+        }
+    }
+
 
     public void updateFromSettings(int secs){
         minTimeInSecondsFromSettings = secs;

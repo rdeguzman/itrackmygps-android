@@ -27,20 +27,20 @@ public class GpsManager {
     public static float KPH = 3.6f;
 
     // Time Interval in seconds
-    private static final int WALKING_TIME_INTERVAL = 10;
-    private static final int SLOW_DRIVING_TIME_INTERVAL = 30;
-    private static final int MODERATE_DRIVING_TIME_INTERVAL = 60;
-    private static final int FAST_DRIVING_TIME_INTERVAL = 120;
+    public static final int WALKING_TIME_INTERVAL = 10;
+    public static final int SLOW_DRIVING_TIME_INTERVAL = 30;
+    public static final int MODERATE_DRIVING_TIME_INTERVAL = 60;
+    public static final int FAST_DRIVING_TIME_INTERVAL = 120;
 
     // Distance Interval in seconds
-    private static final int ZERO_DISTANCE = 0;
-    private static final int TEN_METERS = 10;
-    private static final int TWENTY_METERS = 20;
+    public static final int ZERO_DISTANCE = 0;
+    public static final int TEN_METERS = 10;
+    public static final int TWENTY_METERS = 20;
 
-    private static final int ONE_SECOND = 1;
-    private static final int ONE_MINUTE = ONE_SECOND * 60;
-    private static final int TWO_MINUTES = ONE_MINUTE * 2;
-    private static final int FIVE_MINUTES = ONE_MINUTE * 5;
+    public static final int ONE_SECOND = 1;
+    public static final int ONE_MINUTE = ONE_SECOND * 60;
+    public static final int TWO_MINUTES = ONE_MINUTE * 2;
+    public static final int FIVE_MINUTES = ONE_MINUTE * 5;
 
     private static GpsManager sGpsManager;
     private static GpsLoggerApplication gpsApp;

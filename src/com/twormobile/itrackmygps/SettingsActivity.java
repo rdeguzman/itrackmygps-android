@@ -21,7 +21,7 @@ public class SettingsActivity extends Activity {
     public static final String PREF_ZOOM_BASED_ON_SPEED = "PREF_ZOOM_BASED_ON_SPEED";
     public static final String PREF_TIME_INTERVAL_IN_SECONDS = "PREF_TIME_INTERVAL_IN_SECONDS";
 
-    public static final int DEFAULT_TIME_INTERVAL_IN_SECONDS = 300;  //5 minutes
+    public static final int DEFAULT_TIME_INTERVAL_IN_SECONDS = GpsManager.FIVE_MINUTES;  //5 minutes
     public static final int DEFAULT_DISTANCE_INTERVAL_IN_METERS = 0;
 
     private Spinner mapLayerSpinner;

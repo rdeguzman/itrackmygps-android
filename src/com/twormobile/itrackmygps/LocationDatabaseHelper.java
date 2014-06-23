@@ -8,7 +8,7 @@ import android.location.Location;
 import com.twormobile.itrackmygps.android.Log;
 
 public class LocationDatabaseHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "database.sqlite";
+    public static final String DB_NAME = "database.sqlite";
     private static final int VERSION = 1;
 
     private static final String TABLE_LOCATION = "locations";

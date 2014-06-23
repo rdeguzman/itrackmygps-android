@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 import com.twormobile.itrackmygps.android.Log;
@@ -14,6 +15,12 @@ import android.widget.EditText;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.twormobile.itrackmygps.android.DialogBoxFactory;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 public class GpsLoggerApplication extends Application {
     private static final String TAG = GpsLoggerApplication.class.getSimpleName();
@@ -48,6 +55,8 @@ public class GpsLoggerApplication extends Application {
         gpsManager = GpsManager.get(getApplicationContext());
         queue = Volley.newRequestQueue(this);
         bServiceEnabled = false;
+
+        //exportDB();
     }
 
     @Override
@@ -184,6 +193,28 @@ public class GpsLoggerApplication extends Application {
             networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         }
         return networkInfo == null ? false : networkInfo.isConnected();
+    }
+
+    private void exportDB(){
+        File sd = Environment.getExternalStorageDirectory();
+        File data = Environment.getDataDirectory();
+        FileChannel source=null;
+        FileChannel destination=null;
+        String currentDBPath = "/data/"+ "com.twormobile.itrackmygps/databases/" + LocationDatabaseHelper.DB_NAME;
+        String backupDBPath = LocationDatabaseHelper.DB_NAME;
+        File currentDB = new File(data, currentDBPath);
+        File backupDB = new File(sd, backupDBPath);
+        try {
+            source = new FileInputStream(currentDB).getChannel();
+            destination = new FileOutputStream(backupDB).getChannel();
+            destination.transferFrom(source, 0, source.size());
+            source.close();
+            destination.close();
+            Log.d(TAG, "DB Exported!");
+        } catch(Exception e) {
+            Log.d(TAG, "DB Export Fail " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

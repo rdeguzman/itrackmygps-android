@@ -172,14 +172,18 @@ public class GpsManager {
         // If you can't find one then broadcast a network location
         Location lastKnownGPSLocation = mLocationManager.getLastKnownLocation(gpsProvider);
         if (lastKnownGPSLocation != null) {
-            currentBestLocation = lastKnownGPSLocation;
-            broadcastLocation(lastKnownGPSLocation);
+            if(isBetterLocation(lastKnownGPSLocation, currentBestLocation)){
+                currentBestLocation = lastKnownGPSLocation;
+                broadcastLocation(lastKnownGPSLocation);
+            }
         }
         else{
             Location lastKnownNetworkLocation = mLocationManager.getLastKnownLocation(networkProvider);
             if(lastKnownNetworkLocation != null){
-                currentBestLocation = lastKnownNetworkLocation;
-                broadcastLocation(lastKnownNetworkLocation);
+                if(isBetterLocation(lastKnownNetworkLocation, currentBestLocation)){
+                    currentBestLocation = lastKnownNetworkLocation;
+                    broadcastLocation(lastKnownNetworkLocation);
+                }
             }
         }
 

@@ -333,10 +333,7 @@ public class GpsManager {
             broadcast.putExtra("counter", counter);
             mAppContext.sendBroadcast(broadcast);
 
-            if(connectionStatus() == GpsFix.CONNECTED){
-                insertLocation(location);
-            }
-
+            insertLocation(location);
             postLocation(location);
         }
     }

@@ -6,11 +6,8 @@ import android.content.*;
 import android.location.*;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import com.android.volley.*;
 import com.twormobile.itrackmygps.android.Log;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.ArrayList;
@@ -405,7 +402,6 @@ public class GpsManager {
                     }
                 })
         {
-
             @Override
             protected Map<String, String> getParams()
             {
@@ -424,7 +420,8 @@ public class GpsManager {
             }
         };
 
-        gpsApp.getVolleyRequestQueue().add(postRequest);
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
+        VolleySingleton.getInstance(mAppContext).addToRequestQueue(postRequest);
     }
 
     // Methods in this class are called when the location providers give an update

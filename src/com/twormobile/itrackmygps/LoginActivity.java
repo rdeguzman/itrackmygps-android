@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import com.android.volley.DefaultRetryPolicy;
 import com.twormobile.itrackmygps.android.Log;
 import android.view.View;
 import android.view.Window;
@@ -134,7 +135,8 @@ public class LoginActivity extends Activity {
                     }
                 });
 
-        gpsApp.getVolleyRequestQueue().add(postRequest);
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(postRequest);
     }
 
     public void done(){

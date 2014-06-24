@@ -12,14 +12,11 @@ import android.preference.PreferenceManager;
 import android.widget.Toast;
 import com.twormobile.itrackmygps.android.Log;
 import android.widget.EditText;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.twormobile.itrackmygps.android.DialogBoxFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.channels.FileChannel;
 
 public class GpsLoggerApplication extends Application {
@@ -34,7 +31,6 @@ public class GpsLoggerApplication extends Application {
 
     private GpsManager gpsManager;
     private boolean bServiceEnabled;
-    private RequestQueue queue;
 
     private SharedPreferences prefs;
 
@@ -53,7 +49,6 @@ public class GpsLoggerApplication extends Application {
         deviceId = uuidFactory.getDeviceUuid().toString();
 
         gpsManager = GpsManager.get(getApplicationContext());
-        queue = Volley.newRequestQueue(this);
         bServiceEnabled = false;
 
         //exportDB();
@@ -66,10 +61,6 @@ public class GpsLoggerApplication extends Application {
 
     public GpsManager getGpsManager() {
         return gpsManager;
-    }
-
-    public RequestQueue getVolleyRequestQueue() {
-        return queue;
     }
 
     public boolean isON(){

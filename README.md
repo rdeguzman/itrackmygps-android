@@ -5,6 +5,8 @@ itrackmygps-android
 
 For more info, see <http://itrackmygps.com>
 
+Download from PlayStore https://play.google.com/store/apps/details?id=com.twormobile.itrackmygps
+
 Want to become a tester?
 [Google Plus Community "itrackmygps - testers"](https://plus.google.com/communities/100298062955164933715)
 

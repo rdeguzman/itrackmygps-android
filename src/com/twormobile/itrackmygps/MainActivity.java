@@ -335,22 +335,30 @@ public class MainActivity extends Activity{
     }
 
     private void displayGPSDetails(Location location, int ctr) {
-        tvGPSCounter.setText(Integer.toString(ctr));
-        tvGPSLatitude.setText(Double.toString(location.getLatitude()));
-        tvGPSLongitude.setText(Double.toString(location.getLongitude()));
-        tvGPSAltitude.setText(Double.toString(location.getAltitude()));
-        tvGPSBearing.setText(Float.toString(location.getBearing()));
-        tvGPSSpeed.setText(Float.toString(location.getSpeed()*GpsManager.KPH));
-        tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
-        tvGPSProvider.setText(location.getProvider());
+        if(location != null){
+            tvGPSCounter.setText(Integer.toString(ctr));
+            tvGPSLatitude.setText(Double.toString(location.getLatitude()));
+            tvGPSLongitude.setText(Double.toString(location.getLongitude()));
+            tvGPSAltitude.setText(Double.toString(location.getAltitude()));
+            tvGPSBearing.setText(Float.toString(location.getBearing()));
+            tvGPSSpeed.setText(Float.toString(location.getSpeed()*GpsManager.KPH));
+            tvGPSAccuracy.setText(Float.toString(location.getAccuracy()));
+            tvGPSProvider.setText(location.getProvider());
 
-        String gpsDateTime = CustomDateUtils.formatDateTimestamp(location.getTime());
-        tvGPSDateTime.setText(gpsDateTime);
+            String gpsDateTime = CustomDateUtils.formatDateTimestamp(location.getTime());
+            tvGPSDateTime.setText(gpsDateTime);
 
-        int satellitesWithFix = location.getExtras().getInt("satellites");
-        int satellitesTotal = gpsManager.getTotalSatellites();
-        String s = Integer.toString(satellitesWithFix) + "/" + satellitesTotal;
-        tvGPSTotalSatellites.setText(s);
+            // location.getExtras() is provider specific
+            Bundle locBundle = location.getExtras();
+            int satellitesWithFix = 0;
+            if(locBundle != null && locBundle.containsKey("satellites")){
+                satellitesWithFix = location.getExtras().getInt("satellites");
+            }
+
+            int satellitesTotal = gpsManager.getTotalSatellites();
+            String s = Integer.toString(satellitesWithFix) + "/" + satellitesTotal;
+            tvGPSTotalSatellites.setText(s);
+        }
     }
 
     public void onPause() {

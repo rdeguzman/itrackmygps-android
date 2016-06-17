@@ -107,13 +107,6 @@ public class RegisterActivity extends Activity {
 
         final String url = gpsApp.REGISTER_URL;
 
-        //curl -i -H "Content-Type applicationjson" -X POST --data
-        // 'user[username]=rupert
-        // &user[email]=rupert@2rmobile.com
-        // &user[password]=junjunmalupet
-        // &user[password_confirmation]=junjunmalupet'
-        // http://127.0.0.1:3000/api/register
-
         final String username = getCleanString(etxtUsername);
         final String email = getCleanString(etxtEmail);
         final String password = getCleanString(etxtPassword);

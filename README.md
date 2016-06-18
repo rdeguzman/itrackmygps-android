@@ -15,16 +15,15 @@ Want to become a tester?
 - Logs gps of your Android Device
 - Saves gps coordinates to sqlite database on internal storage
 - Sends gps coordinates to remote server
-
+- AutoStart on Boot
 
 # Prerequisites
-- IntelliJ Idea CE 133.124
-- Android Platform 15
-- Genymotion 1.3.1
+- IntelliJ Idea CE
+- Android Platform 15+
 
 # Instructions
 
-- Clone the project `git clone git@github.com:rdeguzman/trackble-android.git`
+- Clone the project `git clone git@github.com:rdeguzman/itrackmygps-android.git`
 - Get a google maps API Key.
 - Copy `api_key.xml` to `res/values`
 

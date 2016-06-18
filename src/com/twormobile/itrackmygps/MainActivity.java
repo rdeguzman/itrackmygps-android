@@ -375,6 +375,7 @@ public class MainActivity extends Activity{
         // Update the counter and location details from last currentLocation when
         // the app resumes from background
         if(gpsApp.isON()) {
+            showGPSStatus(true);
             displayGPSDetails(gpsManager.getCurrentLocation(), gpsManager.getCounter());
             displayTimeInterval(true);
             gpsManager.displayCurrentTimeInterval();

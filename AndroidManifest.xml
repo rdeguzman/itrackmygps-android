@@ -7,6 +7,8 @@
     <uses-sdk android:minSdkVersion="14"/>
 
     <permission android:name="com.twormobile.itrackmygps.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="com.twormobile.itrackmygps.permission.MAPS_RECEIVE"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -50,6 +52,12 @@
         <activity android:name="com.twormobile.itrackmygps.LoginActivity"/>
 
         <activity android:name="com.twormobile.itrackmygps.ShareActivity"/>
+
+        <receiver android:name="com.twormobile.itrackmygps.AutoStartReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
         <receiver android:name="com.twormobile.itrackmygps.LocationReceiver" android:exported="false">
             <intent-filter>

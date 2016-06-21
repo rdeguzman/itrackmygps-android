@@ -24,6 +24,7 @@ public class GpsManager {
     public static float KPH = 3.6f;
 
     // Time Interval in seconds
+    public static final int ZERO_TIME_INTERVAL = 0;
     public static final int WALKING_TIME_INTERVAL = 10;
     public static final int SLOW_DRIVING_TIME_INTERVAL = 30;
     public static final int MODERATE_DRIVING_TIME_INTERVAL = 60;
@@ -33,6 +34,7 @@ public class GpsManager {
     public static final int ZERO_DISTANCE = 0;
     public static final int TEN_METERS = 10;
     public static final int TWENTY_METERS = 20;
+    public static final int FIVE_HUNDRED_METERS = 500;
 
     public static final int ONE_SECOND = 1;
     public static final int ONE_MINUTE = ONE_SECOND * 60;
@@ -227,14 +229,14 @@ public class GpsManager {
     }
 
     public void startActivePolling() {
-        startPolling(WALKING_TIME_INTERVAL, TWENTY_METERS);
+        startPolling(ZERO_TIME_INTERVAL, FIVE_HUNDRED_METERS);
     }
 
     private void startPolling(int time_interval, int distance) {
         minTimeInMilliseconds = time_interval * 1000L;
         minDistanceInMeters = distance;
 
-        startListenerForProvider(networkLocationListener, networkProvider);
+        //startListenerForProvider(networkLocationListener, networkProvider);
         startListenerForProvider(gpsLocationListener, gpsProvider);
 
         if(!mGpsStatusListenerActive) {
@@ -436,6 +438,7 @@ public class GpsManager {
             }
 
             // Adjust minTime and minDistance based on Speed
+            /*
             if(location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
 
                 int currentTimeIntervalInSeconds = (int) (minTimeInMilliseconds / 1000L);
@@ -465,6 +468,7 @@ public class GpsManager {
                     adjustGpsUpdateInterval(seconds, (int) minDistanceInMeters);
                 }
             }
+            */
         }
 
         @Override
